@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="files">
+	<insert id="upLoad" parameterType="java.util.HashMap">
+		insert into fileupload
+		values(fileupload_seq.nextval, #{id }, #{title}, #{comments},#{likes}
+		, sysdate, #{fileuuid})
+	</insert>
+	<select id="getFile" parameterType="java.lang.String" resultType="java.util.HashMap">
+		select * from fileupload where fileuuid = #{fileuuid }
+	</select>
+	<update id="fileupdate" parameterType="java.lang.String">
+		update fileupload set count =
+		count +1 where fileuuid=#{fileuuid }
+	</update>
+</mapper>
