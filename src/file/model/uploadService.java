@@ -14,42 +14,38 @@ import org.springframework.web.multipart.MultipartFile;
 
 @Component
 public class uploadService {
+
 	@Autowired
 	ServletContext application;
 
 	@Autowired
 	SqlSessionFactory fac;
 
-	public String execute(MultipartFile file, String cate, String tittle, String comments, String userid) {
-		if (!file.isEmpty())
-			try {
-				String cont = file.getContentType();
-				String uid = UUID.randomUUID().toString().substring(0, 4);
-				String fileName = file.getOriginalFilename();
-				String dir = application.getRealPath("/"); //
-				System.out.println(dir);
-				File des = new File(dir, uid);
-				file.transferTo(des);
-				HashMap map = new HashMap();
-				map.put("cate", cate);
-				map.put("tittle", tittle);
-				map.put("id", userid);
-				map.put("likes", 0);
-				map.put("comments", comments);
-				map.put("fileuuid", uid);
+	public String execute(MultipartFile f, String id, String title, String comments) {
+		// id: 업로더 title:파일제목 comments:파일내용
+		if (f.isEmpty())
+			return null;
+		try {
+			String uid = UUID.randomUUID().toString().substring(0, 4);
+			System.out.println(uid);
+			String dir = application.getRealPath("/users");
+              System.out.println(dir);
+			File des = new File(dir, uid);
+			f.transferTo(des);
+			HashMap map = new HashMap();
+			map.put("id", id);
+			map.put("title", title);
+			map.put("comments", comments);
+			map.put("fileuuid", uid);
+			SqlSession sql = fac.openSession();
+			sql.insert("files.upLoad", map);
+			sql.close();
+			return uid;
+		} catch (Exception e) {
+			System.out.println(e);
+			e.printStackTrace();
+			return null;
+		}
 
-				SqlSession sql = fac.openSession();
-				int excute = sql.insert("files.upLoad", map);
-				sql.close();
-				if (excute == 1) {
-					return uid;
-				}
-			} catch (Exception e) {
-				System.out.println(e);
-
-				return null;
-			}
-		return null;
 	}
-
 }

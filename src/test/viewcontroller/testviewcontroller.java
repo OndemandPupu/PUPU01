@@ -7,15 +7,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class testviewcontroller {
 	@RequestMapping("test")
 	public String view() {
-		return "member/login.jsp";
+		return "member/login";
 	}
 	@RequestMapping("/test1")
 	public String view1() {
-		return "test/test.jsp";
+		return "test/test";
 	}
 	@RequestMapping("/test2")
 	public String view2() {
-		return "file/upload.jsp";
+		return "upload";
 	}
 	
 }

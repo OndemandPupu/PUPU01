@@ -10,20 +10,9 @@
 <div style="width: 200; float: right">
 
 
-	<a href="/cart"><input type="button" value="장바구니" /></a> <a
-		href=""><input type="button" value="도움말" /></a> <a
-		href="javascript:login()"> <input type="button" value="로그인"
-		id="showlog" />
-	</a>
-
-	</div>
-	<script>
-		function login() {
-		
-			var uri = "/login.nhn";
-
-			window.open(uri, "c", "height=400,width=300");
-		}
-	</script>
-
+	<a href="/cart"><input type="button" value="장바구니" /></a> <a href=""><input
+		type="button" value="도움말" /></a>
+	<form action="/upload">
+	<input type="submit" value="사진업로드">
+</form>
 </div>

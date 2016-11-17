@@ -24,5 +24,13 @@ public class LoginService {
 		return check;
 
 	}
+	
+	public String joinCheck(String id) {
+		SqlSession sql = fac.openSession();
+		String check = sql.selectOne("member.overlapmember", id);
+		sql.close();
+		return check;
+
+	}
 
 }

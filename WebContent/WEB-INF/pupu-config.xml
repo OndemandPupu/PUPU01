@@ -20,7 +20,7 @@
 	<context:component-scan base-package="file.controller"></context:component-scan>
 	<context:component-scan base-package="file.model"></context:component-scan>
 	<mvc:annotation-driven />
-
+	<mvc:default-servlet-handler/>
 	<bean class="org.springframework.web.servlet.view.BeanNameViewResolver"
 		id="beanNameViewResolver" p:order="1" />
 	
@@ -61,7 +61,7 @@
 	<!-- multipart 형태의 요청을 처리하는 애를 추가로 등록해야 됨 // 그중에 CommonsMultipartResolver 
 		로 처리를 하겠다고 선택을 한거고, 그리고 commons fifle library를 넣어야 함. 종류는 2-3개 정도가 있는데 .. 
 		뭘 등록을 하던 반듯이 id 를 무조건 multipartResolver 로해야됨 (이름으로 뽑아다가 서블릿에 장착시킴) -->
-	<bean class="org.springframework.web.multipart.commons.CommonsMultipartResolver" id="multipartResolver"></bean>
+	<bean class="org.springframework.web.multipart.commons.CommonsMultipartResolver" id="multipartResolver"/>
 	<!-- 메일연결 빈을 등록 -->
 	<bean class="org.springframework.mail.javamail.JavaMailSenderImpl"
 		id="javaMailSenderImpl">

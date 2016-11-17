@@ -18,7 +18,7 @@
 	</nav>
 	<div class="container" style="min-height: 600px;">
 		<div class="row">
-			<div class="col-md-2">
+			<div class="col-md-2" style="margin: 0px; padding: 30px;">
 				<tiles:insertAttribute name="nav" />
 			</div>
 			<div class="col-md-8">
@@ -29,5 +29,4 @@
 	<footer class="container-fluid text-center"
 		style="background-color: #cce6ff">CopyRight <b> &copy; PUPU corp.</b> All rights reserved.</footer>
 </body>
-
 </html>

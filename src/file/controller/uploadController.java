@@ -1,8 +1,5 @@
 package file.controller;
 
-import java.util.HashMap;
-import java.util.List;
-
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,27 +9,27 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
-import file.model.ReadViewService;
 import file.model.uploadService;
 
 @Controller
 public class uploadController {
-	
+
 	@Autowired
-	uploadService uploadservice;
-	@Autowired
-	ReadViewService readviewservice;
-	// ¾÷·Îµå ºä 
-	@RequestMapping("test11")
-	public ModelAndView upfile(HttpSession session, String cate, String tittle , String comments,
-			@RequestParam(name = "file") MultipartFile file) {
-		ModelAndView mav = new ModelAndView("open.jsp");
-		String userid = session.getId();
-		String fileuuid = uploadservice.execute(file, cate, tittle, comments, userid);
-		if(fileuuid != null) {
-			List imporm = readviewservice.readview(fileuuid);
-			mav.addObject("fileimporm", imporm);
+	uploadService ups;
+
+	@RequestMapping("/file/upload")
+	public ModelAndView upfile(String title, String comments,
+			@RequestParam(name = "file") MultipartFile file, HttpSession session) {
+		String id =(String)session.getAttribute("userId");
+		String uid = ups.execute(file, id, title, comments);
+		ModelAndView mav = new ModelAndView();
+		if (uid != null) {
+			mav.setViewName("t:upview");
+			mav.addObject("uid", uid);
+		} else {
+			mav.setViewName("");
 		}
 		return mav;
 	}
+
 }

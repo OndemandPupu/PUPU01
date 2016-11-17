@@ -21,7 +21,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		id= #{id} and pass = #{pass}
 	</select>
 	<select id="overlapmember" parameterType="java.lang.String"
-		resultType="java.util.HashMap">
+		resultType="java.lang.String">
 		select * from member where id=#{id}
 	</select>
 	<select id="findpass" parameterType="java.util.HashMap"
