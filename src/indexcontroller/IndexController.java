@@ -1,21 +1,36 @@
 package indexcontroller;
 
+import java.util.HashMap;
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import file.model.allLoadViewService;
+
 @Controller
 public class IndexController {
-
+	
+	@Autowired
+	allLoadViewService alvs;
+	
 	@RequestMapping("/main")
-	public String welcome(HttpSession session) {
+	public ModelAndView welcome(HttpSession session) {
+		ModelAndView mav = new ModelAndView();
 		if(session.getAttribute("userId") != null) {
-			return "t:yeslogin";
+			mav.setViewName("t:yeslogin");
+			List<HashMap> li = alvs.allview();
+			mav.addObject("list", li);
+			mav.addObject("size", li.size()-1);
+			return mav;
 		}else {
-			return "t:notlogin";
+			mav.setViewName("t:notlogin");
+			return mav;
 		}
 	}
 	@RequestMapping("/check")

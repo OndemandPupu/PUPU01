@@ -1,5 +1,8 @@
 package file.controller;
 
+import java.util.HashMap;
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import file.model.allLoadViewService;
 import file.model.uploadService;
 
 @Controller
@@ -16,16 +20,17 @@ public class uploadController {
 
 	@Autowired
 	uploadService ups;
-
+	
 	@RequestMapping("/file/upload")
-	public ModelAndView upfile(String title, String comments,
+	public ModelAndView upfile(String comments,
 			@RequestParam(name = "file") MultipartFile file, HttpSession session) {
 		String id =(String)session.getAttribute("userId");
-		String uid = ups.execute(file, id, title, comments);
+		String name = (String)session.getAttribute("nickname");
+		String uid = ups.execute(file, id, comments, name);
 		ModelAndView mav = new ModelAndView();
 		if (uid != null) {
-			mav.setViewName("t:upview");
-			mav.addObject("uid", uid);
+			mav.setViewName("empty");
+	
 		} else {
 			mav.setViewName("");
 		}

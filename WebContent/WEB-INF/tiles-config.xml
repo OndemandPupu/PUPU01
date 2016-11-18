@@ -16,7 +16,6 @@
 		<put-attribute name="body" value="/WEB-INF/view/login/TermsOfUse.jsp"></put-attribute>
 	</definition>
 	<definition name="t:upview" extends="t:yeslogin">
-		<put-attribute name="body" value="/WEB-INF/view/file/upload.jsp"></put-attribute>
 	</definition>
 	<definition name="t:cart" template="/WEB-INF/view/template2.jsp">
 		<put-attribute name="header" value="/WEB-INF/view/common/header.jsp"></put-attribute>

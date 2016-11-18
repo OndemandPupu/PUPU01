@@ -32,5 +32,13 @@ public class LoginService {
 		return check;
 
 	}
+	
+	public List<HashMap> nicknameSet(String id) {
+		SqlSession sql = fac.openSession();
+		List<HashMap> nickname = sql.selectList("member.nickname", id);
+		sql.close();
+		return nickname;
+
+	}
 
 }

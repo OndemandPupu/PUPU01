@@ -1,5 +1,7 @@
 package member.controller;
 
+import java.util.HashMap;
+import java.util.List;
 import java.util.UUID;
 
 import javax.mail.internet.InternetAddress;
@@ -30,10 +32,19 @@ public class LoginController {
 			HttpServletResponse response) {
 		ModelAndView mav = new ModelAndView("empty");
 		String rst = loginService.loginCheck(id, pass);
-
 		if (rst != null) {
 			session.setAttribute("userId", id);
+			List<HashMap> li = loginService.nicknameSet(id);
+			HashMap map = new HashMap();
+			for(int i =0; i<li.size();i++) {
+				map = li.get(i);
+			}
+			session.setAttribute("nickname", map.get("NAME") );
 			System.out.println(session.getAttribute("userId"));
+			System.out.println(session.getAttribute("nickname"));
+			if(li.size()<0) {
+				mav.setViewName("t:cart");
+			}
 			mav.addObject("check", "true");
 		}
 		return mav;
