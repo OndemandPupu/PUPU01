@@ -10,7 +10,5 @@
 <div style="width: 200; float: right">
 	<a href="/cart"><input type="button" value="장바구니" /></a> <a href=""><input
 		type="button" value="도움말" /></a>
-	<form action="/upload">
-		<input type="submit" value="사진업로드">
-	</form>
+	<a href="/logout"><input type="button" value="로그아웃" /></a>
 </div>

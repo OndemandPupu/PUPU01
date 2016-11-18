@@ -39,10 +39,7 @@
 						</div>
 						<script>
 							$("#check").change(function() {
-			
 								$("#port1").fadeToggle();
-						
-					
 							});
 									$("#js1").click(function() {
 										$("#port1").fadeToggle();

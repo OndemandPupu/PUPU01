@@ -35,6 +35,10 @@ public class IndexController {
 
 		return "t:upview";
 	}
-	
+	@RequestMapping("/logout")
+	public String memberout(HttpSession session) {
+		session.removeAttribute("userId");
+		return "t:notlogin";
+	}
 	
 }
