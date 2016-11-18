@@ -42,9 +42,7 @@ public class LoginController {
 			session.setAttribute("nickname", map.get("NAME") );
 			System.out.println(session.getAttribute("userId"));
 			System.out.println(session.getAttribute("nickname"));
-			if(li.size()<0) {
-				mav.setViewName("t:cart");
-			}
+			
 			mav.addObject("check", "true");
 		}
 		return mav;
