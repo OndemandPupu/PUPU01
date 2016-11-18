@@ -7,13 +7,13 @@
 	<definition name="t:yeslogin" template="/WEB-INF/view/template.jsp">
 		<put-attribute name="header" value="/WEB-INF/view/common/header.jsp"></put-attribute>
 		<put-attribute name="nav" value="/WEB-INF/view/common/nav.jsp"></put-attribute>
-		<put-attribute name="body" value="/WEB-INF/view/common/main.jsp"></put-attribute>
+		<put-attribute name="body" value="/WEB-INF/view/1_Header/my_feed.jsp"></put-attribute>
 
 	</definition>
 	<definition name="t:notlogin" template="/WEB-INF/view/template3.jsp">
 		<put-attribute name="header" value="/WEB-INF/view/login/loginView.jsp"></put-attribute>
-		<put-attribute name="nav" value="/WEB-INF/view/login/TermsOfUse.jsp"></put-attribute>
-		<put-attribute name="body" value="/WEB-INF/view/login/memberView.jsp"></put-attribute>
+		<put-attribute name="nav" value="/WEB-INF/view/login/memberView.jsp"></put-attribute>
+		<put-attribute name="body" value="/WEB-INF/view/login/TermsOfUse.jsp"></put-attribute>
 	</definition>
 	<definition name="t:upview" extends="t:yeslogin">
 		<put-attribute name="body" value="/WEB-INF/view/file/upload.jsp"></put-attribute>

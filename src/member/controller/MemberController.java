@@ -22,8 +22,8 @@ public class MemberController {
 
 	@RequestMapping("/member/join")
 	public ModelAndView joinmember(HttpServletRequest req) {
-		ModelAndView mav = new ModelAndView();
-
+		ModelAndView mav = new ModelAndView("empty");
+	
 		HashMap jmember = new HashMap(); // 회원가입유저 정보담고있는 hashmap
 		jmember.put("id", req.getParameter("id"));
 		jmember.put("pass", req.getParameter("pass"));
@@ -34,7 +34,7 @@ public class MemberController {
 		jmember.put("birth", req.getParameter("birth"));
 		jmember.put("gender", req.getParameter("gender"));
 		jmember.put("interest", req.getParameter("interest"));
-
+		
 		boolean check = joinmemberservice.joinmember(jmember);
 		mav.addObject("joincheck", check);
 		return mav;

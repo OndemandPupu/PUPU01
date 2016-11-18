@@ -13,21 +13,30 @@
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <body>
-	<nav style="margin: 0px; padding: 30px; background-color: #cce6ff">
+
+	<header style="margin: 0px; padding: 30px; background-color: #cce6ff">
 		<tiles:insertAttribute name="header" />
-	</nav>
+	</header>
+
 	<div class="container" style="min-height: 600px;">
 		<div class="row">
-			<div class="col-md-8">
-				<tiles:insertAttribute name="body" />
-			</div>
-			<div class="col-md-2" style="margin: 0px auto; padding: 30px;">
-				<tiles:insertAttribute name="nav" />
-			</div>	
+			<nav>
+				<div class="col-md-8">
+					<tiles:insertAttribute name="body" />
+				</div>
+			</nav>
+			<aside>
+				<div class="col-md-2" style="margin: 0px; padding: 30px;">
+					<tiles:insertAttribute name="nav" />
+				</div>
+			</aside>
 		</div>
 	</div>
+
 	<footer class="container-fluid text-center"
-		style="background-color: #cce6ff">CopyRight <b> &copy; PUPU corp.</b> All rights reserved.</footer>
+		style="background-color: #cce6ff">
+		CopyRight <b> &copy; PUPU corp.</b> All rights reserved.
+	</footer>
 </body>
 
 </html>

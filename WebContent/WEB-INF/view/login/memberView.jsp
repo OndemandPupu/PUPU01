@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>회원 정보등록</title>
+<title>PUPU-회원가입</title>
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
 	integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
@@ -69,7 +69,7 @@
 										class="form-email form-control" id="auth2"> <span
 										id="Auth"></span> <input type="button" value="인증 확인" id="mail" />
 								</p>
-								<p class="form-group">
+								<p class="form-group"> 
 									<label class="sr-only" for="form-last-name">address</label> <input
 										type="text" name="address" placeholder="ADDRESS"
 										class="form-last-name form-control" id="address">
@@ -95,7 +95,9 @@
 									<textarea name="interest" placeholder="INTEREST"
 										class="form-about-yourself form-control" id="interest"></textarea>
 								</p>
-								<button type="submit" class="btn">Sign me up!</button>
+								<button type="submit" class="btn" id="join">회원가입</button>
+								<button type="reset" class="btn">다시작성</button>
+								
 							</form>
 						</div>
 					</div>

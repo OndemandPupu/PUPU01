@@ -3,7 +3,7 @@
 
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>회원 정보등록</title>
+<title>PUPU-회원 정보등록</title>
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
 	integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
@@ -32,12 +32,18 @@
 						</h1>
 						<div class="description">
 							<p>
-								무엇을 원하던 전부!<br /> <input type="checkbox"><strong><a
+								무엇을 원하던 전부!<br /> <input type="checkbox"  id="check"><strong><a
 									id="js1" style="float: center;">서비스 이용약관, 개인 정보 수집 이용의
 										동의합니다.</a></strong>
 							</p>
 						</div>
 						<script>
+							$("#check").change(function() {
+			
+								$("#port1").fadeToggle();
+						
+					
+							});
 									$("#js1").click(function() {
 										$("#port1").fadeToggle();
 									});
@@ -79,6 +85,5 @@
 				</div>
 			</div>
 		</div>
-	</div>
 	</div>
 </form>

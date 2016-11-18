@@ -22,7 +22,7 @@
 <body>
 
 <div class="container">
-  <button type="button" class="btn btn-default btn-lg" id="myBtn">Login</button>
+  <button type="button" class="btn btn-default btn-lg" id="myBtn">로그인</button>
 
   <!-- Modal -->
   <div class="modal fade" id="myModal" role="dialog">
@@ -37,15 +37,15 @@
         <div class="modal-body" style="padding:40px 50px;">
           <form role="form" action="loginAuth">
             <div class="form-group">
-              <label for="usrname"><span class="glyphicon glyphicon-user"></span> Username</label>
+              <label for="usrname"><span class="glyphicon glyphicon-user"></span> 아이디</label>
               <input type="text" class="form-control" id="usrname" placeholder="Enter email" name="id">
             </div>
             <div class="form-group">
-              <label for="psw"><span class="glyphicon glyphicon-eye-open"></span> Password</label>
+              <label for="psw"><span class="glyphicon glyphicon-eye-open"></span> 비밀번호</label>
               <input type="password" class="form-control" id="psw" placeholder="Enter password" name="pass">
             </div>
             <div class="checkbox">
-              <label><input type="checkbox" value="save" checked>Remember me</label>
+              <label><input type="checkbox" value="save" checked>아이디 저장</label>
             </div>
               <button type="submit" class="btn btn-success btn-block"><span class="glyphicon glyphicon-off"></span> Login</button>
           </form>
@@ -61,7 +61,7 @@
   </div>
 </div>
  
-<script>
+<script >
 $(document).ready(function(){
     $("#myBtn").click(function(){
         $("#myModal").modal();
