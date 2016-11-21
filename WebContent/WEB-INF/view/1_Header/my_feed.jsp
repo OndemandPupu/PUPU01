@@ -2,6 +2,25 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles"%>
+<!-- 기본 템플릿을 작성! -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+	integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+	crossorigin="anonymous">
+<!-- Optional theme -->
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
+	integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp"
+	crossorigin="anonymous">
+<!-- Latest compiled and minified JavaScript -->
+
+<!-- 초기화 -->
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+
 
 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
@@ -52,6 +71,82 @@
 <style>
 html, body, h1, h2, h3, h4, h5 {
 	font-family: "Open Sans", sans-serif
+}
+
+* {
+	margin: 0;
+	padding: 0
+}
+
+body {
+	font-family: 'Open Sans', arial, sans-serif;
+}
+
+li {
+	list-style: none;
+}
+
+a {
+	text-decoration: none;
+}
+
+#top_view {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	height: 50px;
+	padding: 3px;
+	background-color: #fff;
+	font-color: #FF8000;
+	height: 50px;
+	width: 100px;
+	margin: 5px;
+	font-size: 30px;
+	font-weight: 700;
+}
+
+#down_view {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	height: 50px;
+	padding: 3px;
+	background-color: #fff;
+	font-color: #FF8000;
+	height: 50px;
+}
+
+#wrap {
+	overflow: hidden;
+}
+
+#wrap>#main_lab {
+	float: left;
+	width: 500px
+}
+
+#wrap>#content_wrap {
+	float: right;
+	width: 100%;
+	margin-right: -430px
+}
+
+#main_lab {
+	position: fixed;
+	top: 50px;
+	bottom: 50px;
+	left: 0;
+	width: 400px;
+}
+
+#content_wrap {
+	width: 400px;
+}
+
+#wrap>#content_wrap>#content {
+	padding-right: 500px;
 }
 
 .modal-dialog.modal-80size {
@@ -164,14 +259,16 @@ $(document).ready(function(){
 			alt="Avatar" id="fileselect"
 			class="w3-left w3-circle w3-margin-right" style="width: 60px"></a>
 		<h6 class="w3-opacity">
-		<a href="/profile?name=${obj.get('ID')}">
-			<b>${obj.get("NAME") }</b>(${obj.get("ID") })${status.count }님</a>
+			<a href="/profile?findsee=${obj.get('ID')}"> <b>${obj.get("NAME") }</b>(${obj.get("ID") })님
+			</a>
 		</h6>
 		<p>${obj.get("COMMENTS") }</p>
 		<div class="w3-row-padding" style="margin: 0 -16px">
 			<div class="w3-half">
 
-				<button type="button" id="filemodal" style="border: none; background: transparent;" onclick="button1_click('${obj.FILEUUID}', '${obj.ID }' );">
+				<button type="button" id="filemodal"
+					style="border: none; background: transparent;"
+					onclick="button1_click('${obj.FILEUUID}', '${obj.ID }','${obj.COMMENTS }' );">
 					<img src="/users/${obj.get('FILEUUID') }" style="width: 100%"
 						alt="Northern Lights" class="w3-margin-bottom" id="test">
 				</button>
@@ -190,76 +287,66 @@ $(document).ready(function(){
 	tabindex="-1" role="dialog" aria-labelledby="my80sizeCenterModalLabel">
 	<div class="modal-dialog modal-80size modal-center" role="document">
 		<div class="modal-content modal-80size">
-			<div class="wrapper">
-				<div class="box">
-					<div class="row">
-						<!-- sidebar -->
-						<div class="column col-sm-3" id="sidebar">
-							<a class="logo" href="/main">Pupu</a>
-							<ul class="nav">
-								<li>
-									<p>
-										<button class="btn" id="btn" type="submit">
-											<img id="modal_img" class="btn-img" src="" width="600"
-												height="300">
-										</button>
-									</p>
-								</li>
-							</ul>
+
+
+			<div id="wrap">
+
+				<div id="top_view">
+					<a class="logo" href="#" style="color: #FF8000">Pupu</a>
+				</div>
+				<nav id="main_lab">
+					<ul class="nav">
+						<li>
+							<p>
+								<img id="modal_img" class="btn-img" src="" width="300"
+									height="500">
+							</p>
+						</li>
+					</ul>
+				</nav>
+				<div id="content_wrap">
+					<div id="content">
+						<div class="col-sm-12" id="featured">
 							<div class="page-header text-muted">
+								<i class="glyphicon glyphicon-pencil"></i> <p id="modal_comments"></p>
 								<button type="submit" onclick="loadDoc()" class="btn"
 									style="color: #FF8000">
-									<b><i class="glyphicon glyphicon-heart"></i>좋아요♥</b>
+									<b><i class="glyphicon glyphicon-heart"></i>LIKE</b>
 								</button>
 								<span>
-									<button type="submit" onclick="loadDoc()" class="btn"
+									<button type="submit" id="bt" class="btn"
 										style="color: #FF8000">
-										<i class="glyphicon glyphicon-remove"></i><b>DISLIKE</b>
+										<i class="glyphicon glyphicon-remove"></i><b>WRITE</b>
 									</button>
 								</span>
 							</div>
-						</div>
-						<div class="column col-sm-9" id="main">
-							<div class="padding">
-								<div class="full col-sm-9">
-									<!-- content -->
-									<div class="col-sm-12" id="featured"></div>
-									<div class="row">
-										<div class="col-sm-10">
-											<h3>수용아 이거 어떠냐</h3>
-											<h4>
-												<small class="text-muted">1 hour ago • <a href="#"
-													class="text-muted">Read More</a></small>
-											</h4>
-										</div>
-										<div class="col-sm-2">
-											<a href="#" class="pull-right"><img
-												src="http://api.randomuser.me/portraits/thumb/men/19.jpg"
-												class="img-circle"></a>
-										</div>
+							<div class="row">
+								<div class="col-sm-10">
+									<div id="port">
+										<textarea
+											style="width: 500; height: 100; background: #E6E6E6;"
+											placeholder="COMMENT" id="write">  
+								</textarea>
 									</div>
-									<div class="col-sm-12" id="stories">
-										<div class="page-header text-muted divider">Top Stories</div>
-									</div>
-									<div class="row">
-										<div class="col-sm-4 text-center">
-											<h4>상품구매</h4>
-											<a href="#"><img src="//placehold.it/400/f0f0f0"
-												class="img-respsonsive img-circle"></a>
-										</div>
-										<div class="col-sm-4 text-center">
-											<h4>관련정보 등록</h4>
-											<a href="#"><img src="//placehold.it/400/f0f0f0"
-												class="img-respsonsive img-circle"></a>
-										</div>
-										<div class="col-sm-4 text-center">
-											<h4>관련 SITE</h4>
-											<a href="#"><img src="//placehold.it/400/f0f0f0"
-												class="img-respsonsive img-circle"></a>
-										</div>
-									</div>
-									<hr>
 								</div>
+							</div>
+						</div>
+						<div id="ccc"></div>
+						<div class="row">
+							<div class="col-sm-4 text-center">
+								<h3>상품정보</h3>
+								<a href="#"><img src="//placehold.it/400/f0f0f0"
+									class="img-respsonsive img-circle" height="100" /></a>
+							</div>
+							<div class="col-sm-4 text-center">
+								<h3>상품정보</h3>
+								<a href="#"><img src="//placehold.it/400/f0f0f0"
+									class="img-respsonsive img-circle" height="100" /></a>
+							</div>
+							<div class="col-sm-4 text-center">
+								<h3>상품정보</h3>
+								<a href="#"><img src="//placehold.it/400/f0f0f0"
+									class="img-respsonsive img-circle" height="100" /></a>
 							</div>
 						</div>
 					</div>
@@ -271,11 +358,27 @@ $(document).ready(function(){
 		</div>
 	</div>
 </div>
-
-
 <script>
-function button1_click(uuid, id) {
+$("#bt").dblclick(function(){
+	
+	$(document.getElementById("port")).slideToggle();
+});
+
+ $("#write").change(function(){
+	  var t =$("#write").val();
+	  $("#write").val("");
+	   
+	  $("#ccc").append('<h2>'+t+'</h2>');
+	  $("#ccc").append('<b>'+"ID:SUSU"+'</b>');
+	  $("#ccc").append("<a href='#' class='pull-right'>");
+	  $("#ccc").append("<img src='http://api.randomuser.me/portraits/thumb/women/17.jpg' class='img-circle'/>");
+	  $("#ccc").append('</a>');
+	  $("#ccc").append('<hr>');
+   });
+
+function button1_click(uuid, id, comment) {
 		$("#modal_img").attr("src", "/users/"+uuid);
+		$("#modal_comments").innerHTML = comment;
 		$("#my80sizeCenterModal").modal();
 	
 }

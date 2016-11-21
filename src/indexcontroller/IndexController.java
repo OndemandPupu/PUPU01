@@ -62,7 +62,7 @@ public class IndexController {
 	@RequestMapping("/profile")
 	public ModelAndView profile(HttpServletRequest req) {
 		ModelAndView mav = new ModelAndView();
-		String clickId = req.getParameter("name");
+		String clickId = req.getParameter("fdsee");
 		if(clickId != null){
 			mav.setViewName("t:profile");
 			List<HashMap> li = ls.profileCheck(clickId);
