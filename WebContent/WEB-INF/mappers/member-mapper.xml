@@ -16,11 +16,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		update membership
 		set point= point+10 where id= #{id}
 	</update>
-	<select id="checkmember" resultType="java.lang.String" parameterType="java.util.HashMap">
+	<select id="checkmember" resultType="java.lang.String"
+		parameterType="java.util.HashMap">
 		select * from member where
 		id= #{id} and pass = #{pass}
 	</select>
-	<select id="nickname" resultType="java.util.HashMap" parameterType="java.lang.String">
+	<select id="nickname" resultType="java.util.HashMap"
+		parameterType="java.lang.String">
 		select * from member where id= #{id}
 	</select>
 	<select id="overlapmember" parameterType="java.lang.String"
@@ -31,5 +33,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		resultType="java.util.HashMap">
 		select * from member where id=#{id } and name=#{name } and
 		email=#{email }
+	</select>
+	<select id="profile" resultType="java.util.HashMap"
+		parameterType="java.lang.String">
+		select * from member where id
+		=#{id}
 	</select>
 </mapper>

@@ -12,12 +12,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import file.model.allLoadViewService;
+import member.model.LoginService;
 
 @Controller
 public class IndexController {
 	
 	@Autowired
 	allLoadViewService alvs;
+	@Autowired
+	LoginService ls;
 	
 	@RequestMapping("/main")
 	public ModelAndView welcome(HttpSession session) {
@@ -56,4 +59,20 @@ public class IndexController {
 		return "t:notlogin";
 	}
 	
+	@RequestMapping("/profile")
+	public ModelAndView profile(HttpServletRequest req) {
+		ModelAndView mav = new ModelAndView();
+		String clickId = req.getParameter("name");
+		if(clickId != null){
+			mav.setViewName("t:profile");
+			List<HashMap> li = ls.profileCheck(clickId);
+			mav.addObject("profile", li);
+			mav.addObject("size", li.size() - 1);
+
+			return mav;
+		} else {
+			mav.setViewName("t:notlogin");
+			return mav;
+		}
+	}
 }
