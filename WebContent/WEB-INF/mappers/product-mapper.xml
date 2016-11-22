@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="product_info">
+	<insert id="addProduct" parameterType="java.util.HashMap">
+	insert into PRODUCT_INFO
+		values(PRODUCT_INFO_SEQ.nextval, #{name }, #{price}, #{addid}, sysdate)	
+	</insert>
+	<select id="getProduct" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+		select * from product_info where name = #{name} and price =  #{price} and addid =  #{addid}
+	</select>
+</mapper>

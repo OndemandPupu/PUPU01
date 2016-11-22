@@ -16,6 +16,7 @@ public class allLoadViewService {
 	public List<HashMap> allview() {
 		SqlSession sql = fac.openSession();
 		List<HashMap> li = sql.selectList("files.getAllFile");
+		sql.close();
 		return li;
 	}
 }

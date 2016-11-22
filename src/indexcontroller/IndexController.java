@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import file.model.SelLikeService;
 import file.model.allLoadViewService;
 import member.model.LoginService;
 
@@ -21,6 +22,8 @@ public class IndexController {
 	allLoadViewService alvs;
 	@Autowired
 	LoginService ls;
+	@Autowired
+	SelLikeService sls;
 	
 	@RequestMapping("/main")
 	public ModelAndView welcome(HttpSession session) {
@@ -28,8 +31,11 @@ public class IndexController {
 		if(session.getAttribute("userId") != null) {
 			mav.setViewName("t:yeslogin");
 			List<HashMap> li = alvs.allview();
+			List<HashMap> sleList = sls.sellikeList();
+			System.out.println("컨트롤러"+sleList);
 			mav.addObject("list", li);
 			mav.addObject("size", li.size()-1);
+			mav.addObject("sleList", sleList);
 			return mav;
 		}else {
 			mav.setViewName("t:notlogin");

@@ -19,6 +19,8 @@
 	<context:component-scan base-package="indexcontroller"></context:component-scan>
 	<context:component-scan base-package="file.controller"></context:component-scan>
 	<context:component-scan base-package="file.model"></context:component-scan>
+	<context:component-scan base-package="product.controller"></context:component-scan>
+	<context:component-scan base-package="product.model"></context:component-scan>
 	<mvc:annotation-driven />
 	<mvc:default-servlet-handler/>
 	<bean class="org.springframework.web.servlet.view.BeanNameViewResolver"
@@ -48,8 +50,7 @@
 		<property name="dataSource" ref="ds" />
 		<property name="mapperLocations">
 			<list>
-				<value>/WEB-INF/mappers/member-mapper.xml</value>
-				<value>/WEB-INF/mappers/file-mapper.xml</value>
+				<value>/WEB-INF/mappers/*-mapper.xml</value>
 			</list>
 		</property>
 	</bean>

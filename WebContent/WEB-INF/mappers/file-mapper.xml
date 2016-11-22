@@ -5,17 +5,28 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="files">
 	<insert id="upLoad" parameterType="java.util.HashMap">
 		insert into fileupload
-		values(fileupload_seq.nextval, #{id }, #{comments},0
-		, sysdate, #{fileuuid}, #{name })
+		values(fileupload_seq.nextval, #{id }, #{comments}, sysdate, #{fileuuid}, #{name })
 	</insert>
+	<insert id="liker" parameterType="java.util.HashMap">
+		insert into likepeople values(#{fileuuid}, #{selectliker }, 0)
+	</insert>
+	<select id="likercheck" parameterType="java.util.HashMap" resultType="java.lang.String">
+		select * from likepeople where selectliker = #{selectliker } and fileuuid = #{fileuuid }
+	</select>
+	<select id="likerList" resultType="java.util.HashMap">
+		select * from likepeople
+	</select>
 	<select id="getFile" parameterType="java.lang.String" resultType="java.util.HashMap">
 		select * from fileupload where fileuuid = #{fileuuid }
 	</select>
 	<select id="getAllFile" resultType="java.util.HashMap">
 		select * from fileupload order by num desc
 	</select>
-	<update id="fileupdate" parameterType="java.lang.String">
-		update fileupload set count =
-		count +1 where fileuuid=#{fileuuid }
+	<update id="likeupdate" parameterType="java.util.HashMap">
+		update likepeople set likes =
+		likes +1 where selectliker=#{selectliker } and fileuuid=#{fileuuid }
 	</update>
+	<delete id="likeBye" parameterType="java.lang.String">
+		delete from likepeople where fileuuid= #{fileuuid }
+	</delete>
 </mapper>

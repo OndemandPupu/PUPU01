@@ -19,10 +19,8 @@ public class JoinMemberService {
 		SqlSession sql = fac.openSession();
 		int excute = sql.insert("member.addMember", map);
 		if (excute == 1) {
-			HashMap map2 = new HashMap();
-			map2.put("id", map.get("id"));
-			map2.put("name", map.get("name"));
-			int excute2 = sql.insert("member.addMembership", map2);
+			int excute2 = sql.insert("member.addMembership", map);
+			sql.close();
 			if (excute2 == 1) {
 				return true;
 			}

@@ -14,23 +14,14 @@
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
 	integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp"
 	crossorigin="anonymous">
-<!-- Latest compiled and minified JavaScript -->
-
-<!-- 초기화 -->
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-
-
-
 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="generator" content="Bootply" />
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, maximum-scale=1">
 <link href="css/bootstrap.min.css" rel="stylesheet">
-<!--[if lt IE 9]>
-			<script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
-		<![endif]-->
 <link href="css/styles.css" rel="stylesheet">
 <title>NewsFeed</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -187,6 +178,7 @@ a {
 				<img src="/w3images/avatar2.png" alt="Avatar"
 					class="w3-left w3-circle w3-margin-right" style="width: 60px">
 				<h6 class="w3-opacity">
+
 					<a>${nickname}</a>(${userId})님
 				</h6>
 				<textarea class="form-control" id="usrname"
@@ -262,11 +254,11 @@ $(document).ready(function(){
 			<a href="/profile?findsee=${obj.get('ID')}"> <b>${obj.get("NAME") }</b>(${obj.get("ID") })님
 			</a>
 		</h6>
-		<p>${obj.get("COMMENTS") }</p>
+		<p>${obj.COMMENTS }</p>
 		<div class="w3-row-padding" style="margin: 0 -16px">
 			<div class="w3-half">
 
-				<button type="button" id="filemodal"
+				<button type="button" id="filemodal_${status.index }"
 					style="border: none; background: transparent;"
 					onclick="button1_click('${obj.FILEUUID}', '${obj.ID }','${obj.COMMENTS }' );">
 					<img src="/users/${obj.get('FILEUUID') }" style="width: 100%"
@@ -274,25 +266,41 @@ $(document).ready(function(){
 				</button>
 			</div>
 		</div>
-		<button type="button" class="w3-btn w3-theme-d1 w3-margin-bottom">
+		<button type="button" class="w3-btn w3-theme-d1 w3-margin-bottom"
+			onclick="likeclick('${obj.FILEUUID}', '${userId}')">
 			<i class="fa fa-thumbs-up"></i>  좋아요♥
 		</button>
-		<button type="button" class="w3-btn w3-theme-d2 w3-margin-bottom">
+		<button type="button" class="w3-btn w3-theme-d2 w3-margin-bottom"
+			onclick="board_click()">
 			<i class="fa fa-comment"></i>  댓글달기
 		</button>
 	</div>
 </c:forEach>
 
+<script>	
+	function likeclick(uuid, id) {
+		var xhr = new XMLHttpRequest();
+		xhr.open("get", "/liker?uuid="+uuid+"&id="+id, true );
+		xhr.onreadystatechange = function() {
+			if(xhr.readyState == 4 && xhr.status == 200) {
+				var resq = xhr.responseText;
+				if (resq == 'true') {
+					window.alert("좋아욧!!!!");
+				}else{
+					window.alert("실헝욧!!!!");
+				}
+			}
+		};
+		xhr.send();
+	};
+</script>
 <div class="modal modal-center fade" id="my80sizeCenterModal"
 	tabindex="-1" role="dialog" aria-labelledby="my80sizeCenterModalLabel">
 	<div class="modal-dialog modal-80size modal-center" role="document">
 		<div class="modal-content modal-80size">
-
-
 			<div id="wrap">
-
 				<div id="top_view">
-					<a class="logo" href="#" style="color: #FF8000">Pupu</a>
+					<a class="logo" href="/main" style="color: #FF8000">Pupu</a>
 				</div>
 				<nav id="main_lab">
 					<ul class="nav">
@@ -302,14 +310,18 @@ $(document).ready(function(){
 									height="500">
 							</p>
 						</li>
+						<li>
+							<input type="button" id=asd value="상품정보입력할래?">
+						</li>
 					</ul>
 				</nav>
 				<div id="content_wrap">
 					<div id="content">
 						<div class="col-sm-12" id="featured">
 							<div class="page-header text-muted">
-								<i class="glyphicon glyphicon-pencil"></i> <p id="modal_comments"></p>
-								<button type="submit" onclick="loadDoc()" class="btn"
+								<i class="glyphicon glyphicon-pencil"></i>
+								<p id="modal_comments"></p>
+								<button type="button" class="btn" onclick="" id="like2"
 									style="color: #FF8000">
 									<b><i class="glyphicon glyphicon-heart"></i>LIKE</b>
 								</button>
@@ -323,30 +335,37 @@ $(document).ready(function(){
 							<div class="row">
 								<div class="col-sm-10">
 									<div id="port">
-										<textarea
+										<input type="text"
 											style="width: 500; height: 100; background: #E6E6E6;"
-											placeholder="COMMENT" id="write">  
-								</textarea>
+											placeholder="COMMENT" id="write">
 									</div>
 								</div>
 							</div>
 						</div>
 						<div id="ccc"></div>
+						<hr/>
+						<br/>
 						<div class="row">
 							<div class="col-sm-4 text-center">
-								<h3>상품정보</h3>
-								<a href="#"><img src="//placehold.it/400/f0f0f0"
-									class="img-respsonsive img-circle" height="100" /></a>
-							</div>
-							<div class="col-sm-4 text-center">
-								<h3>상품정보</h3>
-								<a href="#"><img src="//placehold.it/400/f0f0f0"
-									class="img-respsonsive img-circle" height="100" /></a>
-							</div>
-							<div class="col-sm-4 text-center">
-								<h3>상품정보</h3>
-								<a href="#"><img src="//placehold.it/400/f0f0f0"
-									class="img-respsonsive img-circle" height="100" /></a>
+								<div id="port1">
+									<label for="productname"> 상품명 : </label> 
+									<input type="text"
+										name="name" id="productname"><br> <label
+										for="price"> 가격 : </label> <input type="text"
+										name="productprice" id="productprice"><br> <label
+										for="adduserid">정보제공</label> <input type="text"
+										name="addid" id="adduserid"> <input type="button"
+										value="정보입력" id="bt1">
+								</div>
+								
+								<div id="port2">
+									<a href="javascript:showProduct()">상품정보가 등록되어있습니다.</a>
+								</div>
+								<div id="port2_sun">
+									<label>상품명 : </label><p id="nameP">${getinfo.get("NAME") }</p><br/>
+									<label>가격 : </label><p id="priceP">${getinfo.get("PRICE") }</p><br/>
+									<label>제공자 : </label><p id="idP">${getinfo.get("ADDID") }</p><br/>
+								</div>
 							</div>
 						</div>
 					</div>
@@ -359,6 +378,51 @@ $(document).ready(function(){
 	</div>
 </div>
 <script>
+$("#port2_sun").hide();
+function showProduct() {
+	$("#port2_sun").slideToggle();
+}
+$("#port1").hide();
+$("#port2").hide();
+$("#asd").click(function() {
+	$("#port1").show();
+});
+$("#bt1").click(function() {
+	$("#port1").hide();
+	var a = $("#productname").val();
+	var b = $("#productprice").val();
+	var c = $("#adduserid").val();
+	var xhr = new XMLHttpRequest();
+	xhr.open("get", "/product?name=" + a + "&price=" + b+ "&id=" + c, true);
+	xhr.onreadystatechange = function() {
+		if (xhr.readyState == 4 && xhr.status == 200) {
+		var resq = xhr.responseText;
+			if (resq == 'true') {
+				window.alert("정보등록완료");
+				$("#asd").attr('disabled',true);
+				xhr.open("get", "/productshow", true);
+				/*
+				if (xhr.readyState == 4 && xhr.status == 200) {
+					var resq1 = xhr.responseText;
+					if(resq1 != null) {
+					var[] a = resq1.split(",");
+						for(var i=0;i<a.size();i++) {
+							$("#nameP").html(a[0]);
+							$("#priceP").html(a[1]);
+							$("#idP").html(a[2]);
+						}
+					}
+				}
+				
+				*/
+				$("#port2").show();
+			} else {
+				window.alert("정보등록실패");
+			}
+		}
+	};
+	xhr.send();
+})
 $("#bt").dblclick(function(){
 	
 	$(document.getElementById("port")).slideToggle();
@@ -375,12 +439,11 @@ $("#bt").dblclick(function(){
 	  $("#ccc").append('</a>');
 	  $("#ccc").append('<hr>');
    });
-
+	
 function button1_click(uuid, id, comment) {
 		$("#modal_img").attr("src", "/users/"+uuid);
-		$("#modal_comments").innerHTML = comment;
+		$("#modal_comments").html(comment);
 		$("#my80sizeCenterModal").modal();
-	
 }
 
 function myFunction(id) {
