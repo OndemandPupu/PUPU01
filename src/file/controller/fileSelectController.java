@@ -1,5 +1,8 @@
 package file.controller;
 
+import java.util.HashMap;
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +28,7 @@ public class fileSelectController {
 	@RequestMapping("/liker")
 	@ResponseBody
 	public String select(HttpServletRequest req) {
+		HashMap map = new HashMap();
 		String uuid = req.getParameter("uuid");
 		String selectliker = req.getParameter("id");
 		boolean rst1 = sls.sellikecheck(selectliker, uuid);
@@ -33,7 +37,12 @@ public class fileSelectController {
 			if(rst2==true) {
 				boolean rst3 = sls.sellikeupdate(selectliker, uuid);
 				if(rst3==true) {
-					return "true";
+					List<HashMap> sleList = sls.sellikeList(uuid);
+					for(int i=0;i<sleList.size();i++) {
+						map = sleList.get(i);
+					}
+					String rst4 = (String)map.get("L_SELECTLIKER");
+					return rst4;
 				}
 			}
 		}else {

@@ -31,11 +31,16 @@ public class IndexController {
 		if(session.getAttribute("userId") != null) {
 			mav.setViewName("t:yeslogin");
 			List<HashMap> li = alvs.allview();
-			List<HashMap> sleList = sls.sellikeList();
-			System.out.println("컨트롤러"+sleList);
+			HashMap map = new HashMap();
+			for(int i =0;i<li.size();i++) {
+				map = li.get(i);
+			}
+			String s_fileid = (String)map.get("FILEUUID");
+			List<HashMap> sleList = sls.sellikeList(s_fileid);
 			mav.addObject("list", li);
 			mav.addObject("size", li.size()-1);
 			mav.addObject("sleList", sleList);
+			
 			return mav;
 		}else {
 			mav.setViewName("t:notlogin");

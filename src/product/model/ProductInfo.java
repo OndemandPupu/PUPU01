@@ -24,9 +24,9 @@ public class ProductInfo {
 		}
 	}
 	
-	public List<HashMap> ProductInfoGet(HashMap map) {
+	public List<HashMap> ProductInfoGet(String fileuuid) {
 		SqlSession sql = fac.openSession();
-		List<HashMap> infoP = sql.selectList("product_info.getProduct", map);
+		List<HashMap> infoP = sql.selectList("product_info.getProduct", fileuuid);
 		sql.close();
 		if (infoP != null) {
 			return infoP;

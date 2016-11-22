@@ -171,28 +171,7 @@ a {
 	vertical-align: middle;
 }
 </style>
-<div class="w3-row-padding">
-	<div class="w3-col m12">
-		<div class="w3-card-2 w3-round w3-white">
-			<div class="w3-container w3-padding" id="upload">
-				<img src="/w3images/avatar2.png" alt="Avatar"
-					class="w3-left w3-circle w3-margin-right" style="width: 60px">
-				<h6 class="w3-opacity">
 
-					<a>${nickname}</a>(${userId})님
-				</h6>
-				<textarea class="form-control" id="usrname"
-					placeholder="무슨 생각을 하고 있나요~?" name="comments" style="border: none;"></textarea>
-				<button type="button" class="w3-btn w3-theme">
-					<i class="fa fa-pencil"></i>  사진첨부
-				</button>
-				<button type="button" class="w3-btn w3-theme">
-					<i class="fa fa-pencil"></i>  올리기
-				</button>
-			</div>
-		</div>
-	</div>
-</div>
 <form role="form" action="/file/upload" method="post"
 	enctype="multipart/form-data">
 	<div class="container">
@@ -245,37 +224,96 @@ $(document).ready(function(){
     });
 });
 </script>
-<c:forEach var="obj" items="${list }" varStatus="status">
+<c:choose>
+<c:when test="${size eq 0 }">
+<div class="w3-row-padding">
+	<div class="w3-col m12">
+		<div class="w3-card-2 w3-round w3-white">
+			<div class="w3-container w3-padding" id="upload">
+				<img src="/w3images/avatar2.png" alt="Avatar"
+					class="w3-left w3-circle w3-margin-right" style="width: 60px">
+				<h6 class="w3-opacity">
+
+					<a>${nickname}</a>(${userId})님
+				</h6>
+				<textarea class="form-control" id="usrname"
+					placeholder="무슨 생각을 하고 있나요~?" name="comments" style="border: none;"></textarea>
+				<button type="button" class="w3-btn w3-theme">
+					<i class="fa fa-pencil"></i>  사진첨부
+				</button>
+				<button type="button" class="w3-btn w3-theme">
+					<i class="fa fa-pencil"></i>  올리기
+				</button>
+			</div>
+		</div>
+	</div>
+</div>
+</c:when>
+<c:otherwise>
+<div class="w3-row-padding">
+	<div class="w3-col m12">
+		<div class="w3-card-2 w3-round w3-white">
+			<div class="w3-container w3-padding" id="upload">
+				<img src="/w3images/avatar2.png" alt="Avatar"
+					class="w3-left w3-circle w3-margin-right" style="width: 60px">
+				<h6 class="w3-opacity">
+
+					<a>${nickname}</a>(${userId})님
+				</h6>
+				<textarea class="form-control" id="usrname"
+					placeholder="무슨 생각을 하고 있나요~?" name="comments" style="border: none;"></textarea>
+				<button type="button" class="w3-btn w3-theme">
+					<i class="fa fa-pencil"></i>  사진첨부
+				</button>
+				<button type="button" class="w3-btn w3-theme">
+					<i class="fa fa-pencil"></i>  올리기
+				</button>
+			</div>
+		</div>
+	</div>
+</div>
+<c:forEach var="i" begin="0" end="${size }" varStatus="status">
 	<div class="w3-container w3-card-2 w3-white w3-round w3-margin">
 		<br> <a href="/selectview"><img src="/w3images/avatar2.png"
 			alt="Avatar" id="fileselect"
 			class="w3-left w3-circle w3-margin-right" style="width: 60px"></a>
 		<h6 class="w3-opacity">
-			<a href="/profile?findsee=${obj.get('ID')}"> <b>${obj.get("NAME") }</b>(${obj.get("ID") })님
+			<a href="/profile?findsee=${list[i].get('ID')}"> <b>${list[i].get("NAME") }</b>(${list[i].get("ID") })님
 			</a>
 		</h6>
-		<p>${obj.COMMENTS }</p>
+		<p>${list[i].get("COMMENTS") }</p>
+		<p id="sh">
+			<c:if
+				test="${list[i].get('FILEUUID') eq sleList[i].get('L_FILEUUID')}">
+				<i class="fa fa-thumbs-up"></i>
+				<p id="sh1">${sleList[i].get("L_SELECTLIKER")}</p>
+			</c:if>
+		</p>
 		<div class="w3-row-padding" style="margin: 0 -16px">
 			<div class="w3-half">
 
 				<button type="button" id="filemodal_${status.index }"
 					style="border: none; background: transparent;"
-					onclick="button1_click('${obj.FILEUUID}', '${obj.ID }','${obj.COMMENTS }' );">
-					<img src="/users/${obj.get('FILEUUID') }" style="width: 100%"
+					onclick="button1_click('${list[i].get('FILEUUID') }', '${list[i].get('ID')}','${list[i].get('COMMENTS') }' );">
+					<img src="/users/${list[i].get('FILEUUID') }" style="width: 100%"
 						alt="Northern Lights" class="w3-margin-bottom" id="test">
 				</button>
 			</div>
 		</div>
 		<button type="button" class="w3-btn w3-theme-d1 w3-margin-bottom"
-			onclick="likeclick('${obj.FILEUUID}', '${userId}')">
+			onclick="likeclick('${list[i].get('FILEUUID') }', '${userId}')">
 			<i class="fa fa-thumbs-up"></i>  좋아요♥
 		</button>
 		<button type="button" class="w3-btn w3-theme-d2 w3-margin-bottom"
 			onclick="board_click()">
 			<i class="fa fa-comment"></i>  댓글달기
 		</button>
+		<br />
+
 	</div>
 </c:forEach>
+</c:otherwise>
+</c:choose>
 
 <script>	
 	function likeclick(uuid, id) {
@@ -284,9 +322,11 @@ $(document).ready(function(){
 		xhr.onreadystatechange = function() {
 			if(xhr.readyState == 4 && xhr.status == 200) {
 				var resq = xhr.responseText;
-				if (resq == 'true') {
+				if (resq != null && resq !="false") {
 					window.alert("좋아욧!!!!");
-				}else{
+					$("#sh").show();
+					$("#sh1").html(resq);
+				}if(resq =="false"){
 					window.alert("실헝욧!!!!");
 				}
 			}
@@ -310,9 +350,7 @@ $(document).ready(function(){
 									height="500">
 							</p>
 						</li>
-						<li>
-							<input type="button" id=asd value="상품정보입력할래?">
-						</li>
+						<li><input type="button" id=asd value="상품정보입력할래?"></li>
 					</ul>
 				</nav>
 				<div id="content_wrap">
@@ -343,28 +381,27 @@ $(document).ready(function(){
 							</div>
 						</div>
 						<div id="ccc"></div>
-						<hr/>
-						<br/>
+						<hr />
+						<br />
 						<div class="row">
 							<div class="col-sm-4 text-center">
 								<div id="port1">
-									<label for="productname"> 상품명 : </label> 
-									<input type="text"
-										name="name" id="productname"><br> <label
-										for="price"> 가격 : </label> <input type="text"
-										name="productprice" id="productprice"><br> <label
-										for="adduserid">정보제공</label> <input type="text"
+									<label for="productname"> 상품명 : </label> <input type="hidden"
+										id="filename" value=""> <input type="text" name="name"
+										id="productname"><br> <label for="price">
+										가격 : </label> <input type="text" name="productprice" id="productprice"><br>
+									<label for="adduserid">정보제공</label> <input type="text"
 										name="addid" id="adduserid"> <input type="button"
 										value="정보입력" id="bt1">
 								</div>
-								
+
 								<div id="port2">
 									<a href="javascript:showProduct()">상품정보가 등록되어있습니다.</a>
 								</div>
 								<div id="port2_sun">
-									<label>상품명 : </label><p id="nameP">${getinfo.get("NAME") }</p><br/>
-									<label>가격 : </label><p id="priceP">${getinfo.get("PRICE") }</p><br/>
-									<label>제공자 : </label><p id="idP">${getinfo.get("ADDID") }</p><br/>
+									<label>상품명 : </label> <b id="nameP"></b> <br /> <label>가격
+										: </label> <b id="priceP"></b> <br /> <label>제공자 : </label> <b
+										id="idP"></b> <br />
 								</div>
 							</div>
 						</div>
@@ -378,51 +415,6 @@ $(document).ready(function(){
 	</div>
 </div>
 <script>
-$("#port2_sun").hide();
-function showProduct() {
-	$("#port2_sun").slideToggle();
-}
-$("#port1").hide();
-$("#port2").hide();
-$("#asd").click(function() {
-	$("#port1").show();
-});
-$("#bt1").click(function() {
-	$("#port1").hide();
-	var a = $("#productname").val();
-	var b = $("#productprice").val();
-	var c = $("#adduserid").val();
-	var xhr = new XMLHttpRequest();
-	xhr.open("get", "/product?name=" + a + "&price=" + b+ "&id=" + c, true);
-	xhr.onreadystatechange = function() {
-		if (xhr.readyState == 4 && xhr.status == 200) {
-		var resq = xhr.responseText;
-			if (resq == 'true') {
-				window.alert("정보등록완료");
-				$("#asd").attr('disabled',true);
-				xhr.open("get", "/productshow", true);
-				/*
-				if (xhr.readyState == 4 && xhr.status == 200) {
-					var resq1 = xhr.responseText;
-					if(resq1 != null) {
-					var[] a = resq1.split(",");
-						for(var i=0;i<a.size();i++) {
-							$("#nameP").html(a[0]);
-							$("#priceP").html(a[1]);
-							$("#idP").html(a[2]);
-						}
-					}
-				}
-				
-				*/
-				$("#port2").show();
-			} else {
-				window.alert("정보등록실패");
-			}
-		}
-	};
-	xhr.send();
-})
 $("#bt").dblclick(function(){
 	
 	$(document.getElementById("port")).slideToggle();
@@ -439,13 +431,64 @@ $("#bt").dblclick(function(){
 	  $("#ccc").append('</a>');
 	  $("#ccc").append('<hr>');
    });
-	
-function button1_click(uuid, id, comment) {
-		$("#modal_img").attr("src", "/users/"+uuid);
-		$("#modal_comments").html(comment);
-		$("#my80sizeCenterModal").modal();
+ 
+ $("#bt1").click(function() {
+	$("#port1").hide();
+	var a = $("#productname").val();
+	var b = $("#productprice").val();
+	var c = $("#adduserid").val();
+	var d = $("#filename").val();
+	var xhr = new XMLHttpRequest();
+	xhr.open("get", "/product?name=" + a + "&price=" + b+ "&id=" + c+"&fileuid="+d, true);
+	xhr.onreadystatechange = function() {
+		if (xhr.readyState == 4 && xhr.status == 200) {
+		var resq = xhr.responseText;
+			if (resq == 'true') {
+				window.alert("정보등록완료");
+				$("#asd").attr('disabled',true);
+				$("#port2").show();
+			} else {
+				window.alert("정보등록실패");
+			}
+		}
+	};
+	xhr.send();
+});	
+function button1_click(uuid, id, comment) {	
+	$("#port1").hide();
+	$("#port2").hide();
+	$(document).ready(function() {
+		var xhr = new XMLHttpRequest();		
+		xhr.open("get", "/productshow?filename="+uuid, true);
+		var resq;
+		var resq1;
+		xhr.onreadystatechange = function() {
+			if (xhr.readyState == 4 && xhr.status == 200) {
+				resq = xhr.responseText;
+				resq1 = JSON.parse(resq);
+				if(resq1[0] != 'null') {
+					$("#nameP").html("<strong>" + resq1[0] + "</strong>");
+					$("#priceP").html(resq1[1]);
+					$("#idP").html(resq1[2]);
+					$("#port2").show();
+					$("#asd").hide();
+				}
+			}
+		}
+		xhr.send();
+		});
+	$("#modal_img").attr("src", "/users/"+uuid);
+	$("#modal_comments").html(comment);
+	$("#filename").attr("value",""+uuid);
+	$("#my80sizeCenterModal").modal();
+}
+function showProduct() {
+	$("#port2_sun").slideToggle();
 }
 
+$("#asd").click(function() {
+	$("#port1").show();
+});
 function myFunction(id) {
     var x = document.getElementById(id);
     if (x.className.indexOf("w3-show") == -1) {

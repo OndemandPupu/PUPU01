@@ -17,8 +17,8 @@ public class SelLikeService {
 	public boolean sellikego(String selectliker, String uuid) {
 		SqlSession sql = fac.openSession();
 		HashMap map = new HashMap();
-		map.put("selectliker", selectliker);
-		map.put("fileuuid", uuid);
+		map.put("l_selectliker", selectliker);
+		map.put("l_fileuuid", uuid);
 		int rst = sql.insert("files.liker", map);
 		sql.close();
 		if(rst==1) {
@@ -31,8 +31,8 @@ public class SelLikeService {
 	public boolean sellikecheck(String selectliker, String uuid) {
 		SqlSession sql = fac.openSession();
 		HashMap map = new HashMap();
-		map.put("selectliker", selectliker);
-		map.put("fileuuid", uuid);
+		map.put("l_selectliker", selectliker);
+		map.put("l_fileuuid", uuid);
 		String rst = sql.selectOne("files.likercheck", map);
 		sql.close();
 		if(rst == null ) {
@@ -44,8 +44,8 @@ public class SelLikeService {
 	public boolean sellikeupdate(String selectliker, String uuid) {
 		SqlSession sql = fac.openSession();
 		HashMap map = new HashMap();
-		map.put("selectliker", selectliker);
-		map.put("fileuuid", uuid);
+		map.put("l_selectliker", selectliker);
+		map.put("l_fileuuid", uuid);
 		int rst = sql.update("files.likeupdate", map);
 		sql.close();
 		if(rst == 1 ) {
@@ -65,12 +65,12 @@ public class SelLikeService {
 		return null;
 	}
 	
-	public List<HashMap> sellikeList() {
+	public List<HashMap> sellikeList(String fileuuid) {
 		SqlSession sql = fac.openSession();
 	
-		List<HashMap> selList= sql.selectList("files.likerList");
-		System.out.println("¸ðµ¨"+selList);
+		List<HashMap> selList= sql.selectList("files.likerList",fileuuid);
 		sql.close();
+		System.out.println(selList);
 		if(selList != null ) {
 			return selList;
 		}
