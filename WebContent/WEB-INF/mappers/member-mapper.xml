@@ -8,14 +8,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		values(#{id}, member_seq.nextval, #{name}, #{email}, #{address},
 		#{phone}, #{interest}, #{birth} ,#{gender}, sysdate , #{pass})
 	</insert>
-	<insert id="addMembership" parameterType="java.lang.String">
-		insert into membership
-		values(#{id},#{name} ,0, 1)
-	</insert>
-	<update id="updateMembership" parameterType="java.lang.String">
-		update membership
-		set point= point+10 where id= #{id}
-	</update>
 	<select id="checkmember" resultType="java.lang.String"
 		parameterType="java.util.HashMap">
 		select * from member where

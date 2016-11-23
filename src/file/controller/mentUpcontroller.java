@@ -28,13 +28,10 @@ public class mentUpcontroller {
 		else 
 			return "NNNNN";
 	}
-	@RequestMapping(value="/memo/show", produces="text/plain;charset=utf-8")
+	@RequestMapping("/memo/show")
 	public ModelAndView showMemo(String fileuuid) {
 		ModelAndView mav = new ModelAndView("empty2");
-		System.out.println("ajax 요청"+fileuuid);
 		List<HashMap> li = ms.getMent(fileuuid);
-		System.out.println("ajax 요청대한답"+li);
-		
 		mav.addObject("comen", li);
 		return mav;
 	}
