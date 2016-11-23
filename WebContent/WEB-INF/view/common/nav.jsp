@@ -3,7 +3,7 @@
 <fieldset style="width: 500">
 	<ul>
 		<h4>HOME</h4>
-		<li><a href="#">Popular</a></li>
+		<li><a href="/popular">Popular</a></li>
 		<li><a href="#">Recommend</a></li>
 		<li><a href="#">Map</a></li>
 

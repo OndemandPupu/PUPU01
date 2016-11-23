@@ -491,7 +491,7 @@ function button1_click(uuid, id, comment) {
 		if(rst!="null") {
 			for(var i=0;i<rst.length;i++) {
 				alert(rst[i]);
-				$("#ccc").append("<b>"+rst[i].id+"</b>"+rst[i].memo+"("+rst[i].dates+")<br/>");
+				$("#ccc").append("<b>"+rst[i].id+"</b> : "+rst[i].memo+"("+rst[i].dates+")<br/>");
 			}
 		} else {
 			$("#ccc").hide();
