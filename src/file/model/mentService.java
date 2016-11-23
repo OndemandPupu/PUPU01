@@ -32,7 +32,6 @@ public class mentService {
 			sql.close();
 			return true;
 		} catch (Exception e) {
-			System.out.println(e);
 			e.printStackTrace();
 			return false;
 		}

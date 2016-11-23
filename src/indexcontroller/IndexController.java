@@ -39,7 +39,6 @@ public class IndexController {
 			List<HashMap> sleList = sls.sellikeList(s_fileid);
 			mav.addObject("list", li);
 			mav.addObject("size", li.size()-1);
-			System.out.println(li.size()-1);
 			mav.addObject("sleList", sleList);
 			
 			return mav;

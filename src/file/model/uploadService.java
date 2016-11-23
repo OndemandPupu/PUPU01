@@ -40,7 +40,6 @@ public class uploadService {
 			sql.close();
 			return uid;
 		} catch (Exception e) {
-			System.out.println(e);
 			e.printStackTrace();
 			return null;
 		}

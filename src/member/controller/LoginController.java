@@ -39,10 +39,7 @@ public class LoginController {
 			for(int i =0; i<li.size();i++) {
 				map = li.get(i);
 			}
-			session.setAttribute("nickname", map.get("NAME") );
-			System.out.println(session.getAttribute("userId"));
-			System.out.println(session.getAttribute("nickname"));
-			
+			session.setAttribute("nickname", map.get("NAME") );			
 			mav.addObject("check", "true");
 		}
 		return mav;

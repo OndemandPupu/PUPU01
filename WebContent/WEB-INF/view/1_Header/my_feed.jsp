@@ -480,6 +480,7 @@ $("#bt").dblclick(function(){
 </script>
 <script>
 function button1_click(uuid, id, comment) {
+	$("#ccc").html("");
 	var d = $("#filename").val();
 	$(document.getElementById("port")).slideToggle();
 	$.ajax({
@@ -487,11 +488,9 @@ function button1_click(uuid, id, comment) {
 		"url":"/memo/show?fileuuid="+uuid,
 		"methode":"get"
 	}).done(function(rst) {
-		alert(rst);
 		if(rst!="null") {
 			for(var i=0;i<rst.length;i++) {
-				alert(rst[i]);
-				$("#ccc").append("<b>"+rst[i].id+"</b> : "+rst[i].memo+"("+rst[i].dates+")<br/>");
+				$("#ccc").append("<img src='http://api.randomuser.me/portraits/thumb/women/17.jpg' class='img-circle'/><b>"+rst[i].id+"</b> : "+rst[i].memo+"("+rst[i].dates+")<br/>");
 			}
 		} else {
 			$("#ccc").hide();
@@ -542,33 +541,28 @@ $("#asd").click(function() {
 	$("#port1").show();
 });
 </script>
-<script>
-/*
- $("#write").change(function(){
-	  var memo =$("#write").val();
-	  $("#ccc").append('<h2>'+memo+'</h2>');
-	  $("#ccc").append('<b>'+"ID:SUSU"+'</b>');
-	  $("#ccc").append("<a href='#' class='pull-right'>");
-	  $("#ccc").append("<img src='http://api.randomuser.me/portraits/thumb/women/17.jpg' class='img-circle'/>");
-	  $("#ccc").append('</a>');
-	  $("#ccc").append('<hr>');
-   });
-   */
-</script>
+
 <script>
 $("#write").change(function(){
-	var t=$("#modal_img").attr("alt");
+	printTime();
+	var time;
+	function printTime() {
+        var now = new Date();                                               
+        var nowTime = now.getFullYear() + "-" + (now.getMonth()+1) + "-" + now.getDate() + " " + now.getHours() + ":" + now.getMinutes() + ":" + now.getSeconds();
+        time = nowTime;          
+        setTimeout("printTime()",1000);       
+	}
+	var t=	$("#modal_img").attr("alt");
 	var d = $("#filename").val();
-	var m =$("#write").val();
+	var m =	$("#write").val();
 	var i = $("#s_id").val();
-	window.alert(m);
 	$("#write").val("");
 		$.ajax({
 			"url":"/memo/upMemo?fileuuid="+d+"&memo="+m+"&id="+i,
 			"methode":"get"
 		}).done(function(rst){
 			if(rst=="YYYYY") {
-				window.alert("코멘트 정상 등록");
+				$("#ccc").append("<b>"+i+"</b> : "+m+"("+time+")<br/>");
 			}else {
 				window.alert("코멘트 등록 실패");
 			}
