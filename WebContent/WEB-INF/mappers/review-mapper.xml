@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="review">
+	<insert id="insert" parameterType="java.lang.String">
+		insert into memo
+		values(memo_seq.nextval, #{id},#{memo} , sysdate, #{fileuuid})
+	</insert>
+	<select id="getAll" resultType="java.util.HashMap" 
+									parameterType="java.lang.String">
+		<![CDATA[
+   select temp.* from
+      (select * from memo order by num desc) temp
+      where fileuuid = #{fileuuid}
+	]]>
+	</select>
+</mapper>

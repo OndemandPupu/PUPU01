@@ -171,7 +171,90 @@ a {
 	vertical-align: middle;
 }
 </style>
-
+<c:choose>
+<c:when test="${size eq -1 }">
+<div class="w3-row-padding">
+	<div class="w3-col m12">
+		<div class="w3-card-2 w3-round w3-white">
+			<div class="w3-container w3-padding" id="upload">
+				<img src="/w3images/avatar2.png" alt="Avatar"
+					class="w3-left w3-circle w3-margin-right" style="width: 60px">
+				<h6 class="w3-opacity">
+					<a>${nickname}</a>(${userId})님
+				</h6>
+				<textarea class="form-control" id="usrname"
+					placeholder="무슨 생각을 하고 있나요~?" name="comments" style="border: none;"></textarea>
+				<button type="button" class="w3-btn w3-theme">
+					<i class="fa fa-pencil"></i>  사진첨부
+				</button>
+				<button type="button" class="w3-btn w3-theme">
+					<i class="fa fa-pencil"></i>  올리기
+				</button>
+			</div>
+		</div>
+	</div>
+</div>
+<form role="form" action="/file/upload" method="post"
+	enctype="multipart/form-data">
+	<div class="container">
+		<!-- Modal -->
+		<div class="modal fade" id="myModal" role="dialog">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-body" style="padding: 40px 50px;">
+						<div class="w3-container w3-padding" id="upload">
+							<img src="/w3images/avatar2.png" alt="Avatar"
+								class="w3-left w3-circle w3-margin-right" style="width: 60px">
+							<h6 class="w3-opacity">
+								<a>${nickname}</a>(${userId})님
+							</h6>
+							<textarea class="form-control" id="usrname"
+								placeholder="무슨 생각을 하고 있나요~?" name="comments"
+								style="border: none;"></textarea>
+						</div>
+						<input type="file" id="up_files" name="file"
+							onchange="handleFileSelect()" />
+						<pre id="list1"
+							style="height: 220px; width: 220px; background-color: white; border: none;"></pre>
+						<div class="modal-footer">
+							<button type="submit" class="btn btn-success btn-block">
+								<span class="glyphicon glyphicon-off"></span> 올리기
+							</button>
+							<button type="submit"
+								class="btn btn-danger btn-default pull-left"
+								data-dismiss="modal">
+								<span class="glyphicon glyphicon-remove"></span> Cancel
+							</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</form>
+</c:when>
+<c:otherwise>
+<div class="w3-row-padding">
+	<div class="w3-col m12">
+		<div class="w3-card-2 w3-round w3-white">
+			<div class="w3-container w3-padding" id="upload">
+				<img src="/w3images/avatar2.png" alt="Avatar"
+					class="w3-left w3-circle w3-margin-right" style="width: 60px">
+				<h6 class="w3-opacity">
+					<a>${nickname}</a>(${userId})님
+				</h6>
+				<textarea class="form-control" id="usrname"
+					placeholder="무슨 생각을 하고 있나요~?" name="comments" style="border: none;"></textarea>
+				<button type="button" class="w3-btn w3-theme">
+					<i class="fa fa-pencil"></i>  사진첨부
+				</button>
+				<button type="button" class="w3-btn w3-theme">
+					<i class="fa fa-pencil"></i>  올리기
+				</button>
+			</div>
+		</div>
+	</div>
+</div>
 <form role="form" action="/file/upload" method="post"
 	enctype="multipart/form-data">
 	<div class="container">
@@ -213,65 +296,6 @@ a {
 		</div>
 	</div>
 </form>
-<script>
-$(document).ready(function(){
-	$("#list1").hide();
-    $("#upload").click(function(){
-        $("#myModal").modal();
-		$("#up_files").click(function(){
-			$("#list1").show();		
-		});
-    });
-});
-</script>
-<c:choose>
-<c:when test="${size eq 0 }">
-<div class="w3-row-padding">
-	<div class="w3-col m12">
-		<div class="w3-card-2 w3-round w3-white">
-			<div class="w3-container w3-padding" id="upload">
-				<img src="/w3images/avatar2.png" alt="Avatar"
-					class="w3-left w3-circle w3-margin-right" style="width: 60px">
-				<h6 class="w3-opacity">
-
-					<a>${nickname}</a>(${userId})님
-				</h6>
-				<textarea class="form-control" id="usrname"
-					placeholder="무슨 생각을 하고 있나요~?" name="comments" style="border: none;"></textarea>
-				<button type="button" class="w3-btn w3-theme">
-					<i class="fa fa-pencil"></i>  사진첨부
-				</button>
-				<button type="button" class="w3-btn w3-theme">
-					<i class="fa fa-pencil"></i>  올리기
-				</button>
-			</div>
-		</div>
-	</div>
-</div>
-</c:when>
-<c:otherwise>
-<div class="w3-row-padding">
-	<div class="w3-col m12">
-		<div class="w3-card-2 w3-round w3-white">
-			<div class="w3-container w3-padding" id="upload">
-				<img src="/w3images/avatar2.png" alt="Avatar"
-					class="w3-left w3-circle w3-margin-right" style="width: 60px">
-				<h6 class="w3-opacity">
-
-					<a>${nickname}</a>(${userId})님
-				</h6>
-				<textarea class="form-control" id="usrname"
-					placeholder="무슨 생각을 하고 있나요~?" name="comments" style="border: none;"></textarea>
-				<button type="button" class="w3-btn w3-theme">
-					<i class="fa fa-pencil"></i>  사진첨부
-				</button>
-				<button type="button" class="w3-btn w3-theme">
-					<i class="fa fa-pencil"></i>  올리기
-				</button>
-			</div>
-		</div>
-	</div>
-</div>
 <c:forEach var="i" begin="0" end="${size }" varStatus="status">
 	<div class="w3-container w3-card-2 w3-white w3-round w3-margin">
 		<br> <a href="/selectview"><img src="/w3images/avatar2.png"
@@ -282,13 +306,7 @@ $(document).ready(function(){
 			</a>
 		</h6>
 		<p>${list[i].get("COMMENTS") }</p>
-		<p id="sh">
-			<c:if
-				test="${list[i].get('FILEUUID') eq sleList[i].get('L_FILEUUID')}">
-				<i class="fa fa-thumbs-up"></i>
-				<p id="sh1">${sleList[i].get("L_SELECTLIKER")}</p>
-			</c:if>
-		</p>
+		
 		<div class="w3-row-padding" style="margin: 0 -16px">
 			<div class="w3-half">
 
@@ -309,31 +327,11 @@ $(document).ready(function(){
 			<i class="fa fa-comment"></i>  댓글달기
 		</button>
 		<br />
-
+		<i class="fa fa-thumbs-up"></i>${sleList[i].get("L_SELECTLIKER") }
 	</div>
 </c:forEach>
 </c:otherwise>
 </c:choose>
-
-<script>	
-	function likeclick(uuid, id) {
-		var xhr = new XMLHttpRequest();
-		xhr.open("get", "/liker?uuid="+uuid+"&id="+id, true );
-		xhr.onreadystatechange = function() {
-			if(xhr.readyState == 4 && xhr.status == 200) {
-				var resq = xhr.responseText;
-				if (resq != null && resq !="false") {
-					window.alert("좋아욧!!!!");
-					$("#sh").show();
-					$("#sh1").html(resq);
-				}if(resq =="false"){
-					window.alert("실헝욧!!!!");
-				}
-			}
-		};
-		xhr.send();
-	};
-</script>
 <div class="modal modal-center fade" id="my80sizeCenterModal"
 	tabindex="-1" role="dialog" aria-labelledby="my80sizeCenterModalLabel">
 	<div class="modal-dialog modal-80size modal-center" role="document">
@@ -341,6 +339,7 @@ $(document).ready(function(){
 			<div id="wrap">
 				<div id="top_view">
 					<a class="logo" href="/main" style="color: #FF8000">Pupu</a>
+					<input type="hidden" value="${userId }" id="s_id">
 				</div>
 				<nav id="main_lab">
 					<ul class="nav">
@@ -414,24 +413,45 @@ $(document).ready(function(){
 		</div>
 	</div>
 </div>
+
+<script>
+$(document).ready(function(){
+	$("#list1").hide();
+    $("#upload").click(function(){
+        $("#myModal").modal();
+		$("#up_files").click(function(){
+			$("#list1").show();		
+		});
+    });
+});
+</script>
+
+<script>
+function likeclick(uuid, id) {
+	var xhr = new XMLHttpRequest();
+	xhr.open("get", "/liker?uuid="+uuid+"&id="+id, true );
+	xhr.onreadystatechange = function() {
+		if(xhr.readyState == 4 && xhr.status == 200) {
+			var resq = xhr.responseText;
+			if (resq != null && resq !="false") {
+				window.alert("좋아욧!!!!");
+				$("#sh").show();
+				$("#sh1").html(resq);
+			}if(resq =="false"){
+				window.alert("실헝욧!!!!");
+			}
+		}
+	};
+	xhr.send();
+};
+</script>
+
 <script>
 $("#bt").dblclick(function(){
-	
 	$(document.getElementById("port")).slideToggle();
 });
-
- $("#write").change(function(){
-	  var t =$("#write").val();
-	  $("#write").val("");
-	   
-	  $("#ccc").append('<h2>'+t+'</h2>');
-	  $("#ccc").append('<b>'+"ID:SUSU"+'</b>');
-	  $("#ccc").append("<a href='#' class='pull-right'>");
-	  $("#ccc").append("<img src='http://api.randomuser.me/portraits/thumb/women/17.jpg' class='img-circle'/>");
-	  $("#ccc").append('</a>');
-	  $("#ccc").append('<hr>');
-   });
- 
+</script>
+<script>
  $("#bt1").click(function() {
 	$("#port1").hide();
 	var a = $("#productname").val();
@@ -445,7 +465,7 @@ $("#bt").dblclick(function(){
 		var resq = xhr.responseText;
 			if (resq == 'true') {
 				window.alert("정보등록완료");
-				$("#asd").attr('disabled',true);
+				$("#asd").hide();
 				$("#port2").show();
 			} else {
 				window.alert("정보등록실패");
@@ -453,10 +473,32 @@ $("#bt").dblclick(function(){
 		}
 	};
 	xhr.send();
-});	
-function button1_click(uuid, id, comment) {	
-	$("#port1").hide();
+});
+</script>
+<script>
+
+</script>
+<script>
+function button1_click(uuid, id, comment) {
+	var d = $("#filename").val();
+	$(document.getElementById("port")).slideToggle();
+	$.ajax({
+		"dataType": "json",
+		"url":"/memo/show?fileuuid="+uuid,
+		"methode":"get"
+	}).done(function(rst) {
+		alert(rst);
+		if(rst!="null") {
+			for(var i=0;i<rst.length;i++) {
+				alert(rst[i]);
+				$("#ccc").append("<b>"+rst[i].id+"</b>"+rst[i].memo+"("+rst[i].dates+")<br/>");
+			}
+		} else {
+			$("#ccc").hide();
+		}
+	})
 	$("#port2").hide();
+	$("#port2_sun").hide();
 	$(document).ready(function() {
 		var xhr = new XMLHttpRequest();		
 		xhr.open("get", "/productshow?filename="+uuid, true);
@@ -467,11 +509,14 @@ function button1_click(uuid, id, comment) {
 				resq = xhr.responseText;
 				resq1 = JSON.parse(resq);
 				if(resq1[0] != 'null') {
-					$("#nameP").html("<strong>" + resq1[0] + "</strong>");
+					$("#nameP").html(resq1[0]);
 					$("#priceP").html(resq1[1]);
 					$("#idP").html(resq1[2]);
 					$("#port2").show();
 					$("#asd").hide();
+				}else {
+					$("#port2").hide();
+					$("#asd").show();	
 				}
 			}
 		}
@@ -481,14 +526,58 @@ function button1_click(uuid, id, comment) {
 	$("#modal_comments").html(comment);
 	$("#filename").attr("value",""+uuid);
 	$("#my80sizeCenterModal").modal();
+	
 }
+</script>
+
+<script>
 function showProduct() {
 	$("#port2_sun").slideToggle();
 }
+</script>
 
+<script>
+$("#port1").hide();
 $("#asd").click(function() {
 	$("#port1").show();
 });
+</script>
+<script>
+/*
+ $("#write").change(function(){
+	  var memo =$("#write").val();
+	  $("#ccc").append('<h2>'+memo+'</h2>');
+	  $("#ccc").append('<b>'+"ID:SUSU"+'</b>');
+	  $("#ccc").append("<a href='#' class='pull-right'>");
+	  $("#ccc").append("<img src='http://api.randomuser.me/portraits/thumb/women/17.jpg' class='img-circle'/>");
+	  $("#ccc").append('</a>');
+	  $("#ccc").append('<hr>');
+   });
+   */
+</script>
+<script>
+$("#write").change(function(){
+	var t=$("#modal_img").attr("alt");
+	var d = $("#filename").val();
+	var m =$("#write").val();
+	var i = $("#s_id").val();
+	window.alert(m);
+	$("#write").val("");
+		$.ajax({
+			"url":"/memo/upMemo?fileuuid="+d+"&memo="+m+"&id="+i,
+			"methode":"get"
+		}).done(function(rst){
+			if(rst=="YYYYY") {
+				window.alert("코멘트 정상 등록");
+			}else {
+				window.alert("코멘트 등록 실패");
+			}
+		});
+});
+</script>
+
+
+<script>
 function myFunction(id) {
     var x = document.getElementById(id);
     if (x.className.indexOf("w3-show") == -1) {
@@ -500,6 +589,9 @@ function myFunction(id) {
         x.previousElementSibling.className.replace(" w3-theme-d1", "");
     }
 }
+</script>
+
+<script>
 function openNav() {
     var x = document.getElementById("navDemo");
     if (x.className.indexOf("w3-show") == -1) {
@@ -509,6 +601,7 @@ function openNav() {
     }
 }
 </script>
+
 <script type="text/javascript">
     function handleFileSelect() 
     {

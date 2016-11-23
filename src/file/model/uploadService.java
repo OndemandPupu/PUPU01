@@ -27,9 +27,7 @@ public class uploadService {
 			return null;
 		try {
 			String uid = UUID.randomUUID().toString().substring(0, 4);
-			System.out.println(uid);
 			String dir = application.getRealPath("/users");
-              System.out.println(dir);
 			File des = new File(dir, uid);
 			f.transferTo(des);
 			HashMap map = new HashMap();

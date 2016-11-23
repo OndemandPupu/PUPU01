@@ -57,7 +57,7 @@ public class SelLikeService {
 	public String sellikedelet(String uuid) {
 		SqlSession sql = fac.openSession();
 	
-		int rst = sql.update("files.likeBye", uuid);
+		int rst = sql.delete("files.likeBye", uuid);
 		sql.close();
 		if(rst == 1 ) {
 			return "false";
@@ -70,7 +70,6 @@ public class SelLikeService {
 	
 		List<HashMap> selList= sql.selectList("files.likerList",fileuuid);
 		sql.close();
-		System.out.println(selList);
 		if(selList != null ) {
 			return selList;
 		}

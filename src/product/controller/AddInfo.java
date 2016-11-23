@@ -29,7 +29,6 @@ public class AddInfo {
 	map.put("price", req.getParameter("price"));
 	map.put("addid", req.getParameter("id"));
 	map.put("fileuuid", req.getParameter("fileuid"));
-	System.out.println(map);
 	boolean rst = pdif.ProductInfoSet(map);	
 		if(rst==true) {
 			return "true";
@@ -41,17 +40,13 @@ public class AddInfo {
 	@RequestMapping(value="/productshow", produces="text/plain;charset=utf-8")
 	@ResponseBody
 	public String getinfo(HttpServletRequest req, HttpSession session){
-		//name:상품명 , price:상품가격 
 		String fnae = req.getParameter("filename");
-		System.out.println("파일이름"+fnae);
 		List<HashMap> rst = pdif.ProductInfoGet(fnae);
-		System.out.println("파일에등록된정보"+rst);
 		HashMap map = new HashMap();
 		String arr = null;
 		for(int i=0;i<rst.size();i++) {
 			map = rst.get(i);
 		}
-		System.out.println(map);
 		if(rst != null) {
 			arr = "[\"";
 			arr += (String)map.get("NAME");
@@ -60,7 +55,6 @@ public class AddInfo {
 			arr += "\",\"";
 			arr += (String)map.get("ADDID");
 			arr += "\"]";
-			System.out.println(arr);
 		}
 		return arr;
 	}

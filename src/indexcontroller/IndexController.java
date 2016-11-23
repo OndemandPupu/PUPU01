@@ -39,6 +39,7 @@ public class IndexController {
 			List<HashMap> sleList = sls.sellikeList(s_fileid);
 			mav.addObject("list", li);
 			mav.addObject("size", li.size()-1);
+			System.out.println(li.size()-1);
 			mav.addObject("sleList", sleList);
 			
 			return mav;
@@ -51,7 +52,6 @@ public class IndexController {
 	public ModelAndView welcome1(HttpServletRequest req) {
 		ModelAndView mav = new ModelAndView("t:notlogin");
 		String agree = req.getParameter("agree");
-		System.out.println(agree);
 		mav.addObject("agreeok", agree);
 		return mav;
 	}
