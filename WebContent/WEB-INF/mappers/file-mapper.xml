@@ -29,4 +29,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<delete id="likeBye" parameterType="java.lang.String">
 		delete from likepeople where l_fileuuid= #{l_fileuuid }
 	</delete>
+	
+	
+	<update id="fileupdate" parameterType="java.lang.String">
+		update fileupload set count =
+		count +1 where fileuuid=#{fileuuid }
+	</update>
+	<delete id="writeout"  parameterType="java.lang.String">
+		delete from fileupload where fileuuid= #{fileuuid} 
+	</delete>
 </mapper>

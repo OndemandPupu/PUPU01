@@ -24,7 +24,7 @@ public class LoginService {
 		return check;
 
 	}
-	
+
 	public String joinCheck(String id) {
 		SqlSession sql = fac.openSession();
 		String check = sql.selectOne("member.overlapmember", id);
@@ -32,7 +32,7 @@ public class LoginService {
 		return check;
 
 	}
-	
+
 	public List<HashMap> nicknameSet(String id) {
 		SqlSession sql = fac.openSession();
 		List<HashMap> nickname = sql.selectList("member.nickname", id);
@@ -40,12 +40,45 @@ public class LoginService {
 		return nickname;
 
 	}
-	
+
 	public List<HashMap> profileCheck(String id) {
 		SqlSession sql = fac.openSession();
 		List<HashMap> check = sql.selectList("member.profile", id);
 		sql.close();
 		return check;
+
+	}
+
+	public List<HashMap> profileSystem() {
+		SqlSession sql = fac.openSession();
+		List<HashMap> check = sql.selectList("member.allMember");
+		sql.close();
+		return check;
+
+	}
+
+	public List<HashMap> managerCheck(String id) {
+		SqlSession sql = fac.openSession();
+		List<HashMap> manager = sql.selectList("member.manager", id);
+		sql.close();
+		return manager;
+
+	}
+
+	public int memberout(String id) {
+		SqlSession sql = fac.openSession();
+		int r = sql.delete("member.memberout", id);
+		sql.close();
+		return r;
+
+	}
+
+	public int writeout(String fileuuid) {
+		System.out.println(fileuuid);
+		SqlSession sql = fac.openSession();
+		int r = sql.delete("files.writeout", fileuuid);
+		sql.close();
+		return r;
 
 	}
 

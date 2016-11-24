@@ -28,21 +28,21 @@ public class IndexController {
 	@RequestMapping("/main")
 	public ModelAndView welcome(HttpSession session) {
 		ModelAndView mav = new ModelAndView();
-		if(session.getAttribute("userId") != null) {
-			mav.setViewName("t:yeslogin");
-			List<HashMap> li = alvs.allview();
-			HashMap map = new HashMap();
-			for(int i =0;i<li.size();i++) {
-				map = li.get(i);
+		if (session.getAttribute("userId") != null) {
+			if (session.getAttribute("userId").equals("pupu-system")) {
+				mav.setViewName("t:manager");
+				List<HashMap> li = alvs.allview();
+				mav.addObject("list", li);
+				mav.addObject("size", li.size() - 1);
+				return mav;
+			} else {
+				mav.setViewName("t:yeslogin");
+				List<HashMap> li = alvs.allview();
+				mav.addObject("list", li);
+				mav.addObject("size", li.size() - 1);
+				return mav;
 			}
-			String s_fileid = (String)map.get("FILEUUID");
-			List<HashMap> sleList = sls.sellikeList(s_fileid);
-			mav.addObject("list", li);
-			mav.addObject("size", li.size()-1);
-			mav.addObject("sleList", sleList);
-			
-			return mav;
-		}else {
+		} else {
 			mav.setViewName("t:notlogin");
 			return mav;
 		}
@@ -63,6 +63,24 @@ public class IndexController {
 
 		return "t:upview";
 	}
+	@RequestMapping("/manager")
+	public String Manager() {
+
+		return "t:manager";
+	}
+	@RequestMapping("/question")
+	public String question() {
+
+		return "t:question";
+
+	}
+
+	@RequestMapping("/delete")
+	public String delete() {
+
+		return "t:delete";
+
+	}
 	@RequestMapping("/logout")
 	public String memberout(HttpSession session) {
 		session.removeAttribute("userId");
@@ -72,8 +90,8 @@ public class IndexController {
 	@RequestMapping("/profile")
 	public ModelAndView profile(HttpServletRequest req) {
 		ModelAndView mav = new ModelAndView();
-		String clickId = req.getParameter("fdsee");
-		if(clickId != null){
+		String clickId = req.getParameter("name");
+		if (clickId != null) {
 			mav.setViewName("t:profile");
 			List<HashMap> li = ls.profileCheck(clickId);
 			mav.addObject("profile", li);
