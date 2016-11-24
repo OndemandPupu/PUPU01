@@ -5,7 +5,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="files">
 	<insert id="upLoad" parameterType="java.util.HashMap">
 		insert into fileupload
-		values(fileupload_seq.nextval, #{id }, #{comments}, sysdate, #{fileuuid}, #{name })
+		values(fileupload_seq.nextval, #{id }, #{comments}, sysdate, #{fileuuid}, #{name }, #{cate })
 	</insert>
 	<insert id="liker" parameterType="java.util.HashMap">
 		insert into likepeople values(#{l_fileuuid}, #{l_selectliker }, 0)

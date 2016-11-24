@@ -212,14 +212,22 @@ a {
 								placeholder="무슨 생각을 하고 있나요~?" name="comments"
 								style="border: none;"></textarea>
 						</div>
+							<select name="cate">
+									<option value="test1">test1</option>
+									<option value="test2">test2</option>
+									<option value="test3">test3</option>
+									<option value="test4">test4</option>		
+								</select>
 						<input type="file" id="up_files" name="file"
 							onchange="handleFileSelect()" />
+							
 						<pre id="list1"
 							style="height: 220px; width: 220px; background-color: white; border: none;"></pre>
 						<div class="modal-footer">
 							<button type="submit" class="btn btn-success btn-block">
 								<span class="glyphicon glyphicon-off"></span> 올리기
 							</button>
+							
 							<button type="submit"
 								class="btn btn-danger btn-default pull-left"
 								data-dismiss="modal">
@@ -274,16 +282,20 @@ a {
 								placeholder="무슨 생각을 하고 있나요~?" name="comments"
 								style="border: none;"></textarea>
 						</div>
+						<select name="cate">
+									<option value="test1">test1</option>
+									<option value="test2">test2</option>
+									<option value="test3">test3</option>
+									<option value="test4">test4</option>		
+						</select>
 						<input type="file" id="up_files" name="file"
 							onchange="handleFileSelect()" />
 						<pre id="list1"
 							style="height: 220px; width: 220px; background-color: white; border: none;"></pre>
-
 						<div class="modal-footer">
 							<button type="submit" class="btn btn-success btn-block">
 								<span class="glyphicon glyphicon-off"></span> 올리기
 							</button>
-
 							<button type="submit"
 								class="btn btn-danger btn-default pull-left"
 								data-dismiss="modal">
@@ -327,7 +339,10 @@ a {
 			<i class="fa fa-comment"></i>  댓글달기
 		</button>
 		<br />
-		<i class="fa fa-thumbs-up"></i>${sleList[i].get("L_SELECTLIKER") }
+		<c:if test="${list[i].get('FILEUUID') eq sleList[i].L_FILEUUID}">
+		<i class="fa fa-thumbs-up"></i>${sleList[i].L_SELECTLIKER}
+		<div id="like_p"></div>
+		</c:if>
 	</div>
 </c:forEach>
 </c:otherwise>
@@ -395,12 +410,12 @@ a {
 								</div>
 
 								<div id="port2">
-									<a href="javascript:showProduct()">상품정보가 등록되어있습니다.</a>
+									<a href="javascript:showProduct()">상품정보가 등록되어있습니다.</a>장바구니에담기<input type="checkbox" id="h_product">
 								</div>
 								<div id="port2_sun">
-									<label>상품명 : </label> <b id="nameP"></b> <br /> <label>가격
-										: </label> <b id="priceP"></b> <br /> <label>제공자 : </label> <b
-										id="idP"></b> <br />
+									<label>상품명 : </label> <p id="nameP"></p> <br /> <label>가격
+										: </label> <p id="priceP"></p> <br /> <label>제공자 : </label> <p
+										id="idP"></p> <br />
 								</div>
 							</div>
 						</div>
@@ -414,6 +429,33 @@ a {
 	</div>
 </div>
 
+<script>
+
+	$("#h_product").change(function() {
+		var v =  $("#h_product").val();
+		if(v=="on") {
+			printTime1();
+			var time;
+			function printTime1() {
+		        var now = new Date();                                               
+		        var nowTime = now.getFullYear() + "-" + (now.getMonth()+1) + "-" + now.getDate();
+		        time = nowTime;          
+		        setTimeout("printTime()",1000);       
+			}
+			var fileid = $("#filename").val();
+			$.ajax({
+				"url":"/havs/cart?fileuuid="+fileid+"&time="+time,
+				"methode":"get"
+			}).done(function(rst) {
+				if(rst=="true") {
+					alert("장바구니에 등록되었습니다.");
+				}else {
+					alert("실패");
+				}
+			})
+		}
+	});
+</script>
 <script>
 $(document).ready(function(){
 	$("#list1").hide();
@@ -433,11 +475,15 @@ function likeclick(uuid, id) {
 	xhr.onreadystatechange = function() {
 		if(xhr.readyState == 4 && xhr.status == 200) {
 			var resq = xhr.responseText;
+			var resq1 = JSON.parse(resq);
+			alert(resq);
+			alert(resq1);
 			if (resq != null && resq !="false") {
 				window.alert("좋아욧!!!!");
-				$("#sh").show();
-				$("#sh1").html(resq);
-			}if(resq =="false"){
+				for(var i=0;i<resq1.length;i++) {
+					$("#like_p").append("<b>"+resq1[i].like+"</b>");	
+				}
+			}if(resq1[0].ask =="false"){
 				window.alert("실헝욧!!!!");
 			}
 		}

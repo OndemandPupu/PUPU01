@@ -33,4 +33,15 @@ public class ProductInfo {
 		}
 			return null;
 	}
+	
+	public boolean setCart(HashMap map) {
+		SqlSession sql = fac.openSession();
+		int r = sql.insert("product_info.addCart", map);
+		if(r==1) {
+			return true;
+		}else {
+			return false;
+		}
+		
+	}
 }

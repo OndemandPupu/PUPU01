@@ -18,17 +18,17 @@ public class uploadController {
 	uploadService ups;
 	
 	@RequestMapping("/file/upload")
-	public ModelAndView upfile(String comments,
+	public ModelAndView upfile(String comments, String cate,
 			@RequestParam(name = "file") MultipartFile file, HttpSession session) {
 		String id =(String)session.getAttribute("userId");
 		String name = (String)session.getAttribute("nickname");
-		String uid = ups.execute(file, id, comments, name);
+		String uid = ups.execute(file, id, comments, name, cate);
 		ModelAndView mav = new ModelAndView();
 		if (uid != null) {
 			mav.setViewName("empty");
 	
 		} else {
-			mav.setViewName("");
+			mav.setViewName("empty");
 		}
 		return mav;
 	}

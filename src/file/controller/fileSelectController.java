@@ -1,6 +1,7 @@
 package file.controller;
 
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -25,9 +26,9 @@ public class fileSelectController {
 		return "my_feed2";
 	}
 	
-	@RequestMapping("/liker")
-	@ResponseBody
-	public String select(HttpServletRequest req) {
+	@RequestMapping(value="/liker")
+	public ModelAndView select(HttpServletRequest req) {
+		ModelAndView mav = new ModelAndView();
 		HashMap map = new HashMap();
 		String uuid = req.getParameter("uuid");
 		String selectliker = req.getParameter("id");
@@ -38,17 +39,19 @@ public class fileSelectController {
 				boolean rst3 = sls.sellikeupdate(selectliker, uuid);
 				if(rst3==true) {
 					List<HashMap> sleList = sls.sellikeList(uuid);
-					for(int i=0;i<sleList.size();i++) {
-						map = sleList.get(i);
-					}
-					String rst4 = (String)map.get("L_SELECTLIKER");
-					return rst4;
+					mav.setViewName("empty3");
+					mav.addObject("list", sleList);
+					System.out.println("좋아요"+sleList);
+					return mav;
 				}
 			}
 		}else {
 			String rst = sls.sellikedelet(uuid);
-			return rst;
+			System.out.println("싫어요"+rst);
+			mav.setViewName("empty3");
+			mav.addObject("rst", rst);
+			return mav;
 		}
-		return "false";
+		return mav;
 	}
 }

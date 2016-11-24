@@ -21,7 +21,7 @@ public class uploadService {
 	@Autowired
 	SqlSessionFactory fac;
 
-	public String execute(MultipartFile f, String id, String comments,String name) {
+	public String execute(MultipartFile f, String id, String comments,String name, String cate) {
 		// id: 업로더 title:파일제목 comments:파일내용
 		if (f.isEmpty())
 			return null;
@@ -35,6 +35,7 @@ public class uploadService {
 			map.put("comments", comments);
 			map.put("fileuuid", uid);
 			map.put("name", name);
+			map.put("cate", cate);
 			SqlSession sql = fac.openSession();
 			sql.insert("files.upLoad", map);
 			sql.close();

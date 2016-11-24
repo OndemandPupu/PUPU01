@@ -58,4 +58,27 @@ public class AddInfo {
 		}
 		return arr;
 	}
+	@RequestMapping("/havs/cart")
+	@ResponseBody
+	public String setCart(HttpSession session, String fileuuid, String time) {
+		String userid = (String)session.getAttribute("userId");
+		HashMap map = new HashMap();
+		String nomove = fileuuid+"-"+time;
+		List<HashMap> rst = pdif.ProductInfoGet(fileuuid);
+		HashMap map2 = new HashMap();
+		for(int i=0;i<rst.size();i++) {
+			map2 = rst.get(i);
+		}
+		map.put("id", userid);
+		map.put("productname", map2.get("NAME"));
+		map.put("productinfo", nomove);
+		map.put("productprice", map2.get("PRICE"));
+		boolean r = pdif.setCart(map);
+		if(r) {
+			return "true";
+		}else {
+			return "false";
+		}
+		
+	}
 }
