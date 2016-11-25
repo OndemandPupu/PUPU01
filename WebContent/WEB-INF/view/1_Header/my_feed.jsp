@@ -485,7 +485,6 @@ $(document).ready(function(){
 		document.getElementById("chat").scrollTop = document.getElementById("chat").scrollHeight;
 	}
 	socket.onclose = function(args) {
-		document.getElementById("rst" ).innerHTML = "<b>웹소켓닫김!!</b>";
 	}
 	
 	function destroy() {
