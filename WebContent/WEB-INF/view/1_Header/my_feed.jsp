@@ -410,8 +410,7 @@ a {
 										id="filename" value=""> <input type="text" name="name"
 										id="productname"><br> <label for="price">
 										가격 : </label> <input type="text" name="productprice" id="productprice"><br>
-									<label for="adduserid">정보제공</label> <input type="text"
-										name="addid" id="adduserid"> <input type="button"
+										 <input type="button"
 										value="정보입력" id="bt1">
 								</div>
 
@@ -529,19 +528,18 @@ $("#bt").dblclick(function(){
 	$("#port1").hide();
 	var p_name = $("#productname").val();
 	var p_price = $("#productprice").val();
-	var p_id = $("#adduserid").val();
 	var fileuid = $("#filename").val();
 	$.ajax({
-		"url":"/product?name=" + p_name + "&price=" + p_price+ "&id=" + p_id+"&fileuid="+fileuid,
+		"url":"/product?name=" + p_name + "&price=" + p_price+"&fileuid="+fileuid,
 		"methode":"get"
 	}).done(function(rst){
-		if (rst == 'true') {
+		if (rst != '') {
 			window.alert("정보등록완료");
 			$("#asd").hide();
 			$("#port2").show();
-			$("#nameP").html(a);
-			$("#priceP").html(b);
-			$("#idP").html(c);
+			$("#nameP").html(p_name);
+			$("#priceP").html(p_price);
+			$("#idP").html(rst);
 		} else {
 			window.alert("정보등록실패");
 		}

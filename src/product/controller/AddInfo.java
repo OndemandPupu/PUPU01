@@ -24,14 +24,17 @@ public class AddInfo {
 	@ResponseBody
 	public String addinfo(HttpServletRequest req, HttpSession session){
 		//name:상품명 , price:상품가격 
+		String a= (String)session.getAttribute("nickname");
+		String b = (String)session.getAttribute("userId");
+		String addid = a+"("+b+")";
 	HashMap map = new HashMap();
 	map.put("name", req.getParameter("name"));
 	map.put("price", req.getParameter("price"));
-	map.put("addid", req.getParameter("id"));
+	map.put("addid", addid);
 	map.put("fileuuid", req.getParameter("fileuid"));
 	boolean rst = pdif.ProductInfoSet(map);	
 		if(rst==true) {
-			return "true";
+			return addid;
 		}else {
 			return "false";
 		}
@@ -62,7 +65,10 @@ public class AddInfo {
 	@RequestMapping("/havs/cart")
 	@ResponseBody
 	public String setCart(HttpSession session, String fileuuid, String time) {
-		String userid = (String)session.getAttribute("userId");
+		String a = (String)session.getAttribute("userId");
+				String b = (String)session.getAttribute("nickname");
+		
+		String userid = a+"("+b+")";
 		HashMap map = new HashMap();
 		String nomove = fileuuid+"-"+time;
 		List<HashMap> rst = pdif.ProductInfoGet(fileuuid);
