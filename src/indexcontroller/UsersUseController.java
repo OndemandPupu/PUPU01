@@ -17,10 +17,7 @@ public class UsersUseController {
 	@Autowired
 	LoginService ls;
 	
-	@RequestMapping("/cart")
-	public String cartVeiw() {
-		return "t:cart";
-	}
+	
 	
 	@RequestMapping("/upload")
 	public String memberupload() {

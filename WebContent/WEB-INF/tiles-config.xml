@@ -17,8 +17,10 @@
 	</definition>
 	<definition name="t:upview" extends="t:yeslogin">
 	</definition>
-	<definition name="t:cart" template="/WEB-INF/view/template2.jsp">
+	<definition name="t:cart" template="/WEB-INF/view/template.jsp">
 		<put-attribute name="header" value="/WEB-INF/view/common/header.jsp"></put-attribute>
+		<put-attribute name="nav"
+			value="/WEB-INF/view/2_Nav_L/1_Home/profile.jsp"></put-attribute>
 		<put-attribute name="body" value="/WEB-INF/view/1_Header/cart.jsp"></put-attribute>
 	</definition>
 	<definition name="t:login" template="/WEB-INF/view/template2.jsp">
@@ -48,6 +50,11 @@
 	<definition name="t:delete" extends="t:manager">
 		<put-attribute name="body"
 			value="/WEB-INF/view/1_Header/Manager_feed.jsp"></put-attribute>
+	</definition>
+	
+	<definition name="t:recommendlist" extends="t:manager">
+		<put-attribute name="body"
+			value="/WEB-INF/view/1_Header/recommendlist.jsp"></put-attribute>
 	</definition>
 
 	<definition name="t:memberout" template="/WEB-INF/view/templateManager.jsp">

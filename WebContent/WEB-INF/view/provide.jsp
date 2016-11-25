@@ -22,7 +22,6 @@
 					<input type="hidden" value="${uid }" id="uid">
 						<label>상 품 명 :</label><input type="text" id="p_name"> <br/>
 						<label>상 품 가 격 :</label><input type="text" id="p_price"><br/>	
-						<label>작성자 :</label><input type="text" id="p_id" ><br/>
 						 <input type="button" value="정보입력" id="bt1">
 					</div>
 					<script>
@@ -37,10 +36,10 @@
 						var p_id = $("#p_id").val();
 						var fileuid = $("#uid").val();
 						$.ajax({
-							"url":"/product?name=" + p_name + "&price=" + p_price+ "&id=" + p_id+"&fileuid="+fileuid,
+							"url":"/product?name=" + p_name + "&price=" + p_price+"&fileuid="+fileuid,
 							"methode":"get"
 						}).done(function(rst){
-							if(rst == 'true') {
+							if(rst != '') {
 								window.alert("정보등록완료");
 								location.href="/main";
 							}

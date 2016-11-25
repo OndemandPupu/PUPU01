@@ -20,7 +20,7 @@ public class AddInfo {
 	ProductInfo pdif;
 	
 	
-	@RequestMapping("/product")
+	@RequestMapping(value="/product", produces="text/plain;charset=utf-8")
 	@ResponseBody
 	public String addinfo(HttpServletRequest req, HttpSession session){
 		//name:상품명 , price:상품가격 
