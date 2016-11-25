@@ -32,14 +32,20 @@ public class IndexController {
 			mav.setViewName("t:yeslogin");
 			List<HashMap> li = alvs.allview();
 			HashMap map = new HashMap();
+			List<HashMap> sleList = null;
 			for(int i =0;i<li.size();i++) {
 				map = li.get(i);
+				String s_fileid = (String)map.get("FILEUUID");
+				sleList = sls.setlikeList(s_fileid);
+				if(sleList!=null) {
+					System.out.println(s_fileid+":"+sleList);
+				}				
 			}
-			String s_fileid = (String)map.get("FILEUUID");
-			List<HashMap> sleList = sls.sellikeList(s_fileid);
+			
+			mav.addObject("liker", sleList);
 			mav.addObject("list", li);
 			mav.addObject("size", li.size()-1);
-			mav.addObject("sleList", sleList);
+			//mav.addObject("sleList", sleList);
 			
 			return mav;
 		}else {
@@ -72,7 +78,7 @@ public class IndexController {
 	@RequestMapping("/profile")
 	public ModelAndView profile(HttpServletRequest req) {
 		ModelAndView mav = new ModelAndView();
-		String clickId = req.getParameter("fdsee");
+		String clickId = req.getParameter("findsee");
 		if(clickId != null){
 			mav.setViewName("t:profile");
 			List<HashMap> li = ls.profileCheck(clickId);
@@ -84,5 +90,11 @@ public class IndexController {
 			mav.setViewName("t:notlogin");
 			return mav;
 		}
+	}
+	@RequestMapping("/provide")
+	public ModelAndView showProvide() {
+		ModelAndView mav = new ModelAndView("provide");
+		
+		return mav;
 	}
 }

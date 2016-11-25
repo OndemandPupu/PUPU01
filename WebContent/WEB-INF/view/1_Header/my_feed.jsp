@@ -172,180 +172,186 @@ a {
 }
 </style>
 <c:choose>
-<c:when test="${size eq -1 }">
-<div class="w3-row-padding">
-	<div class="w3-col m12">
-		<div class="w3-card-2 w3-round w3-white">
-			<div class="w3-container w3-padding" id="upload">
-				<img src="/w3images/avatar2.png" alt="Avatar"
-					class="w3-left w3-circle w3-margin-right" style="width: 60px">
-				<h6 class="w3-opacity">
-					<a>${nickname}</a>(${userId})님
-				</h6>
-				<textarea class="form-control" id="usrname"
-					placeholder="무슨 생각을 하고 있나요~?" name="comments" style="border: none;"></textarea>
-				<button type="button" class="w3-btn w3-theme">
-					<i class="fa fa-pencil"></i>  사진첨부
-				</button>
-				<button type="button" class="w3-btn w3-theme">
-					<i class="fa fa-pencil"></i>  올리기
-				</button>
-			</div>
-		</div>
-	</div>
-</div>
-<form role="form" action="/file/upload" method="post"
-	enctype="multipart/form-data">
-	<div class="container">
-		<!-- Modal -->
-		<div class="modal fade" id="myModal" role="dialog">
-			<div class="modal-dialog">
-				<div class="modal-content">
-					<div class="modal-body" style="padding: 40px 50px;">
-						<div class="w3-container w3-padding" id="upload">
-							<img src="/w3images/avatar2.png" alt="Avatar"
-								class="w3-left w3-circle w3-margin-right" style="width: 60px">
-							<h6 class="w3-opacity">
-								<a>${nickname}</a>(${userId})님
-							</h6>
-							<textarea class="form-control" id="usrname"
-								placeholder="무슨 생각을 하고 있나요~?" name="comments"
-								style="border: none;"></textarea>
-						</div>
-							<select name="cate">
-									<option value="test1">test1</option>
-									<option value="test2">test2</option>
-									<option value="test3">test3</option>
-									<option value="test4">test4</option>		
-								</select>
-						<input type="file" id="up_files" name="file"
-							onchange="handleFileSelect()" />
-							
-						<pre id="list1"
-							style="height: 220px; width: 220px; background-color: white; border: none;"></pre>
-						<div class="modal-footer">
-							<button type="submit" class="btn btn-success btn-block">
-								<span class="glyphicon glyphicon-off"></span> 올리기
-							</button>
-							
-							<button type="submit"
-								class="btn btn-danger btn-default pull-left"
-								data-dismiss="modal">
-								<span class="glyphicon glyphicon-remove"></span> Cancel
-							</button>
-						</div>
+	<c:when test="${size eq -1 }">
+		<div class="w3-row-padding">
+			<div class="w3-col m12">
+				<div class="w3-card-2 w3-round w3-white">
+					<div class="w3-container w3-padding" id="upload">
+						<img src="/w3images/avatar2.png" alt="Avatar"
+							class="w3-left w3-circle w3-margin-right" style="width: 60px">
+						<h6 class="w3-opacity">
+							<a>${nickname}</a>(${userId})님<span id="sever_conection"></span>
+						</h6>
+						<textarea class="form-control" id="usrname"
+							placeholder="무슨 생각을 하고 있나요~?" name="comments"
+							style="border: none;"></textarea>
+						<button type="button" class="w3-btn w3-theme">
+							<i class="fa fa-pencil"></i>  사진첨부
+						</button>
+						<button type="button" class="w3-btn w3-theme">
+							<i class="fa fa-pencil"></i>  올리기
+						</button>
 					</div>
 				</div>
 			</div>
 		</div>
-	</div>
-</form>
-</c:when>
-<c:otherwise>
-<div class="w3-row-padding">
-	<div class="w3-col m12">
-		<div class="w3-card-2 w3-round w3-white">
-			<div class="w3-container w3-padding" id="upload">
-				<img src="/w3images/avatar2.png" alt="Avatar"
-					class="w3-left w3-circle w3-margin-right" style="width: 60px">
-				<h6 class="w3-opacity">
-					<a>${nickname}</a>(${userId})님
-				</h6>
-				<textarea class="form-control" id="usrname"
-					placeholder="무슨 생각을 하고 있나요~?" name="comments" style="border: none;"></textarea>
-				<button type="button" class="w3-btn w3-theme">
-					<i class="fa fa-pencil"></i>  사진첨부
-				</button>
-				<button type="button" class="w3-btn w3-theme">
-					<i class="fa fa-pencil"></i>  올리기
-				</button>
-			</div>
-		</div>
-	</div>
-</div>
-<form role="form" action="/file/upload" method="post"
-	enctype="multipart/form-data">
-	<div class="container">
-		<!-- Modal -->
-		<div class="modal fade" id="myModal" role="dialog">
-			<div class="modal-dialog">
-				<div class="modal-content">
-					<div class="modal-body" style="padding: 40px 50px;">
-
-						<div class="w3-container w3-padding" id="upload">
-							<img src="/w3images/avatar2.png" alt="Avatar"
-								class="w3-left w3-circle w3-margin-right" style="width: 60px">
-							<h6 class="w3-opacity">
-								<a>${nickname}</a>(${userId})님
-							</h6>
-							<textarea class="form-control" id="usrname"
-								placeholder="무슨 생각을 하고 있나요~?" name="comments"
-								style="border: none;"></textarea>
-						</div>
-						<select name="cate">
+		<form role="form" action="/file/upload" method="post"
+			enctype="multipart/form-data">
+			<div class="container">
+				<!-- Modal -->
+				<div class="modal fade" id="myModal" role="dialog">
+					<div class="modal-dialog">
+						<div class="modal-content">
+							<div class="modal-body" style="padding: 40px 50px;">
+								<div class="w3-container w3-padding" id="upload">
+									<img src="/w3images/avatar2.png" alt="Avatar"
+										class="w3-left w3-circle w3-margin-right" style="width: 60px">
+									<h6 class="w3-opacity">
+										<a>${nickname}</a>(${userId})님
+									</h6>
+									<textarea class="form-control" id="usrname"
+										placeholder="무슨 생각을 하고 있나요~?" name="comments"
+										style="border: none;"></textarea>
+								</div>
+								<select name="cate">
 									<option value="test1">test1</option>
 									<option value="test2">test2</option>
 									<option value="test3">test3</option>
-									<option value="test4">test4</option>		
-						</select>
-						<input type="file" id="up_files" name="file"
-							onchange="handleFileSelect()" />
-						<pre id="list1"
-							style="height: 220px; width: 220px; background-color: white; border: none;"></pre>
-						<div class="modal-footer">
-							<button type="submit" class="btn btn-success btn-block">
-								<span class="glyphicon glyphicon-off"></span> 올리기
-							</button>
-							<button type="submit"
-								class="btn btn-danger btn-default pull-left"
-								data-dismiss="modal">
-								<span class="glyphicon glyphicon-remove"></span> Cancel
-							</button>
+									<option value="test4">test4</option>
+								</select> <input type="file" id="up_files" name="file"
+									onchange="handleFileSelect()" />
+
+								<pre id="list1"
+									style="height: 220px; width: 220px; background-color: white; border: none;"></pre>
+								<div class="modal-footer">
+									<button type="submit" class="btn btn-success btn-block">
+										<span class="glyphicon glyphicon-off"></span> 올리기
+									</button>
+
+									<button type="submit"
+										class="btn btn-danger btn-default pull-left"
+										data-dismiss="modal">
+										<span class="glyphicon glyphicon-remove"></span> Cancel
+									</button>
+								</div>
+							</div>
 						</div>
 					</div>
 				</div>
 			</div>
-		</div>
-	</div>
-</form>
-<c:forEach var="i" begin="0" end="${size }" varStatus="status">
-	<div class="w3-container w3-card-2 w3-white w3-round w3-margin">
-		<br> <a href="/selectview"><img src="/w3images/avatar2.png"
-			alt="Avatar" id="fileselect"
-			class="w3-left w3-circle w3-margin-right" style="width: 60px"></a>
-		<h6 class="w3-opacity">
-			<a href="/profile?findsee=${list[i].get('ID')}"> <b>${list[i].get("NAME") }</b>(${list[i].get("ID") })님
-			</a>
-		</h6>
-		<p>${list[i].get("COMMENTS") }</p>
-		
-		<div class="w3-row-padding" style="margin: 0 -16px">
-			<div class="w3-half">
-
-				<button type="button" id="filemodal_${status.index }"
-					style="border: none; background: transparent;"
-					onclick="button1_click('${list[i].get('FILEUUID') }', '${list[i].get('ID')}','${list[i].get('COMMENTS') }' );">
-					<img src="/users/${list[i].get('FILEUUID') }" style="width: 100%"
-						alt="Northern Lights" class="w3-margin-bottom" id="test">
-				</button>
+		</form>
+	</c:when>
+	<c:otherwise>
+		<div class="w3-row-padding">
+			<div class="w3-col m12">
+				<div class="w3-card-2 w3-round w3-white">
+					<div class="w3-container w3-padding" id="upload">
+						<img src="/w3images/avatar2.png" alt="Avatar"
+							class="w3-left w3-circle w3-margin-right" style="width: 60px">
+						<h6 class="w3-opacity">
+							<a>${nickname}</a>(${userId})님<span id="sever_conection"></span>
+						</h6>
+						<textarea class="form-control" id="usrname"
+							placeholder="무슨 생각을 하고 있나요~?" name="comments"
+							style="border: none;"></textarea>
+						<button type="button" class="w3-btn w3-theme">
+							<i class="fa fa-pencil"></i>  사진첨부
+						</button>
+						<button type="button" class="w3-btn w3-theme">
+							<i class="fa fa-pencil"></i>  올리기
+						</button>
+					</div>
+				</div>
 			</div>
 		</div>
-		<button type="button" class="w3-btn w3-theme-d1 w3-margin-bottom"
-			onclick="likeclick('${list[i].get('FILEUUID') }', '${userId}')">
-			<i class="fa fa-thumbs-up"></i>  좋아요♥
-		</button>
-		<button type="button" class="w3-btn w3-theme-d2 w3-margin-bottom"
-			onclick="board_click()">
-			<i class="fa fa-comment"></i>  댓글달기
-		</button>
-		<br />
-		<c:if test="${list[i].get('FILEUUID') eq sleList[i].L_FILEUUID}">
-		<i class="fa fa-thumbs-up"></i>${sleList[i].L_SELECTLIKER}
-		<div id="like_p"></div>
-		</c:if>
-	</div>
-</c:forEach>
-</c:otherwise>
+		<form role="form" action="/file/upload" method="post"
+			enctype="multipart/form-data">
+			<div class="container">
+				<!-- Modal -->
+				<div class="modal fade" id="myModal" role="dialog">
+					<div class="modal-dialog">
+						<div class="modal-content">
+							<div class="modal-body" style="padding: 40px 50px;">
+
+								<div class="w3-container w3-padding" id="upload">
+									<img src="/w3images/avatar2.png" alt="Avatar"
+										class="w3-left w3-circle w3-margin-right" style="width: 60px">
+									<h6 class="w3-opacity">
+										<a>${nickname}</a>(${userId})님
+									</h6>
+									<textarea class="form-control" id="usrname"
+										placeholder="무슨 생각을 하고 있나요~?" name="comments"
+										style="border: none;"></textarea>
+								</div>
+								<select name="cate">
+									<option value="test1">test1</option>
+									<option value="test2">test2</option>
+									<option value="test3">test3</option>
+									<option value="test4">test4</option>
+								</select> <input type="file" id="up_files" name="file"
+									onchange="handleFileSelect()" />
+								<pre id="list1"
+									style="height: 220px; width: 220px; background-color: white; border: none;"></pre>
+								<div class="modal-footer">
+										<button type="submit" class="btn btn-success btn-block"
+											id="F_upload">
+											<span class="glyphicon glyphicon-off"></span> 올리기
+										</button>
+									<button type="submit"
+										class="btn btn-danger btn-default pull-left"
+										data-dismiss="modal">
+										<span class="glyphicon glyphicon-remove"></span> Cancel
+									</button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</form>
+		<c:forEach var="i" begin="0" end="${size }" varStatus="status">
+			<div class="w3-container w3-card-2 w3-white w3-round w3-margin">
+				<br> <a href="/selectview"><img src="/w3images/avatar2.png"
+					alt="Avatar" id="fileselect"
+					class="w3-left w3-circle w3-margin-right" style="width: 60px"></a>
+				<h6 class="w3-opacity">
+					<a href="/profile?findsee=${list[i].get('ID')}"> <b>${list[i].get("NAME") }</b>(${list[i].get("ID") })님
+					</a>
+				</h6>
+				<p>${list[i].get("COMMENTS") }</p>
+				#업로드된 이 공간의 파일 uuid 는 [<b>${list[i].get('FILEUUID')}</b>] 입니다
+				<div class="w3-row-padding" style="margin: 0 -16px">
+					<div class="w3-half">
+
+						<button type="button" id="filemodal_${status.index }"
+							style="border: none; background: transparent;"
+							onclick="button1_click('${list[i].get('FILEUUID') }', '${list[i].get('ID')}','${list[i].get('COMMENTS') }' )">
+							<img src="/users/${list[i].get('FILEUUID') }" style="width: 100%"
+								alt="Northern Lights" class="w3-margin-bottom" id="test">
+						</button>
+					</div>
+				</div>
+				<button type="button" class="w3-btn w3-theme-d1 w3-margin-bottom"
+					onclick="likeclick('${list[i].get('FILEUUID') }')">
+					<i class="fa fa-thumbs-up"></i>  좋아요♥
+				</button>
+				<button type="button" class="w3-btn w3-theme-d2 w3-margin-bottom"
+					onclick="board_click()">
+					<i class="fa fa-comment"></i>  댓글달기
+				</button>
+				<div id="f_comborder"></div>
+				<input type="text" id="f_comments" placeholder="댓글을 입력하세요">
+				<br />
+				<c:forEach var="ooj" items="${liker }">
+		${ooj.L_FILEUUID }
+			<c:if test="${list[i].get('FILEUUID') eq ooj.L_FILEUUID }">
+			${ooj.L_SELECTLIKER }
+			</c:if>
+				</c:forEach>
+				<div id="like_p_${status.index }"></div>
+			</div>
+		</c:forEach>
+	</c:otherwise>
 </c:choose>
 <div class="modal modal-center fade" id="my80sizeCenterModal"
 	tabindex="-1" role="dialog" aria-labelledby="my80sizeCenterModalLabel">
@@ -353,8 +359,8 @@ a {
 		<div class="modal-content modal-80size">
 			<div id="wrap">
 				<div id="top_view">
-					<a class="logo" href="/main" style="color: #FF8000">Pupu</a>
-					<input type="hidden" value="${userId }" id="s_id">
+					<a class="logo" href="/main" style="color: #FF8000">Pupu</a> <input
+						type="hidden" value="${userId }" id="s_id">
 				</div>
 				<nav id="main_lab">
 					<ul class="nav">
@@ -410,12 +416,17 @@ a {
 								</div>
 
 								<div id="port2">
-									<a href="javascript:showProduct()">상품정보가 등록되어있습니다.</a>장바구니에담기<input type="checkbox" id="h_product">
+									<a href="javascript:showProduct()">상품정보가 등록되어있습니다.</a>장바구니에담기<input
+										type="checkbox" id="h_product">
 								</div>
 								<div id="port2_sun">
-									<label>상품명 : </label> <p id="nameP"></p> <br /> <label>가격
-										: </label> <p id="priceP"></p> <br /> <label>제공자 : </label> <p
-										id="idP"></p> <br />
+									<label>상품명 : </label>
+									<p id="nameP"></p>
+									<br /> <label>가격 : </label>
+									<p id="priceP"></p>
+									<br /> <label>제공자 : </label>
+									<p id="idP"></p>
+									<br />
 								</div>
 							</div>
 						</div>
@@ -428,6 +439,7 @@ a {
 		</div>
 	</div>
 </div>
+
 
 <script>
 
@@ -456,8 +468,32 @@ a {
 		}
 	});
 </script>
+<script type="text/javascript">
+	function board_click() {
+		
+	}
+</script>
 <script>
+var socket;
 $(document).ready(function(){
+	var target = "ws://localhost/j_member";
+	socket = new WebSocket(target);
+	socket.onopen = function(args) {
+		$("#sever_conection").html("서버와연결됨..");
+	}
+	socket.onmessage = function(args) {
+		document.getElementById("chat" ).innerHTML += "[# "+args.data+"]<br/>";
+		document.getElementById("chat").scrollTop = document.getElementById("chat").scrollHeight;
+	}
+	socket.onclose = function(args) {
+		document.getElementById("rst" ).innerHTML = "<b>웹소켓닫김!!</b>";
+	}
+	
+	function destroy() {
+		socket.close();
+	}
+	
+	
 	$("#list1").hide();
     $("#upload").click(function(){
         $("#myModal").modal();
@@ -469,26 +505,17 @@ $(document).ready(function(){
 </script>
 
 <script>
-function likeclick(uuid, id) {
-	var xhr = new XMLHttpRequest();
-	xhr.open("get", "/liker?uuid="+uuid+"&id="+id, true );
-	xhr.onreadystatechange = function() {
-		if(xhr.readyState == 4 && xhr.status == 200) {
-			var resq = xhr.responseText;
-			var resq1 = JSON.parse(resq);
-			alert(resq);
-			alert(resq1);
-			if (resq != null && resq !="false") {
-				window.alert("좋아욧!!!!");
-				for(var i=0;i<resq1.length;i++) {
-					$("#like_p").append("<b>"+resq1[i].like+"</b>");	
-				}
-			}if(resq1[0].ask =="false"){
-				window.alert("실헝욧!!!!");
-			}
+function likeclick(uuid) {
+	$.ajax({
+		"dataType":"json",
+		"url":"/liker?uuid="+uuid,
+		"methode":"get"
+	}).done(function(rst){
+		if(rst[0].unlike!="false")
+		for(var i=0;i<rst.length;i++) {
+			$("#like_p_"+i).append("<b>"+rst[i].like+"</b>");
 		}
-	};
-	xhr.send();
+	})
 };
 </script>
 
@@ -500,32 +527,37 @@ $("#bt").dblclick(function(){
 <script>
  $("#bt1").click(function() {
 	$("#port1").hide();
-	var a = $("#productname").val();
-	var b = $("#productprice").val();
-	var c = $("#adduserid").val();
-	var d = $("#filename").val();
-	var xhr = new XMLHttpRequest();
-	xhr.open("get", "/product?name=" + a + "&price=" + b+ "&id=" + c+"&fileuid="+d, true);
-	xhr.onreadystatechange = function() {
-		if (xhr.readyState == 4 && xhr.status == 200) {
-		var resq = xhr.responseText;
-			if (resq == 'true') {
-				window.alert("정보등록완료");
-				$("#asd").hide();
-				$("#port2").show();
-			} else {
-				window.alert("정보등록실패");
-			}
+	var p_name = $("#productname").val();
+	var p_price = $("#productprice").val();
+	var p_id = $("#adduserid").val();
+	var fileuid = $("#filename").val();
+	$.ajax({
+		"url":"/product?name=" + p_name + "&price=" + p_price+ "&id=" + p_id+"&fileuid="+fileuid,
+		"methode":"get"
+	}).done(function(rst){
+		if (rst == 'true') {
+			window.alert("정보등록완료");
+			$("#asd").hide();
+			$("#port2").show();
+			$("#nameP").html(a);
+			$("#priceP").html(b);
+			$("#idP").html(c);
+		} else {
+			window.alert("정보등록실패");
 		}
-	};
-	xhr.send();
-});
+	});
+ })
 </script>
 <script>
 
 </script>
 <script>
 function button1_click(uuid, id, comment) {
+	$("#port2_sun").hide();
+	$("#modal_img").attr("src", "/users/"+uuid);
+	$("#modal_comments").html(comment);
+	$("#filename").attr("value",""+uuid);
+	$("#my80sizeCenterModal").modal();
 	$("#ccc").html("");
 	var d = $("#filename").val();
 	$(document.getElementById("port")).slideToggle();
@@ -542,42 +574,40 @@ function button1_click(uuid, id, comment) {
 			$("#ccc").hide();
 		}
 	})
-	$("#port2").hide();
-	$("#port2_sun").hide();
-	$(document).ready(function() {
-		var xhr = new XMLHttpRequest();		
-		xhr.open("get", "/productshow?filename="+uuid, true);
-		var resq;
-		var resq1;
-		xhr.onreadystatechange = function() {
-			if (xhr.readyState == 4 && xhr.status == 200) {
-				resq = xhr.responseText;
-				resq1 = JSON.parse(resq);
-				if(resq1[0] != 'null') {
-					$("#nameP").html(resq1[0]);
-					$("#priceP").html(resq1[1]);
-					$("#idP").html(resq1[2]);
-					$("#port2").show();
-					$("#asd").hide();
-				}else {
-					$("#port2").hide();
-					$("#asd").show();	
-				}
-			}
+	$.ajax({
+		"dataType":"json",
+		"url":"/productshow?filename="+d,
+		"methode":"get"
+	}).done(function(rst) {
+		if(rst[0].name!="null"){
+			$("#port2").show();
+			$("#asd").hide();
+		}else {
+			$("#port2").hide();
+			$("#asd").show();
 		}
-		xhr.send();
-		});
-	$("#modal_img").attr("src", "/users/"+uuid);
-	$("#modal_comments").html(comment);
-	$("#filename").attr("value",""+uuid);
-	$("#my80sizeCenterModal").modal();
-	
+	})
 }
 </script>
 
 <script>
 function showProduct() {
 	$("#port2_sun").slideToggle();
+	var d = $("#filename").val();
+	$.ajax({
+		"dataType":"json",
+		"url":"/productshow?filename="+d,
+		"methode":"get"
+	}).done(function(rst) {
+		if(rst[0].name!="null") {
+			$("#nameP").html(rst[0].name);
+			$("#priceP").html(rst[0].price);
+			$("#idP").html(rst[0].id);	
+		}else {
+			$("#port2").hide();
+			$("#asd").show();	
+		}
+	})
 }
 </script>
 

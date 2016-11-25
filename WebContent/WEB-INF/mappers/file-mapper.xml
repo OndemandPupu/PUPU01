@@ -14,7 +14,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select * from likepeople where l_selectliker = #{l_selectliker } and l_fileuuid = #{l_fileuuid }
 	</select>
 	<select id="likerList" resultType="java.util.HashMap" parameterType="java.lang.String">
-		select * from FILEUPLOAD a, LIKEPEOPLE b where a.fileuuid = b.l_fileuuid
+		<![CDATA[
+	  		 select temp.* from
+	      		(select * from FILEUPLOAD a, LIKEPEOPLE b where a.fileuuid = b.l_fileuuid) temp
+	      			where fileuuid = #{fileuuid}
+		]]>
+	</select>
+	<select id="setlike" resultType="java.util.HashMap" parameterType="java.lang.String">
+		select l_selectliker, l_fileuuid from likepeople where l_fileuuid =#{l_fileuuid}
 	</select>
 	<select id="getFile" parameterType="java.lang.String" resultType="java.util.HashMap">
 		select * from fileupload where fileuuid = #{fileuuid }
@@ -26,7 +33,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		update likepeople set l_likes =
 		l_likes +1 where l_selectliker=#{l_selectliker } and l_fileuuid=#{l_fileuuid }
 	</update>
-	<delete id="likeBye" parameterType="java.lang.String">
-		delete from likepeople where l_fileuuid= #{l_fileuuid }
+	<delete id="likeBye" parameterType="java.util.HashMap">
+		delete from likepeople where l_fileuuid= #{l_fileuuid } and l_selectliker = #{l_selectliker}
 	</delete>
 </mapper>

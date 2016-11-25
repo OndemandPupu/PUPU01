@@ -54,10 +54,12 @@ public class SelLikeService {
 		return false;
 	}
 	
-	public String sellikedelet(String uuid) {
+	public String sellikedelet(String uuid, String selectliker) {
 		SqlSession sql = fac.openSession();
-	
-		int rst = sql.delete("files.likeBye", uuid);
+		HashMap map = new HashMap();
+		map.put("l_fileuuid", uuid);
+		map.put("l_selectliker", selectliker);
+		int rst = sql.delete("files.likeBye", map);
 		sql.close();
 		if(rst == 1 ) {
 			return "false";
@@ -72,6 +74,16 @@ public class SelLikeService {
 		sql.close();
 		if(selList != null ) {
 			return selList;
+		}
+		return null;
+	}
+	
+	public List<HashMap> setlikeList(String fileuuid) {
+		SqlSession sql = fac.openSession();
+		List<HashMap> li = sql.selectList("files.setlike",fileuuid);
+		sql.close();
+		if(li!=null) {
+			return li;
 		}
 		return null;
 	}

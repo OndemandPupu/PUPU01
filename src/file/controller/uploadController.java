@@ -25,8 +25,8 @@ public class uploadController {
 		String uid = ups.execute(file, id, comments, name, cate);
 		ModelAndView mav = new ModelAndView();
 		if (uid != null) {
-			mav.setViewName("empty");
-	
+			mav.setViewName("provide");
+			mav.addObject("uid", uid);
 		} else {
 			mav.setViewName("empty");
 		}

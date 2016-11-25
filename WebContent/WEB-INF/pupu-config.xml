@@ -13,6 +13,13 @@
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
 		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd">
 	
+	<bean class="webhandler.controller.CommentsController" id="controller"/>
+	<websocket:handlers>
+	<websocket:mapping handler="controller" path="/j_member"/>
+		<websocket:handshake-interceptors>
+			<bean class="org.springframework.web.socket.server.support.HttpSessionHandshakeInterceptor"></bean>
+		</websocket:handshake-interceptors>
+	</websocket:handlers>
 	<context:component-scan base-package="test.viewcontroller"></context:component-scan>
 	<context:component-scan base-package="member.controller"></context:component-scan>
 	<context:component-scan base-package="member.model"></context:component-scan>

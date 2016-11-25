@@ -48,13 +48,14 @@ public class AddInfo {
 			map = rst.get(i);
 		}
 		if(rst != null) {
-			arr = "[\"";
+			arr = "[{\"name\":\"";
 			arr += (String)map.get("NAME");
-			arr += "\",\"";
+			arr += "\",\"price\":\"";
 			arr += (String)map.get("PRICE");
-			arr += "\",\"";
+			arr += "\",\"id\":\"";
 			arr += (String)map.get("ADDID");
-			arr += "\"]";
+			arr += "\"}]";
+			System.out.println(arr);
 		}
 		return arr;
 	}
@@ -70,8 +71,8 @@ public class AddInfo {
 			map2 = rst.get(i);
 		}
 		map.put("id", userid);
-		map.put("productname", map2.get("NAME"));
 		map.put("productinfo", nomove);
+		map.put("productname", map2.get("NAME"));
 		map.put("productprice", map2.get("PRICE"));
 		boolean r = pdif.setCart(map);
 		if(r) {
