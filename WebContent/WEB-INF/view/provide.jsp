@@ -23,6 +23,7 @@
 					<input type="hidden" value="${cate } " id="cate">
 						<label>상 품 명 :</label><input type="text" id="p_name"> <br/>
 						<label>상 품 가 격 :</label><input type="text" id="p_price"><br/>	
+
 						<br/>
 						 <input type="button" value="정보입력" id="bt1">
 					</div>
@@ -39,6 +40,7 @@
 						var fileuid = $("#uid").val();
 						var cate = $("#cate").val();
 						$.ajax({
+
 							"url":"/product?name=" + p_name + "&price=" + p_price+"&fileuid="+fileuid+"&cate="+cate,
 							"methode":"get"
 						}).done(function(rst){

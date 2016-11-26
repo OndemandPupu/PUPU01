@@ -20,7 +20,6 @@
 			<bean class="org.springframework.web.socket.server.support.HttpSessionHandshakeInterceptor"></bean>
 		</websocket:handshake-interceptors>
 	</websocket:handlers>
-	<context:component-scan base-package="test.viewcontroller"></context:component-scan>
 	<context:component-scan base-package="member.controller"></context:component-scan>
 	<context:component-scan base-package="member.model"></context:component-scan>
 	<context:component-scan base-package="indexcontroller"></context:component-scan>

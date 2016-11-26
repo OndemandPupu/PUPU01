@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -40,6 +41,7 @@ public class ManagerController {
 		return "t:delete";
 
 	}
+	
 
 	@RequestMapping("/memberout")
 	public ModelAndView memberout(HttpServletRequest req) {

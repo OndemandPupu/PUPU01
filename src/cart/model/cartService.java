@@ -20,6 +20,18 @@ public class cartService {
 		
 		
 		System.out.println("cart list " + li);
+		return li;
+	}
+
+	
+	public List<HashMap> managercart(String id) {
+		System.out.println(id);
+		SqlSession sql = fac.openSession();
+		List<HashMap> li = sql.selectList("mycart.managercart", id);
+		
+		
+		System.out.println("cart list " + li);
+
 		
 		return li;
 	}
