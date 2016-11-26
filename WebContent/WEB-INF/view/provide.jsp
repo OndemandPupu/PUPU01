@@ -20,9 +20,10 @@
 					<div id="fome_provide2">
 					## 정확하게입력<br/>
 					<input type="hidden" value="${uid }" id="uid">
+					<input type="hidden" value="${cate } " id="cate">
 						<label>상 품 명 :</label><input type="text" id="p_name"> <br/>
 						<label>상 품 가 격 :</label><input type="text" id="p_price"><br/>	
-						<label>작성자 :</label><input type="text" id="p_id" ><br/>
+						<br/>
 						 <input type="button" value="정보입력" id="bt1">
 					</div>
 					<script>
@@ -36,11 +37,12 @@
 						var p_price = $("#p_price").val();
 						var p_id = $("#p_id").val();
 						var fileuid = $("#uid").val();
+						var cate = $("#cate").val();
 						$.ajax({
-							"url":"/product?name=" + p_name + "&price=" + p_price+ "&id=" + p_id+"&fileuid="+fileuid,
+							"url":"/product?name=" + p_name + "&price=" + p_price+"&fileuid="+fileuid+"&cate="+cate,
 							"methode":"get"
 						}).done(function(rst){
-							if(rst == 'true') {
+							if(rst != '') {
 								window.alert("정보등록완료");
 								location.href="/main";
 							}

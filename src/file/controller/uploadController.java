@@ -27,6 +27,7 @@ public class uploadController {
 		if (uid != null) {
 			mav.setViewName("provide");
 			mav.addObject("uid", uid);
+			mav.addObject("cate",cate);
 		} else {
 			mav.setViewName("empty");
 		}

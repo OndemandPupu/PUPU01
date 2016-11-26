@@ -30,6 +30,8 @@ public class fileSelectController {
 		HashMap map = new HashMap();
 		String uuid = req.getParameter("uuid");
 		String selectliker = (String)session.getAttribute("userId");
+		String nick = (String)session.getAttribute("nickname");
+		map.put("nickname", nick);
 		boolean rst1 = sls.sellikecheck(selectliker, uuid);
 		// 눌럿던사람인지 안눌럿던사람인지 검사
 		if(rst1==true) {
@@ -40,6 +42,7 @@ public class fileSelectController {
 				// 인설트가 정상처리되면 like +1 로 업데이트
 				if(rst3==true) {
 					List<HashMap> sleList = sls.sellikeList(uuid);
+					sleList.add(map);
 					mav.setViewName("like");
 					mav.addObject("sleList", sleList);
 					System.out.println("좋아요"+sleList);

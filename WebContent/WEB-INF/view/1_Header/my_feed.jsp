@@ -315,7 +315,7 @@ a {
 					alt="Avatar" id="fileselect"
 					class="w3-left w3-circle w3-margin-right" style="width: 60px"></a>
 				<h6 class="w3-opacity">
-					<a href="/profile?findsee=${list[i].get('ID')}"> <b>${list[i].get("NAME") }</b>(${list[i].get("ID") })님
+					<a href="/profile/${list[i].get('ID')}"> <b>${list[i].get("NAME") }</b>(${list[i].get("ID") })님
 					</a>
 				</h6>
 				<p>${list[i].get("COMMENTS") }</p>
@@ -325,7 +325,7 @@ a {
 
 						<button type="button" id="filemodal_${status.index }"
 							style="border: none; background: transparent;"
-							onclick="button1_click('${list[i].get('FILEUUID') }', '${list[i].get('ID')}','${list[i].get('COMMENTS') }' )">
+							onclick="button1_click('${list[i].get('FILEUUID') }', '${list[i].get('ID')}','${list[i].get('COMMENTS') }','${list[i].get('CATE') }' )">
 							<img src="/users/${list[i].get('FILEUUID') }" style="width: 100%"
 								alt="Northern Lights" class="w3-margin-bottom" id="test">
 						</button>
@@ -339,16 +339,11 @@ a {
 					onclick="board_click()">
 					<i class="fa fa-comment"></i>  댓글달기
 				</button>
-				<div id="f_comborder"></div>
-				<input type="text" id="f_comments" placeholder="댓글을 입력하세요">
+				<hr/>
+				<div id="like_p_${list[i].get('FILEUUID') }"></div>
 				<br />
-				<c:forEach var="ooj" items="${liker }">
-		${ooj.L_FILEUUID }
-			<c:if test="${list[i].get('FILEUUID') eq ooj.L_FILEUUID }">
-			${ooj.L_SELECTLIKER }
-			</c:if>
-				</c:forEach>
-				<div id="like_p_${status.index }"></div>
+				<input type="text" id="f_comments" placeholder="댓글을 입력하세요">
+				<div id="f_comborder"></div>				
 			</div>
 		</c:forEach>
 	</c:otherwise>
@@ -361,6 +356,7 @@ a {
 				<div id="top_view">
 					<a class="logo" href="/main" style="color: #FF8000">Pupu</a> <input
 						type="hidden" value="${userId }" id="s_id">
+						<input type="hidden" value="" id="s_cate">
 				</div>
 				<nav id="main_lab">
 					<ul class="nav">
@@ -407,7 +403,9 @@ a {
 							<div class="col-sm-4 text-center">
 								<div id="port1">
 									<label for="productname"> 상품명 : </label> <input type="hidden"
-										id="filename" value=""> <input type="text" name="name"
+										id="filename" value=""> 
+									
+										<input type="text" name="name"
 										id="productname"><br> <label for="price">
 										가격 : </label> <input type="text" name="productprice" id="productprice"><br>
 										 <input type="button"
@@ -419,6 +417,8 @@ a {
 										type="checkbox" id="h_product">
 								</div>
 								<div id="port2_sun">
+								<label>카테고리 :</label>
+								<p id="cateP"></p>
 									<label>상품명 : </label>
 									<p id="nameP"></p>
 									<br /> <label>가격 : </label>
@@ -444,6 +444,7 @@ a {
 
 	$("#h_product").change(function() {
 		var v =  $("#h_product").val();
+		var v2 = $("#s_cate").val();
 		if(v=="on") {
 			printTime1();
 			var time;
@@ -455,7 +456,7 @@ a {
 			}
 			var fileid = $("#filename").val();
 			$.ajax({
-				"url":"/havs/cart?fileuuid="+fileid+"&time="+time,
+				"url":"/havs/cart?fileuuid="+fileid+"&time="+time+"&cate="+v2,
 				"methode":"get"
 			}).done(function(rst) {
 				if(rst=="true") {
@@ -469,7 +470,7 @@ a {
 </script>
 <script type="text/javascript">
 	function board_click() {
-		
+		$("#f_comments").show();
 	}
 </script>
 <script>
@@ -491,7 +492,7 @@ $(document).ready(function(){
 		socket.close();
 	}
 	
-	
+	$("#f_comments").hide();
 	$("#list1").hide();
     $("#upload").click(function(){
         $("#myModal").modal();
@@ -509,9 +510,12 @@ function likeclick(uuid) {
 		"url":"/liker?uuid="+uuid,
 		"methode":"get"
 	}).done(function(rst){
-		if(rst[0].unlike!="false")
-		for(var i=0;i<rst.length;i++) {
-			$("#like_p_"+i).append("<b>"+rst[i].like+"</b>");
+		if(rst[0].unlike!="false") {
+			for(var i=0;i<rst.length;i++) {
+				$("#like_p_"+uuid).append("<b>"+rst[i].like+"</b>");
+			}
+		}else {
+			$("#like_p_"+uuid).html("");
 		}
 	})
 };
@@ -528,8 +532,9 @@ $("#bt").dblclick(function(){
 	var p_name = $("#productname").val();
 	var p_price = $("#productprice").val();
 	var fileuid = $("#filename").val();
+	var p_cate = $("#s_cate").val();
 	$.ajax({
-		"url":"/product?name=" + p_name + "&price=" + p_price+"&fileuid="+fileuid,
+		"url":"/product?name=" + p_name + "&price=" + p_price+"&fileuid="+fileuid+"&cate="+p_cate,
 		"methode":"get"
 	}).done(function(rst){
 		if (rst != '') {
@@ -538,6 +543,7 @@ $("#bt").dblclick(function(){
 			$("#port2").show();
 			$("#nameP").html(p_name);
 			$("#priceP").html(p_price);
+			$("#cateP").html(p_cate);
 			$("#idP").html(rst);
 		} else {
 			window.alert("정보등록실패");
@@ -549,11 +555,12 @@ $("#bt").dblclick(function(){
 
 </script>
 <script>
-function button1_click(uuid, id, comment) {
+function button1_click(uuid, id, comment, cate) {
 	$("#port2_sun").hide();
 	$("#modal_img").attr("src", "/users/"+uuid);
 	$("#modal_comments").html(comment);
 	$("#filename").attr("value",""+uuid);
+	$("#s_cate").attr("value",""+cate);
 	$("#my80sizeCenterModal").modal();
 	$("#ccc").html("");
 	var d = $("#filename").val();
@@ -600,6 +607,7 @@ function showProduct() {
 			$("#nameP").html(rst[0].name);
 			$("#priceP").html(rst[0].price);
 			$("#idP").html(rst[0].id);	
+			$("#cateP").html(rst[0].cate);
 		}else {
 			$("#port2").hide();
 			$("#asd").show();	

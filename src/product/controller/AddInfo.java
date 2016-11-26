@@ -32,6 +32,7 @@ public class AddInfo {
 	map.put("price", req.getParameter("price"));
 	map.put("addid", addid);
 	map.put("fileuuid", req.getParameter("fileuid"));
+	map.put("cate" , req.getParameter("cate"));
 	boolean rst = pdif.ProductInfoSet(map);	
 		if(rst==true) {
 			return addid;
@@ -57,6 +58,8 @@ public class AddInfo {
 			arr += (String)map.get("PRICE");
 			arr += "\",\"id\":\"";
 			arr += (String)map.get("ADDID");
+			arr += "\",\"cate\":\"";
+			arr += (String)map.get("CATE");
 			arr += "\"}]";
 			System.out.println(arr);
 		}
@@ -64,11 +67,11 @@ public class AddInfo {
 	}
 	@RequestMapping("/havs/cart")
 	@ResponseBody
-	public String setCart(HttpSession session, String fileuuid, String time) {
+	public String setCart(HttpSession session, String fileuuid, String time, String cate) {
 		String a = (String)session.getAttribute("userId");
-				String b = (String)session.getAttribute("nickname");
+		String b = (String)session.getAttribute("nickname");
 		
-		String userid = a+"("+b+")";
+		String userid = b+"("+a+")";
 		HashMap map = new HashMap();
 		String nomove = fileuuid+"-"+time;
 		List<HashMap> rst = pdif.ProductInfoGet(fileuuid);
@@ -77,6 +80,7 @@ public class AddInfo {
 			map2 = rst.get(i);
 		}
 		map.put("id", userid);
+		map.put("productcate", cate);
 		map.put("productinfo", nomove);
 		map.put("productname", map2.get("NAME"));
 		map.put("productprice", map2.get("PRICE"));

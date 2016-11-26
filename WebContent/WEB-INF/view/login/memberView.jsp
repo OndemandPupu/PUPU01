@@ -12,14 +12,15 @@
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
 	integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp"
 	crossorigin="anonymous">
-<!-- Latest compiled and minified JavaScript -->
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
 	integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
 	crossorigin="anonymous"></script>
-
-<form action="/member/join">
-
+<style>
+</style>
+<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+<script src="js/jquery-ui.min.js"></script>
 	<!-- Top content -->
 	<div class="top-content">
 		<div class="inner-bg">
@@ -28,20 +29,23 @@
 					<div class="col-sm-5 form-box">
 						<div class="form-top">
 							<div class="form-top-left">
-								<h3>회원 가입</h3>
-								<p>아래 회원 양식을 작성해 주세요:</p>
+								<h3 class="text-primary">회원 가입</h3>
+								<p class="text-primary" >아래 회원 양식을 작성해 주세요:</p>
 							</div>
 							<div class="form-top-right">
 								<i class="fa fa-pencil"></i>
 							</div>
 						</div>
-						<div class="form-bottom">
+						<div class="form-group has-success has-feedback" >
 							<form action="/member/join" method="post"
 								class="registration-form">
 								<p class="form-group">
 									<label class="sr-only" for="id">ID</label> <input type="text"
-										name="id" placeholder="ID" class="form-last-name form-control"
-										id="id"> <span id="rst"></span>
+										name="id" placeholder="ID" class="form-control" aria-describedby="inputError2Status"
+										id="id" > <span class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true"></span>
+                                                <span id="inputSuccess5Status" class="sr-only">(success)</span> 
+										
+										<span id="rst"></span>
 								</p>
 								<p class="form-group">
 									<label class="sr-only" for="id">PASS</label> <input
@@ -69,36 +73,40 @@
 										type="text" placeholder="발송받은 인증번호"
 										class="form-email form-control" id="auth2"> <span
 										id="Auth"></span> <input type="button" value="인증 확인" id="mail" />
+										<span id="rst3"></span>
 								</p>
-								<p class="form-group"> 
+								<p class="form-group">
 									<label class="sr-only" for="form-last-name">address</label> <input
 										type="text" name="address" placeholder="ADDRESS"
 										class="form-last-name form-control" id="address">
 								</p>
 								<p class="form-group">
 									<label class="sr-only" for="phone">phone</label> <input
-										type="text" name="phone" placeholder="PHONE"
+										type="text" name="phone" placeholder="PHONE(-없이 입력)"
 										class="form-last-name form-control" id="phone">
+										<span id="rst2"></span>
 								</p>
-								<p class="form-group">
+								<p class="form-group" >
 									<label class="sr-only" for="birth">birth</label> <input
 										type="text" name="birth" placeholder="BIRTH"
 										class="form-last-name form-control" id="birth">
 								</p>
 								<p class="form-group">
-									<label class="sr-only" for="gender">gender</label> <input
-										type="text" name="gender" placeholder="GENDER"
-										class="form-last-name form-control" id="gender">
+									<label class="sr-only" for="gender">gender</label> <select
+										id="gender" name="gender" class="form-last-name form-control">
+										<option value="">GENDER</option>
+										<option value="여성" style="color: red">여성</option>
+										<option value="남성" style="color: blue">남성</option>
+										<option value="OTHER">기타</option>
+									</select>
 								</p>
-
 								<p class="form-group">
 									<label class="sr-only" for="interest">interest</label>
 									<textarea name="interest" placeholder="INTEREST"
 										class="form-about-yourself form-control" id="interest"></textarea>
 								</p>
-								<button type="submit" class="btn" id="join">회원가입</button>
-								<button type="reset" class="btn">다시작성</button>
-								
+								<button type="button" class="btn btn-link" id="join">회원가입</button>
+								<button type="reset" class="btn btn-link" >다시작성</button>
 							</form>
 						</div>
 					</div>
@@ -106,78 +114,134 @@
 			</div>
 		</div>
 	</div>
-</form>
 
 <script>
-	document.getElementById("id").addEventListener("blur", function() {
-		var v = document.getElementById("id").value;
-
-		var xhr = new XMLHttpRequest();
-		xhr.open("get", "/member/joinAjax?id=" + v, true);
-		xhr.onreadystatechange = function() {
-			if (xhr.status == 200 & xhr.readyState == 4) {
-				var t = xhr.responseText;
-				console.log(t);
-				var html;
-				if (t == "TRUE") {
-					html = "<h4 style='color:red;'>이미 사용중인 아이디입니다.</h4><br/>";
-				} else {
-					html = "<h4 style='color:green;'>사용가능한 아이디 입니다.</h4><br/>";
-				}
-				document.getElementById("rst").innerHTML = html;
-			}
-
-		};
-		xhr.send();
+// 중복아이디체크
+var regExp = /\s/g;
+var pattern = /[^\w\s]/i;
+var textw = "text-warnig";
+var textp = "text-primary";
+$(document).ready(function () {
+	$('#birth').datepicker();
+	$("#interest").blur(function() {
+		var a = $("#id").val();
+		var b = $("#pass").val();
+		var c = $("#name").val();
+		var d = $("#emailId").val();
+		var e = $("#address").val();
+		var f = $("#phone").val();
+		var g = $("#birth").val();
+		var h = $("#gender").val();
+		var i = $("#interest").val();
+		if(!a || !b || !c || !d || !e || !f || !g || !h || !i) {
+			$("#join").attr("disabled",true);
+			$("#join").click(function() {
+				alert('회원가입정보를 모두 입력해주세요.');
+			});
+		}else {
+			$("#join").attr("disabled", false);
+		}
 	});
-</script>
-
-<script>
-	document.getElementById("pass2").addEventListener("blur", function() {
-		var pass2 = document.getElementById("pass2").value;
-		var pass = document.getElementById("pass").value;
-		var html;
-		if (pass != pass2) {
-			html = "<h4 style='color:red;'>패스워드가 일치하지 않습니다.</h4><br/>";
+	$("#id").blur(function() {
+		var id = $("#id").val();
+		if(id == "" || id == null || id == undefined || ( id != null && typeof id == "object" && !Object.keys(id).length )) {
+			$("#rst").html('<p class='+textw+'>아이디를 입력해 주세요.</p>');
 		} else {
-			html = "<h4 style='color:green;'>패스워드가 일치합니다.</h4><br/>";
-		}
-		document.getElementById("rst1").innerHTML = html;
-	});
-</script>
-<script>
-	document.getElementById("emailId").addEventListener("change", function() {
-		var reg = /[0-9a-zA-Z][_0-9a-zA-Z-]*@[_0-9a-zA-Z-]+(\.[_0-9a-zA-Z-]+){1,2}$/;
-		
-		if(reg.test($("#emailId").val())){
-			var xhr = new XMLHttpRequest();
-			var v = document.getElementById("emailId").value;
-			
-			 xhr.open("get", "/member/joinAjax2?email="+v, true);
-			 xhr.onreadystatechange = function() {
-				 if (xhr.status == 200 & xhr.readyState == 4) {
-					 var t = xhr.responseText;
-					 if (t != null) {	
-						window.alert("인증코드가 전송되었습니다.");
-						$("#email_auth").show();
-						document.getElementById("mail").addEventListener("click", function() {
-							 var v1 = document.getElementById("auth2").value;
-							if(t == v1) {
-								window.alert("정상인증처리되었습니다.");
-								$("#email_auth").hide();
+			var reg =  /^[A-Za-z0-9]{4,10}$/;
+			if(!reg.test($("#id").val())) {
+				$("#rst").html('<p class='+textw+'>ID는 영문 또는 숫자으로 설정해주세요.</P>');
+			} else {
+				if(!regExp.test($("#id").val())) {
+					if(!pattern.test($("#id").val())) {
+						$.ajax({
+							'url':'/member/joinAjax?id='+id,
+							'methode':'get'
+						}).done(function(rst){
+							if(rst=="TRUE") {
+								$("#rst").html('<p class='+textw+'>이미 사용중인 아이디 입니다.</p>');
+							}else if(rst=="FALSE") {
+								$("#rst").html('<p class='+textp+'>사용가능한 아이디 입니다.</p>');
 							}else {
-								window.alert("정상인증처리되지않았습니다.인증코드를 다시 확인해주세요.");	 
+								$("#rst").html('<p class='+textw+'>아이디 입력 필수</p>');
 							}
-						});
-					 }else {
-						 window.alert("인증코드 발송에 실패하였습니다.");
+						});			
 					}
-				 }
-			 }
-			 xhr.send();	 
-		}else{
-			$("#email_auth").hide();
-			window.alert("이메일 주소 형식에 맞지 않습니다.");
+				}
+			}
 		}
 	});
+	// 패스워드 일치 검사
+	
+	$("#pass").blur(function() {
+		var reg =  /^[A-Za-z0-9]{4,10}$/;
+		if(pass == "" || pass == null || pass == undefined || ( pass != null && typeof pass == "object" && !Object.keys(pass).length )) {
+			$("#rst1").html('<p class='+textw+'>패스워드를 입력해주세요.</P>');	
+		} else {
+			if(!reg.test($("#pass").val())) {
+				$("#rst1").html('<p class='+textw+'>PW는 영문숫자조합 4~10자리로 설정해주세요.</P>');
+			} else {
+				if(!regExp.test($("#pass").val())) {
+					if(!pattern.test($("#pass").val())) {
+						$("#rst1").html('<p class='+textp+'>안전한 비밀번호입니다.</P>');
+						$("#pass2").blur(function() {
+							var pass2 = $("#pass2").val();
+							var pass = $("#pass").val();
+							if(pass == "" || pass == null || pass == undefined || ( pass != null && typeof pass == "object" && !Object.keys(pass).length ) 
+									|| pass2 == "" || pass2 == null || pass2 == undefined || ( pass2 != null && typeof pass2 == "object" && !Object.keys(pass2).length ) ) {
+								$("#rst1").html('<p class='+textw+'>패스워드를 입력해주세요.</P>');	
+							} else if (pass != pass2) {
+								$("#rst1").html('<p class='+textw+'>패스워드가 일치하지 않습니다.</P>');
+							} else if(pass==pass2) {
+								$("#rst1").html('<p class='+textp+'>패스워드가 일치 합니다.</p>');
+							} else {
+								$("#rst1").html('<p class='+textw+'>서버와의 연결상태가 원활하지 않습니다. 재접속해주시기 바랍니다.</p>');
+							}
+						});	
+					}	
+				}
+			}	
+		}
+	});
+	
+	// 휴대폰번호형식 검사
+	$("#phone").blur(function() {
+		var regPhone = /^01([0|1|6|7|8|9]?)-?([0-9]{3,4})-?([0-9]{4})$/;
+		if(!regPhone.test($("#phone").val())) {
+			$("#rst2").html('<p class='+textw+'>형식에 맞게 작성해주세요.</p>');
+		} else {
+			$("#rst2").hide();
+		}
+	});
+	
+	// 이메일형식검사
+	$("#emailId").change(function() {
+		var reg = /[0-9a-zA-Z][_0-9a-zA-Z-]*@[_0-9a-zA-Z-]+(\.[_0-9a-zA-Z-]+){1,2}$/;
+		if(reg.test($("#emailId").val())) {
+			var v = $("#emailId").val();
+			$.ajax({
+				"url":"/member/joinAjax2?email="+v,
+				"methode":"get"
+			}).done(function(rst) {
+				if(rst!=null) {
+					window.alert("인증코드가 전송되었습니다.");
+					$("#email_auth").show();
+					$("#mail").click(function() {
+						var v1 = $("#auth2").val();
+						if(rst==v1) {
+							window.alert("정상인증처리되었습니다.");
+							$("#email_auth").hide();
+						} else {
+							window.alert("정상인증처리되지않았습니다.인증코드를 다시 확인해주세요.");
+						}
+					})
+				} else {
+					window.alert("인증코드 발송에 실패하였습니다.");
+				}
+			})
+		} else {
+			$("#email_auth").hide();
+			$("#rst3").html('<p class='+textw+'>이메일 주소 형식에 맞지 않습니다.</p>');
+		}
+	})
+});
 </script>

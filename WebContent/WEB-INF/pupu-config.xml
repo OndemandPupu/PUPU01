@@ -28,6 +28,8 @@
 	<context:component-scan base-package="file.model"></context:component-scan>
 	<context:component-scan base-package="product.controller"></context:component-scan>
 	<context:component-scan base-package="product.model"></context:component-scan>
+	<context:component-scan base-package="cart.model"></context:component-scan>
+	
 	<mvc:annotation-driven />
 	<mvc:default-servlet-handler/>
 	<bean class="org.springframework.web.servlet.view.BeanNameViewResolver"
