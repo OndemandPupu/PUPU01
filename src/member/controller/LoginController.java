@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import member.model.JoinFollowService;
 import member.model.LoginService;
 
 @Controller
@@ -34,6 +35,7 @@ public class LoginController {
 		String rst = loginService.loginCheck(id, pass);
 		if (rst != null) {
 			session.setAttribute("userId", id);
+			
 			List<HashMap> li = loginService.nicknameSet(id);
 			HashMap map = new HashMap();
 			for(int i =0; i<li.size();i++) {

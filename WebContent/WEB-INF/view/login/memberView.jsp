@@ -12,11 +12,43 @@
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
 	integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp"
 	crossorigin="anonymous">
+<!-- Latest compiled and minified JavaScript -->
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
 	integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
 	crossorigin="anonymous"></script>
 <style>
+
+#pu3{
+  color: #FFFFFF;
+
+
+}
+
+.button {
+    background-color: #04B404; /* Green */
+    border: none;
+    color: white;
+    padding: 10px 28px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+    margin: 4px 2px;
+    cursor: pointer;
+}
+.button1 {
+    background-color:transparent; 
+    color: black; 
+    border: 2px solid #EDBA88;
+}
+
+.button1:hover {
+    background-color:#313413;
+    color: white;
+}
+
+
 </style>
 <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
@@ -28,14 +60,20 @@
 				<div class="row">
 					<div class="col-sm-5 form-box">
 						<div class="form-top">
-							<div class="form-top-left">
-								<h3 class="text-primary">회원 가입</h3>
-								<p class="text-primary" >아래 회원 양식을 작성해 주세요:</p>
+							<div class="form-top-left" id="pu3">
+								<h3 >회원 가입</h3>
+								<p >아래 회원 양식을 작성해 주세요:</p>
 							</div>
 							<div class="form-top-right">
 								<i class="fa fa-pencil"></i>
 							</div>
 						</div>
+						
+		
+						
+					
+					
+						
 						<div class="form-group has-success has-feedback" >
 							<form action="/member/join" method="post"
 								class="registration-form">
@@ -73,7 +111,6 @@
 										type="text" placeholder="발송받은 인증번호"
 										class="form-email form-control" id="auth2"> <span
 										id="Auth"></span> <input type="button" value="인증 확인" id="mail" />
-										<span id="rst3"></span>
 								</p>
 								<p class="form-group">
 									<label class="sr-only" for="form-last-name">address</label> <input
@@ -84,29 +121,40 @@
 									<label class="sr-only" for="phone">phone</label> <input
 										type="text" name="phone" placeholder="PHONE(-없이 입력)"
 										class="form-last-name form-control" id="phone">
-										<span id="rst2"></span>
 								</p>
+
+
 								<p class="form-group" >
 									<label class="sr-only" for="birth">birth</label> <input
 										type="text" name="birth" placeholder="BIRTH"
 										class="form-last-name form-control" id="birth">
 								</p>
+
 								<p class="form-group">
 									<label class="sr-only" for="gender">gender</label> <select
 										id="gender" name="gender" class="form-last-name form-control">
 										<option value="">GENDER</option>
-										<option value="여성" style="color: red">여성</option>
-										<option value="남성" style="color: blue">남성</option>
+										<option value="여성" >여성</option>
+										<option value="남성" >남성</option>
 										<option value="OTHER">기타</option>
 									</select>
+
 								</p>
 								<p class="form-group">
-									<label class="sr-only" for="interest">interest</label>
-									<textarea name="interest" placeholder="INTEREST"
-										class="form-about-yourself form-control" id="interest"></textarea>
+								<label class="sr-only" for="interest">interest</label> <select
+										id="interest" name="interest" class="form-last-name form-control">
+										<option value="">INTEREST</option>
+										<option value="test1">test1</option>
+										<option value="test2">test2</option>
+										<option value="test3">test3</option>
+										<option value="test4">test4</option>
+									</select>
 								</p>
-								<button type="button" class="btn btn-link" id="join">회원가입</button>
-								<button type="reset" class="btn btn-link" >다시작성</button>
+								
+								<button type="button" class="button button1" id="join"><a style="color: #D0F5A9">회원가입</a></button>
+								<button type="reset" class="button button1" ><a style="color: #BDBDBD">다시작성</a></button>
+							
+								
 							</form>
 						</div>
 					</div>
@@ -122,6 +170,7 @@ var pattern = /[^\w\s]/i;
 var textw = "text-warnig";
 var textp = "text-primary";
 $(document).ready(function () {
+	/**/
 	$('#birth').datepicker();
 	$("#interest").blur(function() {
 		var a = $("#id").val();
@@ -134,10 +183,8 @@ $(document).ready(function () {
 		var h = $("#gender").val();
 		var i = $("#interest").val();
 		if(!a || !b || !c || !d || !e || !f || !g || !h || !i) {
+			alert('회원가입정보를 모두 입력해주세요.');
 			$("#join").attr("disabled",true);
-			$("#join").click(function() {
-				alert('회원가입정보를 모두 입력해주세요.');
-			});
 		}else {
 			$("#join").attr("disabled", false);
 		}

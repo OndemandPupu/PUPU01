@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import member.model.JoinFollowService;
 import member.model.JoinMemberService;
 
 /*
@@ -19,7 +20,10 @@ import member.model.JoinMemberService;
 public class MemberController {
 	@Autowired
 	JoinMemberService joinmemberservice;
-
+	
+	@Autowired
+	JoinFollowService jfs;
+	
 	@RequestMapping("/member/join")
 	public ModelAndView joinmember(HttpServletRequest req) {
 		ModelAndView mav = new ModelAndView("empty");
@@ -34,8 +38,11 @@ public class MemberController {
 		jmember.put("birth", req.getParameter("birth"));
 		jmember.put("gender", req.getParameter("gender"));
 		jmember.put("interest", req.getParameter("interest"));
-		
+		jmember.put("profile", "null");
 		boolean check = joinmemberservice.joinmember(jmember);
+		if(check) {
+			int r = jfs.followService(req.getParameter("id"));
+		}
 		mav.addObject("joincheck", check);
 		return mav;
 	}

@@ -6,8 +6,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<insert id="addMember" parameterType="java.util.HashMap">
 		insert into member
 		values(#{id}, member_seq.nextval, #{name}, #{email}, #{address},
-		#{phone}, #{interest}, #{birth} ,#{gender}, sysdate , #{pass})
+		#{phone}, #{interest}, #{birth} ,#{gender}, sysdate , #{pass}, #{profile} )
 	</insert>
+	<insert id="addfollw" parameterType="java.lang.String">
+		insert into memberfollower values(#{id})
+	</insert>
+
 	<select id="checkmember" resultType="java.lang.String"
 		parameterType="java.util.HashMap">
 		select * from member where

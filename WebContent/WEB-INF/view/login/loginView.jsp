@@ -6,7 +6,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+  
   <style>
   .modal-header, h4, .close {
       background-color: #5cb85c;
@@ -18,12 +22,49 @@
       background-color: #f9f9f9;
   }
   </style>
+  <style>
+  .buttonL {
+  
+    background-color: #04B404; /* Green */
+    border-radius: 4px;
+    color: white;
+    padding: 10px 22px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 18px;
+    font-style :inherit;
+    margin: 4px 2px;
+    -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
+    cursor: pointer;
+  
+  
+  
+}
+
+
+
+.buttonL2 {
+      background-color: white; 
+    color: #BDBDBD; 
+    border: 2px solid #088A08;
+}
+.buttonL2:hover {
+    background-color: #04B404;
+    color: white;
+}
+
+  
+  </style>
+  
+  
 </head>
 <body>
 
-<div class="container">
-  <button type="button" class="btn btn-default btn-lg" id="myBtn">로그인</button>
-
+<div class="container" >
+<button  class="buttonL buttonL2 "  id="myBtn">Sign in</button>
+  
   <!-- Modal -->
   <div class="modal fade" id="myModal" role="dialog">
     <div class="modal-dialog">
@@ -35,7 +76,7 @@
           <h4><span class="glyphicon glyphicon-lock"></span> Login</h4>
         </div>
         <div class="modal-body" style="padding:40px 50px;">
-          <form role="form" action="loginAuth" method="post">
+          <form role="form" action="loginAuth">
             <div class="form-group">
               <label for="usrname"><span class="glyphicon glyphicon-user"></span> 아이디</label>
               <input type="text" class="form-control" id="usrname" placeholder="Enter email" name="id">

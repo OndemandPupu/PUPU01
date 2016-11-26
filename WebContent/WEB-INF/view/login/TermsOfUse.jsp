@@ -18,6 +18,24 @@
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
 	integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
 	crossorigin="anonymous"></script>
+<style>
+#pu{
+  color:#D0F5A9;
+
+}
+#pu2{
+  color:#6E6E6E ;
+}
+#js1{
+  color:#FFFFFF;
+}
+#port1{
+ color:#FFFFFF ;
+}
+
+</style>	
+	
+	
 
 <form action="/member/join">
 	<!-- Top content -->
@@ -26,13 +44,13 @@
 		<div class="inner-bg">
 			<div class="container">
 				<div class="row">
-					<div class="col-sm-7 text">
-						<h1>
+					<div class="col-sm-7 text" >
+						<h1 id="pu">
 							<strong>PUPU</strong> Registration Form
 						</h1>
-						<div class="description">
-							<p>
-								무엇을 원하던 전부!<br /> <input type="checkbox"  id="check"><strong><a
+						<div class="description" >
+							<p id="pu2">
+								<b>Whatever you want!<b></b><br /> <input type="checkbox"  id="check"><strong><a
 									id="js1" style="float: center;">서비스 이용약관, 개인 정보 수집 이용의
 										동의합니다.</a></strong>
 							</p>
