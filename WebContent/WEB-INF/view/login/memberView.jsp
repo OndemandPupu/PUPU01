@@ -68,12 +68,6 @@
 								<i class="fa fa-pencil"></i>
 							</div>
 						</div>
-						
-		
-						
-					
-					
-						
 						<div class="form-group has-success has-feedback" >
 							<form action="/member/join" method="post"
 								class="registration-form">
@@ -82,7 +76,6 @@
 										name="id" placeholder="ID" class="form-control" aria-describedby="inputError2Status"
 										id="id" > <span class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true"></span>
                                                 <span id="inputSuccess5Status" class="sr-only">(success)</span> 
-										
 										<span id="rst"></span>
 								</p>
 								<p class="form-group">
@@ -121,15 +114,14 @@
 									<label class="sr-only" for="phone">phone</label> <input
 										type="text" name="phone" placeholder="PHONE(-없이 입력)"
 										class="form-last-name form-control" id="phone">
+										<span
+										id="rst2"></span>
 								</p>
-
-
 								<p class="form-group" >
 									<label class="sr-only" for="birth">birth</label> <input
 										type="text" name="birth" placeholder="BIRTH"
 										class="form-last-name form-control" id="birth">
 								</p>
-
 								<p class="form-group">
 									<label class="sr-only" for="gender">gender</label> <select
 										id="gender" name="gender" class="form-last-name form-control">
@@ -150,11 +142,8 @@
 										<option value="test4">test4</option>
 									</select>
 								</p>
-								
-								<button type="button" class="button button1" id="join"><a style="color: #D0F5A9">회원가입</a></button>
+								<button type="submit" class="button button1" id="join"><a style="color: #D0F5A9">회원가입</a></button>
 								<button type="reset" class="button button1" ><a style="color: #BDBDBD">다시작성</a></button>
-							
-								
 							</form>
 						</div>
 					</div>

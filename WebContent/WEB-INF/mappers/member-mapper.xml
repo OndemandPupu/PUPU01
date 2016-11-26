@@ -9,7 +9,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		#{phone}, #{interest}, #{birth} ,#{gender}, sysdate , #{pass}, #{profile} )
 	</insert>
 	<insert id="addfollw" parameterType="java.lang.String">
-		insert into memberfollower values(#{id})
+		insert into memberfollower values(#{id}, null)
 	</insert>
 
 	<select id="checkmember" resultType="java.lang.String"

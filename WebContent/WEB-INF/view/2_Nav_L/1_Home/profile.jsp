@@ -15,7 +15,7 @@
          	<p class="w3-center"><img src="/profile/${obj.get('PROFILE') }" class="w3-circle" style="height:106px;width:106px" alt="Avatar"></p>
          	<hr>
          	<c:if test="${userId ne obj.get('ID') }">
-         		<button id="friend" onclick="addFriend('${userId}');">친구추가</button>
+         		<button id="friend" onclick="addFriend('${userId}','${obj.get('ID') }');">친구추가</button>
          	</c:if>
          	<c:if test="${userId eq obj.get('ID') }">
          		<button id="setprofile">내정보</button>
@@ -32,9 +32,9 @@
 $("#setprofile").click(function() {
 	$("#myprofile_CenterModal").modal();
 });
-function addFriend(id) {
+function addFriend(myid, youid) {
 	 $.ajax({
-	    	"url":"/follow?id="+id,
+	    	"url":"/follow?myid="+id+"&youid="+youid,
 	    	"methode":"get"
 	 }).done(function(rst) {
 		 
