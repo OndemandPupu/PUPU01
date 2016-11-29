@@ -502,6 +502,29 @@ input[type="text"] {
 										<i class="glyphicon glyphicon-bullhorn"></i><b>글쓰기</b>
 									</button>
 									<br />
+						<div class=" list-group"  >
+							<div class="col-sm-4 text-left">
+								<div id="port2" >
+									<a href="javascript:showProduct()" style="color: white;"><b>상품정보가 등록되어있습니다.</b></a>
+									
+								</div>
+									<div id="port2_sun" class="list-group">
+									    <a class="list-group-item active">
+										카테고리 :<b id="cateP"></b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										<b style="color: #2EFE2E; position: right">장바구니에담기</b><input type="checkbox" id="h_product"></a>
+										
+										<a class="list-group-item ">상품명 :<b id="nameP"></b> </a>
+										
+									<a class="list-group-item ">가격 :<b id="priceP"></b></a>
+										
+										<a class="list-group-item ">제공자 :<b id="idP"></b> </a>
+										
+										<br />
+									</div>
+								</div>
+							</div>
+							
+							
 									<div id=asd class="button button5" data-toggle="tooltip"
 										data-placement="right" title="사진을 상품을 아시나요?">
 										<b>정보제공</b>
@@ -528,25 +551,7 @@ input[type="text"] {
 					<div id="content">
 
 						<div id="ccc"></div>
-						<div class="row">
-							<div class="col-sm-4 text-center">
-								<div id="port2">
-									<a href="javascript:showProduct()">상품정보가 등록되어있습니다.</a>장바구니에담기<input
-										type="checkbox" id="h_product">
-								</div>
-									<div id="port2_sun">
-										<label>카테고리 :</label>
-										<p id="cateP"></p>
-										<label>상품명 : </label>
-										<p id="nameP"></p>
-										<br /> <label>가격 : </label>
-										<p id="priceP"></p>
-										<br /> <label>제공자 : </label>
-										<p id="idP"></p>
-										<br />
-									</div>
-								</div>
-							</div>
+						
 			</div>
 		</div>
 	</div>
@@ -776,7 +781,7 @@ function showProduct() {
 		if(rst[0].name!="null") {
 			$("#nameP").html(rst[0].name);
 			$("#priceP").html(rst[0].price);
-			$("#idP").html(rst[0].id);	
+			$("#idP").html("<img src='http://api.randomuser.me/portraits/thumb/women/17.jpg' class='img-round'/><b>"+rst[0].id);	
 			$("#cateP").html(rst[0].cate);
 		}else {
 			$("#port2").hide();
@@ -872,4 +877,11 @@ function openNav() {
             
         reader.readAsDataURL(files);    
     }
+</script>
+
+
+<script>
+$(document).ready(function(){
+    $('[data-toggle="popover"]').popover();   
+});
 </script>

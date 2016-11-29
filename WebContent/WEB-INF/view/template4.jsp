@@ -34,8 +34,7 @@
 			</aside>
 		</div>
 	</div>
-	<footer class="container-fluid text-center"
-		style="background-color: #cce6ff">
+	<footer class="container-fluid text-center">
 		CopyRight <b> &copy; PUPU corp.</b> All rights reserved.
 	</footer>
 </body>

@@ -25,8 +25,7 @@
 			</div>
 		</div>
 	</div>
-	<footer 
-		style="background-color: #cce6ff">CopyRight <b> &copy; PUPU corp.</b> All rights reserved.</footer>
+	<footer >CopyRight <b> &copy; PUPU corp.</b> All rights reserved.</footer>
 </body>
 
 </html>
