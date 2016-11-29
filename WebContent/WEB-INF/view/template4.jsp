@@ -18,15 +18,25 @@
 	</header>
 	<div class="container" style="min-height: 600px;">
 		<div class="row">
-			<div class="col-md-8">
+			<nav>
+				<div class="col-md-2" style="margin: 0px; padding: 30px;">
+					<tiles:insertAttribute name="nav" />
+				</div>
+			</nav>
 			<article>
-				<tiles:insertAttribute name="body" />
+				<div class="col-md-8">
+					<tiles:insertAttribute name="body" />
+				</div>
 			</article>
-			</div>
+			<aside>
+				
+				<tiles:insertAttribute name="aside" />
+			</aside>
 		</div>
 	</div>
-	<footer 
-		style="background-color: #cce6ff">CopyRight <b> &copy; PUPU corp.</b> All rights reserved.</footer>
+	<footer class="container-fluid text-center"
+		style="background-color: #cce6ff">
+		CopyRight <b> &copy; PUPU corp.</b> All rights reserved.
+	</footer>
 </body>
-
 </html>

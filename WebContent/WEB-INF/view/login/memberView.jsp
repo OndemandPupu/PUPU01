@@ -25,7 +25,7 @@
 
 }
 
-.button {
+.buttonT {
     background-color: #04B404; /* Green */
     border: none;
     color: white;
@@ -142,8 +142,11 @@
 										<option value="test4">test4</option>
 									</select>
 								</p>
-								<button type="submit" class="button button1" id="join"><a style="color: #D0F5A9">회원가입</a></button>
-								<button type="reset" class="button button1" ><a style="color: #BDBDBD">다시작성</a></button>
+								<button type="submit" class="buttonT button1" id="join" style="color: white;">
+								회원가입</button>
+								<button type="reset" class="buttonT button1" style="color: white;" >
+								다시작성</button>
+							
 							</form>
 						</div>
 					</div>
@@ -161,7 +164,7 @@ var textp = "text-primary";
 $(document).ready(function () {
 	/**/
 	$('#birth').datepicker();
-	$("#interest").blur(function() {
+	$("#join").mousedown(function() {
 		var a = $("#id").val();
 		var b = $("#pass").val();
 		var c = $("#name").val();
@@ -174,6 +177,7 @@ $(document).ready(function () {
 		if(!a || !b || !c || !d || !e || !f || !g || !h || !i) {
 			alert('회원가입정보를 모두 입력해주세요.');
 			$("#join").attr("disabled",true);
+			location.reload();
 		}else {
 			$("#join").attr("disabled", false);
 		}
@@ -185,7 +189,7 @@ $(document).ready(function () {
 		} else {
 			var reg =  /^[A-Za-z0-9]{4,10}$/;
 			if(!reg.test($("#id").val())) {
-				$("#rst").html('<p class='+textw+'>ID는 영문 또는 숫자으로 설정해주세요.</P>');
+				$("#rst").html('<p class='+textw+'>ID는 영문 또는 숫자 4~10자리로 설정해주세요.</P>');
 			} else {
 				if(!regExp.test($("#id").val())) {
 					if(!pattern.test($("#id").val())) {

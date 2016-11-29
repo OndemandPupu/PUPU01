@@ -29,6 +29,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="getAllFile" resultType="java.util.HashMap">
 		select * from fileupload order by num desc
 	</select>
+		<select id="getLikers" resultType="java.util.HashMap">
+		select * from likepeople
+	</select>
 	<select id="getAllFile2" parameterType="java.lang.String" resultType="java.util.HashMap">
 		select * from fileupload  where id = #{id }
 	</select>

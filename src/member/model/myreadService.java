@@ -19,5 +19,25 @@ public class myreadService {
 	  sql.close();
 	    return li;
   }
+  
+  public int addCommetns(HashMap map) {
+	  SqlSession sql = fac.openSession();
+	  int excute = sql.insert("review.addComments", map);
+	  sql.close();
+	  if(excute==1) {
+		  return excute;  
+	  }
+	  return excute;
+  }
+  
+  public List<HashMap> getCommetns() {
+	  SqlSession sql = fac.openSession();
+	  List<HashMap> li = sql.selectList("review.getComments");
+	  sql.close();
+	  if(li!=null) {
+		  return li;
+	  }
+	  return null;
+  }
 	
 }

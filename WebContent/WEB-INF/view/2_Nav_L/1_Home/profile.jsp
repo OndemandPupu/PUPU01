@@ -11,11 +11,14 @@
     <c:forEach var="obj" items="${profile }">
       <div class="w3-card-2 w3-round w3-white">
         <div class="w3-container">
+        <input type="hidden" id="my_id" value="${userId}">
+        <input type="hidden" id="your_id" value="${obj.get('ID') }">
          	<h4 class="w3-center">My Profile</h4>
          	<p class="w3-center"><img src="/profile/${obj.get('PROFILE') }" class="w3-circle" style="height:106px;width:106px" alt="Avatar"></p>
          	<hr>
          	<c:if test="${userId ne obj.get('ID') }">
-         		<button id="friend" onclick="addFriend('${userId}','${obj.get('ID') }');">친구추가</button>
+         		<button id="friend" onclick="addFriend('${userId}','${obj.get('ID') }');">팔로워</button>
+         		<p id="f_check"></p>
          	</c:if>
          	<c:if test="${userId eq obj.get('ID') }">
          		<button id="setprofile">내정보</button>
@@ -29,15 +32,33 @@
 	</div>
 </c:forEach>
 <script>
-$("#setprofile").click(function() {
-	$("#myprofile_CenterModal").modal();
+$(document).ready(function() {
+	var my_id = $("#my_id").val();
+	var your_id = $("#your_id").val();
+	$.ajax({
+		"url":"/followcheck?my_id="+my_id+"&you_id="+your_id,
+    	"methode":"get"
+	}).done(function(rst){
+		if(rst=="FALSE") {
+			$("#friend").hide();
+			$("#f_check").html("<button>팔로워~</button>");
+		}else {
+			$("#friend").show();
+			function addFriend(youid, myid) {
+				 $.ajax({
+				    	"url":"/follow?myid="+myid+"&youid="+youid,
+				    	"methode":"get"
+				 }).done(function(rst) {
+					 if(rst=="TRUE") {
+						 alert("친구됨!");
+						 $("#friend").hide();
+						 $("#f_check").html("<button>친구입니다.</button>");
+						 
+					 }
+				 })
+			}
+		}
+	})
 });
-function addFriend(myid, youid) {
-	 $.ajax({
-	    	"url":"/follow?myid="+id+"&youid="+youid,
-	    	"methode":"get"
-	 }).done(function(rst) {
-		 
-	 })
-}
+
 </script>

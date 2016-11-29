@@ -43,14 +43,14 @@ public class IndexController {
 					map = li.get(i);
 					String s_fileid = (String)map.get("FILEUUID");
 					sleList = sls.setlikeList(s_fileid);
-					if(sleList!=null) {
+					if(sleList !=null) {
 						System.out.println(s_fileid+":"+sleList);
 					}	
 				}			
 				mav.addObject("liker", sleList);
 				mav.addObject("list", li);
 				mav.addObject("size", li.size()-1);
-				//mav.addObject("sleList", sleList);
+				mav.addObject("sleList", sleList);
 				return mav;
 			}
 		}else {

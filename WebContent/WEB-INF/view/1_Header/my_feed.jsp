@@ -57,8 +57,6 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
-
 <style>
 html, body, h1, h2, h3, h4, h5 {
 	font-family: "Open Sans", sans-serif
@@ -81,36 +79,151 @@ a {
 	text-decoration: none;
 }
 
+#pn {
+	color: #5882FA;
+}
+
+#port {
+	padding: 10px;
+}
+
+#ment {
+	padding: 0px;
+}
+
+.button {
+	background-color: #4CAF50; /* Green */
+	border: none;
+	color: white;
+	padding: 5px 10px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 13px;
+	margin: 3px 2px;
+	-webkit-transition-duration: 0.4s; /* Safari */
+	transition-duration: 0.4s;
+	cursor: pointer;
+}
+
+.button4 {
+	background-color: white;
+	color: #0000FF;
+	border: 2px solid #0000FF;
+	border-radius: 5px
+}
+
+.button5 {
+	background-color: white;
+	color: black;
+	border: 2px solid #555555;
+	border-radius: 5px
+}
+
+.button5:hover {
+	background-color: #555555;
+	color: white;
+}
+
+.button_warning {
+	background-color: white;
+	color: black;
+	border: 2px solid #555555;
+	border-radius: 5px
+}
+
+.button_warning:hover {
+	background-color: #FE2E2E;
+	color: white;
+}
+
+.button4:hover {
+	color: white;
+	background-color: #0000FF;
+}
+
+#modal_img {
+	height: auto;
+	width: 400px;
+	padding: 20px;
+}
+
+.font_right {
+	text-align: right;
+}
+
+.font_big {
+	font-size: 10px;
+}
+
+.font_color {
+	color: #5882FA;
+}
+
+.user_color {
+	color: #4B088A;
+}
+
+#port1 {
+	padding: 5px;
+	height: auto;
+	width: 400px;
+	text-align: center;
+	border: solid 1px #c3c3c3;
+}
+
+.text_box {
+	padding: 0px;
+	height: 100px;
+	width: 300px;
+	text-align: center;
+	border: solid 1px #c3c3c3;
+}
+
+input[type="text"] {
+	margin: 5px;
+	padding: 5px;
+	width: 300px;
+	height: 30px;
+}
+
+.logo {
+	
+}
+
 #top_view {
 	position: fixed;
 	top: 0;
 	left: 0;
 	right: 0;
-	height: 50px;
-	padding: 3px;
-	background-color: #fff;
-	font-color: #FF8000;
-	height: 50px;
-	width: 100px;
-	margin: 5px;
-	font-size: 30px;
-	font-weight: 700;
+	padding: 10px;
+	height: 100px;
+	width: 200px;
+	margin: 10px;
+	font-size: 50px;
 }
 
-#down_view {
+#featured {
 	position: fixed;
-	top: 0;
+	top: -25;
 	left: 0;
 	right: 0;
-	height: 50px;
-	padding: 3px;
-	background-color: #fff;
-	font-color: #FF8000;
-	height: 50px;
+	padding: 15px;
+	margin-top: -60PX;
+}
+
+.position {
+	top: -25;
+	left: 0;
+	right: 0;
+}
+
+.p_positon {
+	padding: 20px
 }
 
 #wrap {
-	overflow: hidden;
+	
 }
 
 #wrap>#main_lab {
@@ -126,10 +239,12 @@ a {
 
 #main_lab {
 	position: fixed;
-	top: 50px;
+	top: 100px;
 	bottom: 50px;
 	left: 0;
 	width: 400px;
+	margin: 0px;
+	padding: 0px;
 }
 
 #content_wrap {
@@ -220,14 +335,12 @@ a {
 									<option value="test4">test4</option>
 								</select> <input type="file" id="up_files" name="file"
 									onchange="handleFileSelect()" />
-
 								<pre id="list1"
 									style="height: 220px; width: 220px; background-color: white; border: none;"></pre>
 								<div class="modal-footer">
 									<button type="submit" class="btn btn-success btn-block">
 										<span class="glyphicon glyphicon-off"></span> 올리기
 									</button>
-
 									<button type="submit"
 										class="btn btn-danger btn-default pull-left"
 										data-dismiss="modal">
@@ -254,11 +367,11 @@ a {
 						<textarea class="form-control" id="usrname"
 							placeholder="무슨 생각을 하고 있나요~?" name="comments"
 							style="border: none;"></textarea>
-						<button type="button" class="w3-btn w3-theme">
-							<i class="fa fa-pencil"></i>  사진첨부
+						<button type="button" class="button button5">
+							<i class="glyphicon glyphicon-picture"></i>  사진첨부
 						</button>
-						<button type="button" class="w3-btn w3-theme">
-							<i class="fa fa-pencil"></i>  올리기
+						<button type="button" class="button button5">
+							<i class="glyphicon glyphicon-save"></i>  올리기
 						</button>
 					</div>
 				</div>
@@ -272,7 +385,6 @@ a {
 					<div class="modal-dialog">
 						<div class="modal-content">
 							<div class="modal-body" style="padding: 40px 50px;">
-
 								<div class="w3-container w3-padding" id="upload">
 									<img src="/w3images/avatar2.png" alt="Avatar"
 										class="w3-left w3-circle w3-margin-right" style="width: 60px">
@@ -283,22 +395,25 @@ a {
 										placeholder="무슨 생각을 하고 있나요~?" name="comments"
 										style="border: none;"></textarea>
 								</div>
-								<select name="cate">
-									<option value="test1">test1</option>
-									<option value="test2">test2</option>
-									<option value="test3">test3</option>
-									<option value="test4">test4</option>
-								</select> <input type="file" id="up_files" name="file"
+								<p class="form-group">
+									<select name="cate" class="form-last-name form-control">
+										<option value="test1">test1</option>
+										<option value="test2">test2</option>
+										<option value="test3">test3</option>
+										<option value="test4">test4</option>
+									</select>
+
+								</p>
+								<input type="file" id="up_files" name="file"
 									onchange="handleFileSelect()" />
 								<pre id="list1"
 									style="height: 220px; width: 220px; background-color: white; border: none;"></pre>
 								<div class="modal-footer">
-										<button type="submit" class="btn btn-success btn-block"
-											id="F_upload">
-											<span class="glyphicon glyphicon-off"></span> 올리기
-										</button>
-									<button type="submit"
-										class="btn btn-danger btn-default pull-left"
+									<button type="submit" class="btn button button5" id="F_upload">
+										<span class="glyphicon glyphicon-off"></span> 올리기
+									</button>
+									<span></span>
+									<button type="submit" class="btn button button_warning  "
 										data-dismiss="modal">
 										<span class="glyphicon glyphicon-remove"></span> Cancel
 									</button>
@@ -319,7 +434,9 @@ a {
 					</a>
 				</h6>
 				<p>${list[i].get("COMMENTS") }</p>
-				#업로드된 이 공간의 파일 uuid 는 [<b>${list[i].get('FILEUUID')}</b>] 입니다
+				<input type="hidden" id="uploadId"
+					value="${list[i].get('FILEUUID')}"> #업로드된 이 공간의 파일 uuid 는 [<b>${list[i].get('FILEUUID')}</b>]
+				입니다
 				<div class="w3-row-padding" style="margin: 0 -16px">
 					<div class="w3-half">
 
@@ -331,19 +448,26 @@ a {
 						</button>
 					</div>
 				</div>
-				<button type="button" class="w3-btn w3-theme-d1 w3-margin-bottom"
+				<button type="button" class="button button5"
 					onclick="likeclick('${list[i].get('FILEUUID') }')">
 					<i class="fa fa-thumbs-up"></i>  좋아요♥
 				</button>
-				<button type="button" class="w3-btn w3-theme-d2 w3-margin-bottom"
-					onclick="board_click()">
+				<button type="button" class="button button5"
+					onclick="board_click('${list[i].get('FILEUUID') }','${nickname }','${userId }')">
 					<i class="fa fa-comment"></i>  댓글달기
 				</button>
-				<hr/>
 				<div id="like_p_${list[i].get('FILEUUID') }"></div>
-				<br />
-				<input type="text" id="f_comments" placeholder="댓글을 입력하세요">
-				<div id="f_comborder"></div>				
+				<c:forEach var="j" begin="0" end="${sleList.size() }">
+					<c:if
+						test="${list[i].get('FILEUUID') eq sleList[j].get('L_FILEUUID') }">
+						<c:if test="${j ne 0  }">,</c:if>
+					${sleList[j].get("L_SELECTLIKER") }
+				</c:if>
+				</c:forEach>
+				<hr />
+				<input type="text" id="f_comments_${list[i].get('FILEUUID') }"
+					class="form-control" placeholder="댓글을 입력하세요">
+				<div id="f_comborder_${list[i].get('FILEUUID') }"></div>
 			</div>
 		</c:forEach>
 	</c:otherwise>
@@ -351,92 +475,86 @@ a {
 <div class="modal modal-center fade" id="my80sizeCenterModal"
 	tabindex="-1" role="dialog" aria-labelledby="my80sizeCenterModalLabel">
 	<div class="modal-dialog modal-80size modal-center" role="document">
-		<div class="modal-content modal-80size">
+		<div class="">
 			<div id="wrap">
 				<div id="top_view">
-					<a class="logo" href="/main" style="color: #FF8000">Pupu</a> <input
-						type="hidden" value="${userId }" id="s_id">
-						<input type="hidden" value="" id="s_cate">
+					<a class="logo" href="/main" style="color: #2EFE2E;"><i
+						class="glyphicon glyphicon-hom"></i>&nbsp;<b>Pupu</b></a><br /> <input
+						type="hidden" value="${userId }" id="s_id"> <input
+						type="hidden" value="" id="s_cate">
 				</div>
 				<nav id="main_lab">
 					<ul class="nav">
 						<li>
 							<p>
-								<img id="modal_img" class="btn-img" src="" width="300"
-									height="500">
-							</p>
-						</li>
-						<li><input type="button" id=asd value="상품정보입력할래?"></li>
-					</ul>
-				</nav>
-				<div id="content_wrap">
-					<div id="content">
-						<div class="col-sm-12" id="featured">
-							<div class="page-header text-muted">
-								<i class="glyphicon glyphicon-pencil"></i>
-								<p id="modal_comments"></p>
-								<button type="button" class="btn" onclick="" id="like2"
-									style="color: #FF8000">
-									<b><i class="glyphicon glyphicon-heart"></i>LIKE</b>
-								</button>
-								<span>
-									<button type="submit" id="bt" class="btn"
-										style="color: #FF8000">
-										<i class="glyphicon glyphicon-remove"></i><b>WRITE</b>
+								<img id="modal_img" class="media-object" src="" width="304"
+									height="236">
+							</p> <br />
+							<div id="featured">
+								<div id="ment">
+									<i class="glyphicon glyphicon-pencil"></i>
+									<p id="modal_comments"></p>
+
+
+									<button type="submit" id="bt" class="button button4 "
+										data-toggle="tooltip" data-placement="top" title="글을 남겨주세요">
+
+										<i class="glyphicon glyphicon-bullhorn"></i><b>글쓰기</b>
 									</button>
-								</span>
-							</div>
-							<div class="row">
-								<div class="col-sm-10">
-									<div id="port">
-										<input type="text"
-											style="width: 500; height: 100; background: #E6E6E6;"
-											placeholder="COMMENT" id="write">
+									<br />
+									<div id=asd class="button button5" data-toggle="tooltip"
+										data-placement="right" title="사진을 상품을 아시나요?">
+										<b>정보제공</b>
 									</div>
-								</div>
+									<div id="port1" class=" panel-info">
+										<label for="productname"></label> <input type="hidden"
+											id="filename" value=""> <input type="text"
+											name="name" id="productname" class="btn  form-control"
+											style="position: left;" placeholder="상품명"> <label
+											for="price"></label> <input type="text" name="productprice"
+											id="productprice" class="btn  form-control" placeholder="가격"><br>
+										<input type="button" class="button button5" value="정보입력"
+											id="bt1">
+									</div>
+									<div id="port">
+										<input type="text" class=" form-control"
+											placeholder="Comments.." id="write" />
+									</div>
+				</div>
 							</div>
-						</div>
+						</li>
+					</ul>
+				</nav><div id="content_wrap">
+					<div id="content">
+
 						<div id="ccc"></div>
-						<hr />
-						<br />
 						<div class="row">
 							<div class="col-sm-4 text-center">
-								<div id="port1">
-									<label for="productname"> 상품명 : </label> <input type="hidden"
-										id="filename" value=""> 
-									
-										<input type="text" name="name"
-										id="productname"><br> <label for="price">
-										가격 : </label> <input type="text" name="productprice" id="productprice"><br>
-										 <input type="button"
-										value="정보입력" id="bt1">
-								</div>
-
 								<div id="port2">
 									<a href="javascript:showProduct()">상품정보가 등록되어있습니다.</a>장바구니에담기<input
 										type="checkbox" id="h_product">
 								</div>
-								<div id="port2_sun">
-								<label>카테고리 :</label>
-								<p id="cateP"></p>
-									<label>상품명 : </label>
-									<p id="nameP"></p>
-									<br /> <label>가격 : </label>
-									<p id="priceP"></p>
-									<br /> <label>제공자 : </label>
-									<p id="idP"></p>
-									<br />
+									<div id="port2_sun">
+										<label>카테고리 :</label>
+										<p id="cateP"></p>
+										<label>상품명 : </label>
+										<p id="nameP"></p>
+										<br /> <label>가격 : </label>
+										<p id="priceP"></p>
+										<br /> <label>제공자 : </label>
+										<p id="idP"></p>
+										<br />
+									</div>
 								</div>
 							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="modal-footer">
-				<button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
 			</div>
 		</div>
 	</div>
+	<div class="modal-footer">
+				<button type="button" class="button button_warning" data-dismiss="modal"> <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>닫기</button>
+			</div>
+</div>
+</div>
 </div>
 
 
@@ -468,21 +586,69 @@ a {
 		}
 	});
 </script>
-<script type="text/javascript">
-	function board_click() {
-		$("#f_comments").show();
+<script>
+function board_click(uuid,nick,id) {
+	$("#f_comments_"+uuid).focus();
+	printTime2();
+	var time;
+	function printTime2() {
+        var now = new Date();                                               
+        var nowTime = now.getFullYear() + "-" + (now.getMonth()+1) + "-" + now.getDate() + " " + now.getHours() + ":" + now.getMinutes() + ":" + now.getSeconds();
+        time = nowTime;          
+        setTimeout("printTime()",1000);       
 	}
+	$("#f_comments_"+uuid).blur(function() {
+		var r = $("#f_comments_"+uuid).val();
+		if(r!="") {
+			$("#f_comborder_"+uuid).append(nick+"("+id+"):"+r+"("+time+")<br/>");
+			$.ajax({
+				"dataType":"json",
+				"url":"/saveWirter?id="+id+"&nick="+nick+"&uuid="+uuid+"&memo="+r,
+				"methode":"get"
+			}).done(function(rst) {
+				if(rst=="true") {
+					console.log("등록");
+				}else {
+					console.log("실패");
+				}
+			});
+		}
+	});
+}
 </script>
 <script>
 var socket;
 $(document).ready(function(){
+	$.ajax({
+		"dataType":"json",
+		"url":"/getWirter",
+		"methode":"get"
+	}).done(function(rst) {
+		if(rst!="null") {
+			for(var i=0;i<rst.length;i++) {
+				$("#f_comborder_"+rst[i].cod).append(rst[i].id+":"+rst[i].comments+"("+rst[i].dates+")<br/>");	
+			}
+		}
+	})
+		$.ajax({
+		"dataType":"json",
+		"url":"/getliker",
+		"methode":"get"
+	}).done(function(rst) {
+		if(rst!="null") {
+			for(var i=0;i<rst.length;i++) {
+				$("#like_p_"+rst[i].id).html("<i class='fa fa-thumbs-up'></i>");
+				$("#like_p_"+rst[i].id).append("<b>"+rst[i].like+"</b>님");	
+			}
+		}
+	})
 	var target = "ws://localhost/j_member";
 	socket = new WebSocket(target);
-	socket.onopen = function(args) {
+	socket.onopen = function(args) { 
 		$("#sever_conection").html("서버와연결됨..");
 	}
 	socket.onmessage = function(args) {
-		document.getElementById("chat" ).innerHTML += "[# "+args.data+"]<br/>";
+		document.getElementById("chat " ).innerHTML += "[# "+args.data+"]<br/>";
 		document.getElementById("chat").scrollTop = document.getElementById("chat").scrollHeight;
 	}
 	socket.onclose = function(args) {
@@ -491,8 +657,6 @@ $(document).ready(function(){
 	function destroy() {
 		socket.close();
 	}
-	
-	$("#f_comments").hide();
 	$("#list1").hide();
     $("#upload").click(function(){
         $("#myModal").modal();
@@ -512,7 +676,8 @@ function likeclick(uuid) {
 	}).done(function(rst){
 		if(rst[0].unlike!="false") {
 			for(var i=0;i<rst.length;i++) {
-				$("#like_p_"+uuid).append("<b>"+rst[i].like+"</b>");
+				$("#like_p_"+uuid).html("<i class='fa fa-thumbs-up'></i>");
+				$("#like_p_"+uuid).append("<b>"+rst[i].like+"</b>님");
 			}
 		}else {
 			$("#like_p_"+uuid).html("");
@@ -572,7 +737,12 @@ function button1_click(uuid, id, comment, cate) {
 	}).done(function(rst) {
 		if(rst!="null") {
 			for(var i=0;i<rst.length;i++) {
-				$("#ccc").append("<img src='http://api.randomuser.me/portraits/thumb/women/17.jpg' class='img-circle'/><b>"+rst[i].id+"</b> : "+rst[i].memo+"("+rst[i].dates+")<br/>");
+				$("#ccc").append("<div class='panel panel-info'>"
+						   +"<div class='panel-heading' id='pn'>"+"<img src='http://api.randomuser.me/portraits/thumb/women/17.jpg' class='img-rectangle'/><b>"
+						    +"<p>"+"</p>"+"<span class='glyphicon glyphicon-user user_color' aria-hidden='true'/>"+"&nbsp;"+rst[i].id+"</b>"+"</div>"+	
+							"<div class='panel-body'>"+rst[i].memo+
+							"<br/>"+"<p class='font_big font_right font_color'>"+"<span class='glyphicon glyphicon-envelope user_color' aria-hidden='true'/>"+"&nbsp;"+"Date:"+rst[i].dates+"</p>"+"</div>"+"</div>");
+
 			}
 		} else {
 			$("#ccc").hide();

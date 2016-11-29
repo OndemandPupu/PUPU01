@@ -12,11 +12,48 @@
 
   
   <style>
-  .modal-header, h4, .close {
-      background-color: #5cb85c;
-      color:white !important;
+  
+  .button {
+    /* Green */
+    border: none;
+    color: white;
+    padding: 5px 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 13px;
+    margin: 3px 2px;
+    -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
+    cursor: pointer;
+    width: 493px;
+}
+
+  
+  
+  .button5 {
+    background-color: ;
+    color: black;
+    border: 2px solid ;
+     border-radius:5px
+}
+
+.button5:hover {
+    background-color: #58FA82;
+    color: white;
+    
+}
+  
+  .pupu_header{
       text-align: center;
       font-size: 30px;
+  }
+  
+  
+  .modal-header,  .h2.close {
+      background-color: #5cb85c;
+      color:white !important;
+     
   }
   .modal-footer {
       background-color: #f9f9f9;
@@ -52,7 +89,8 @@
 }
 .buttonL2:hover {
     background-color: #04B404;
-    color: white;
+  
+    color: green;
 }
 
   
@@ -71,33 +109,35 @@
     
       <!-- Modal content-->
       <div class="modal-content">
-        <div class="modal-header" style="padding:35px 50px;">
+        <div class="pupu_header">
           <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4><span class="glyphicon glyphicon-lock"></span> Login</h4>
+        <!--  <h4><span class="glyphicon glyphicon-lock"></span> Login</h4> --> 
+           <h2><span class="glyphicon glyphicon-grain"></span> Pupu</h2>
+        
         </div>
         <div class="modal-body" style="padding:40px 50px;">
-          <form role="form" action="loginAuth">
+          <form role="form" action="loginAuth" method="post">
             <div class="form-group">
-              <label for="usrname"><span class="glyphicon glyphicon-user"></span> 아이디</label>
+              <label for="usrname"><span class="glyphicon glyphicon-user"></span> ID</label>
               <input type="text" class="form-control" id="usrname" placeholder="Enter email" name="id">
             </div>
             <div class="form-group">
-              <label for="psw"><span class="glyphicon glyphicon-eye-open"></span> 비밀번호</label>
+              <label for="psw"><span class="glyphicon glyphicon-eye-open"></span> Password</label>
               <input type="password" class="form-control" id="psw" placeholder="Enter password" name="pass">
             </div>
             <div class="checkbox">
               <label><input type="checkbox" value="save" checked>아이디 저장</label>
             </div>
-              <button type="submit" class="btn btn-success btn-block"><span class="glyphicon glyphicon-off"></span> Login</button>
+              <button type="submit" class="button button5"><span class="glyphicon glyphicon-off"></span> Login</button>
           </form>
         </div>
         <div class="modal-footer">
-          <button type="submit" class="btn btn-danger btn-default pull-left" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Cancel</button>
-          <p>Not a member? <a href="#">Sign Up</a></p>
+          <button type="submit" class=" button5 btn-default pull-left" data-dismiss="modal">
+          <span class="glyphicon glyphicon-remove"></span> Cancel</button>
+          <p>Join us? <a href="#">Sign Up</a></p>
           <p>Forgot <a href="#">Password?</a></p>
         </div>
       </div>
-      
     </div>
   </div>
 </div>

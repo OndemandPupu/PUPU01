@@ -13,7 +13,7 @@
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <body>
-	<header style="margin: 0px; padding: 30px; background-color: #cce6ff">
+	<header style="margin: 0px; padding: 30px; background-color: #fffff">
 		<tiles:insertAttribute name="header" />
 	</header>
 	<div class="container" style="min-height: 600px;">

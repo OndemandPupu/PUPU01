@@ -87,4 +87,14 @@ public class SelLikeService {
 		}
 		return null;
 	}
+	
+	public List<HashMap> getLikers() {
+		SqlSession sql = fac.openSession();
+		List<HashMap> li = sql.selectList("files.getLikers");
+		sql.close();
+		if(li!=null) {
+			return li;
+		}
+		return null;
+	}
 }

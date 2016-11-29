@@ -14,8 +14,11 @@
 		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd">
 	
 	<bean class="webhandler.controller.CommentsController" id="controller"/>
+	<bean class="webhandler.controller.UploaderHandler" id="uploaderHandler"/>
 	<websocket:handlers>
+	
 	<websocket:mapping handler="controller" path="/j_member"/>
+	<websocket:mapping handler="uploaderHandler" path="/knock_member"/>
 		<websocket:handshake-interceptors>
 			<bean class="org.springframework.web.socket.server.support.HttpSessionHandshakeInterceptor"></bean>
 		</websocket:handshake-interceptors>

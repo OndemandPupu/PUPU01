@@ -13,6 +13,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -29,7 +30,7 @@ public class LoginController {
 	JavaMailSender sender;
 	
 	@RequestMapping("loginAuth")
-	public ModelAndView proceed(HttpSession session, @RequestParam(name = "id") String id, String pass, 
+	public ModelAndView proceed(HttpSession session,  String id, String pass, 
 			HttpServletResponse response) {
 		ModelAndView mav = new ModelAndView("empty");
 		String rst = loginService.loginCheck(id, pass);

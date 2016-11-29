@@ -21,9 +21,11 @@ public class mentUpcontroller {
 
 	@RequestMapping("/memo/upMemo")
 	@ResponseBody
-	public String upMemo(String fileuuid, String memo, String id) {
+	public String upMemo(HttpSession session, String fileuuid, String memo, String id) {
 		ModelAndView mav = new ModelAndView();
-		boolean r = ms.addMent(id, memo, fileuuid);
+		String id2 = (String)session.getAttribute("nickname");
+		String tid = id2+"("+id+")";
+		boolean r = ms.addMent(tid, memo, fileuuid);
 		if(r)
 			return "YYYYY";
 		else 
