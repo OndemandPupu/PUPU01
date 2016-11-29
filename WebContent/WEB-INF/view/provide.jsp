@@ -21,7 +21,7 @@
 					## 정확하게입력<br/>
 					<input type="hidden" value="${uid }" id="uid">
 					<input type="hidden" value="${cate } " id="cate">
-						<label>상 품 명 :</label><input type="text" id="p_name"> <br/>
+						<label>상 품 명  :</label><input type="text" id="p_name"> <br/>
 						<label>상 품 가 격 :</label><input type="text" id="p_price"><br/>	
 
 
