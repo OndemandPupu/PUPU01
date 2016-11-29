@@ -813,7 +813,11 @@ $("#write").change(function(){
 			"methode":"get"
 		}).done(function(rst){
 			if(rst=="YYYYY") {
-				$("#ccc").append("<b>"+i+"</b> : "+m+"("+time+")<br/>");
+				$("#ccc").append("<div class='panel panel-info'>"
+						   +"<div class='panel-heading' id='pn'>"+"<img src='http://api.randomuser.me/portraits/thumb/women/17.jpg' class='img-rectangle'/><b>"
+						    +"<p>"+"</p>"+"<span class='glyphicon glyphicon-user user_color' aria-hidden='true'/>"+"&nbsp;"+i+"</b>"+"</div>"+	
+							"<div class='panel-body'>"+m+
+							"<br/>"+"<p class='font_big font_right font_color'>"+"<span class='glyphicon glyphicon-envelope user_color' aria-hidden='true'/>"+"&nbsp;"+"Date:"+i+"</p>"+"</div>"+"</div>");
 			}else {
 				window.alert("코멘트 등록 실패");
 			}
