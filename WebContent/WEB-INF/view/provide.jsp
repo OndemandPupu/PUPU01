@@ -24,6 +24,7 @@
 						<label>상 품 명 :</label><input type="text" id="p_name"> <br/>
 						<label>상 품 가 격 :</label><input type="text" id="p_price"><br/>	
 
+
 						<br/>
 						 <input type="button" value="정보입력" id="bt1">
 					</div>
