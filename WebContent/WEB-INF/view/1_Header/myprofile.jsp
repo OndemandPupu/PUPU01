@@ -22,7 +22,7 @@
 				<li id="address1"><h5>주소: ${obj.get("ADDRESS") }</h5> <br /></li>
 			</ul>
 			
-			<form  action="/profileupload" enctype="multipart/form-data" method="post">
+			<form  action="/profileupload" enctype="multipart/form-data" method="post" id="up_file">
 				<input type="file" id="up_files" name="file"
 					onchange="handleFileSelect()" />
 			<button type="submit" id="saveProfile" >프로필사진지정하기</button>
@@ -47,6 +47,7 @@
 <br>
 <script>
 $(document).ready(function() {
+	$("#up_file").hide();
 	$.ajax({
 		"url":"/profileSet",
 		"methode":"get"
@@ -72,7 +73,9 @@ $(document).ready(function() {
 				$("#checkpass").hide();
 				$("#bt1").hide();
 				$("#bt2").show();
-				$("#imfo2").fadeIn();
+				$("#up_file").show();
+				$("#imfo2").show();
+				$("#imfo").hide();
 	
 			} else {
 				alert("비밀번호를 확인해주세요.");
@@ -120,7 +123,7 @@ $(document).ready(function() {
 				var img_view = [ '<img src="', e.target.result, '" title="',
 						escape(theFile.name), '"/>' ].join('');
 				document.getElementById('view').innerHTML = img_view;
-				$("#view1").hide();
+				$("#view").hide();
 			};
 
 		})(files);

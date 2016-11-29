@@ -292,7 +292,7 @@ input[type="text"] {
 			<div class="w3-col m12">
 				<div class="w3-card-2 w3-round w3-white">
 					<div class="w3-container w3-padding" id="upload">
-						<img src="/w3images/avatar2.png" alt="Avatar"
+						<img src="/profilefolder/${userId }" alt="Avatar"
 							class="w3-left w3-circle w3-margin-right" style="width: 60px">
 						<h6 class="w3-opacity">
 							<a>${nickname}</a>(${userId})님<span id="sever_conection"></span>
@@ -319,7 +319,7 @@ input[type="text"] {
 						<div class="modal-content">
 							<div class="modal-body" style="padding: 40px 50px;">
 								<div class="w3-container w3-padding" id="upload">
-									<img src="/w3images/avatar2.png" alt="Avatar"
+									<img src="/profilefolder/${userId }" alt="Avatar"
 										class="w3-left w3-circle w3-margin-right" style="width: 60px">
 									<h6 class="w3-opacity">
 										<a>${nickname}</a>(${userId})님
@@ -359,7 +359,7 @@ input[type="text"] {
 			<div class="w3-col m12">
 				<div class="w3-card-2 w3-round w3-white">
 					<div class="w3-container w3-padding" id="upload">
-						<img src="/w3images/avatar2.png" alt="Avatar"
+						<img src="/profilefolder/${userId }" alt="Avatar"
 							class="w3-left w3-circle w3-margin-right" style="width: 60px">
 						<h6 class="w3-opacity">
 							<a>${nickname}</a>(${userId})님<span id="sever_conection"></span>
@@ -386,7 +386,7 @@ input[type="text"] {
 						<div class="modal-content">
 							<div class="modal-body" style="padding: 40px 50px;">
 								<div class="w3-container w3-padding" id="upload">
-									<img src="/w3images/avatar2.png" alt="Avatar"
+									<img src="/profilefolder/${userId }" alt="Avatar"
 										class="w3-left w3-circle w3-margin-right" style="width: 60px">
 									<h6 class="w3-opacity">
 										<a>${nickname}</a>(${userId})님
@@ -413,7 +413,7 @@ input[type="text"] {
 										<span class="glyphicon glyphicon-off"></span> 올리기
 									</button>
 									<span></span>
-									<button type="submit" class="btn button button_warning  "
+									<button type="submit" class="btn button button_warning"
 										data-dismiss="modal">
 										<span class="glyphicon glyphicon-remove"></span> Cancel
 									</button>
@@ -426,11 +426,11 @@ input[type="text"] {
 		</form>
 		<c:forEach var="i" begin="0" end="${size }" varStatus="status">
 			<div class="w3-container w3-card-2 w3-white w3-round w3-margin">
-				<br> <a href="/selectview"><img src="/w3images/avatar2.png"
+				<br> <a href="/selectview"><img src="/profilefolder/${list[i].get('ID') }"
 					alt="Avatar" id="fileselect"
 					class="w3-left w3-circle w3-margin-right" style="width: 60px"></a>
 				<h6 class="w3-opacity">
-					<a href="/profile/${list[i].get('ID')}"> <b>${list[i].get("NAME") }</b>(${list[i].get("ID") })님
+					<a href="/profilefolder/${uid }"> <b>${list[i].get("NAME") }</b>(${list[i].get("ID") })님
 					</a>
 				</h6>
 				<p>${list[i].get("COMMENTS") }</p>

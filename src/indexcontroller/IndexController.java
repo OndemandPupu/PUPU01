@@ -2,6 +2,7 @@ package indexcontroller;
 
 import java.util.HashMap;
 import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import file.model.SelLikeService;
 import file.model.allLoadViewService;
+import file.model.uploadService;
 import member.model.LoginService;
 
 @Controller
@@ -22,6 +24,8 @@ public class IndexController {
 	LoginService ls;
 	@Autowired
 	SelLikeService sls;
+	@Autowired
+	uploadService us;
 
 	@RequestMapping("/main")
 	public ModelAndView welcome(HttpSession session) {
@@ -36,6 +40,8 @@ public class IndexController {
 				return mav;
 			}else {
 				mav.setViewName("t:yeslogin");
+				String id= (String)session.getAttribute("userId");
+				String uuid = us.profileSet(id);
 				List<HashMap> li = alvs.allview();
 				HashMap map = new HashMap();
 				List<HashMap> sleList = null;
@@ -46,7 +52,8 @@ public class IndexController {
 					if(sleList !=null) {
 						System.out.println(s_fileid+":"+sleList);
 					}	
-				}			
+				}
+				mav.addObject("uid", uuid);
 				mav.addObject("liker", sleList);
 				mav.addObject("list", li);
 				mav.addObject("size", li.size()-1);
