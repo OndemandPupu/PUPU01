@@ -20,6 +20,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	      			where fileuuid = #{fileuuid}
 		]]>
 	</select>
+	<select id="rownum" resultType="java.util.HashMap">
+      <![CDATA[select rownum, temp.*from( select * from likepeople order by l_likes desc)temp  
+      where rownum<=3]]>
+      </select> 
 	<select id="setlike" resultType="java.util.HashMap" parameterType="java.lang.String">
 		select l_selectliker, l_fileuuid from likepeople where l_fileuuid =#{l_fileuuid}
 	</select>

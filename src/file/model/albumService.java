@@ -20,5 +20,16 @@ public class albumService {
 		  return ph;
 		
 	   }
+		
+		
+		 public List rownum() {
+				SqlSession sql = fac.openSession();
+				List top3= sql.selectList("files.rownum");
+				// ¾øÀ¸¸é null
+				
+				sql.close();
+				return top3;
+			}
+		
 	}
 

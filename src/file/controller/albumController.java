@@ -31,6 +31,19 @@ public class albumController {
 		
 		
 	}
+   
+   @RequestMapping("/user/top3") 
+	public ModelAndView srchResolve() {
+   ModelAndView mav =  new ModelAndView();
+		List li = as.rownum();
+	     mav.setViewName("t:top");
+	
+	     mav.addObject("top",li);
+	     
+	     return mav;
+		
+	}
+   
 	
 	
    

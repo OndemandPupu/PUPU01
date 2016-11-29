@@ -27,7 +27,9 @@
 		<put-attribute name="header" value="/WEB-INF/view/common/header.jsp"></put-attribute>
 		<put-attribute name="body" value="/WEB-INF/view/1_Header/cart.jsp"></put-attribute>
 	</definition>
-
+	<definition name="t:top" extends="t:login">
+		<put-attribute name="body" value="/WEB-INF/view/1_Header/recommend.jsp"></put-attribute>
+	</definition>
 	<definition name="t:profile" template="/WEB-INF/view/template4.jsp">
 		<put-attribute name="header" value="/WEB-INF/view/common/header.jsp"></put-attribute>
 		<put-attribute name="nav" value="/WEB-INF/view/2_Nav_L/1_Home/profile.jsp"></put-attribute>

@@ -29,7 +29,7 @@ margin: 10px;
       
     </li>
        <li><a href="#">Popular</a></li>
-        <li><a href="#">Recommend</a></li>
+        <li><a href="/user/top3">Recommend</a></li>
         <li><a href="#">Map</a></li>  
   </ul>
   </div>

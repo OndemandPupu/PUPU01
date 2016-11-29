@@ -15,8 +15,9 @@
 	
 	<bean class="webhandler.controller.CommentsController" id="controller"/>
 	<bean class="webhandler.controller.UploaderHandler" id="uploaderHandler"/>
+	<bean class="webhandler.controller.FriendHandler" id="friendHandler"/>
 	<websocket:handlers>
-	
+	<websocket:mapping handler="friendHandler" path="/f_member"/>
 	<websocket:mapping handler="controller" path="/j_member"/>
 	<websocket:mapping handler="uploaderHandler" path="/knock_member"/>
 		<websocket:handshake-interceptors>

@@ -20,19 +20,7 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Open Sans", sans-serif}
           <hr/>
           <p><strong>Holiday</strong></p>
          <div id="login"></div>
-          <p>Friday 15:00</p>
-          <p>Friday 15:00</p>
-          <p>Friday 15:00</p>
-          <p>Friday 15:00</p>
-          <p>Friday 15:00</p>
-          <p>Friday 15:00</p>
-          <p>Friday 15:00</p>
-          <p>Friday 15:00</p>
-          <p>Friday 15:00</p>
-          <p>Friday 15:00</p>
-          <p>Friday 15:00</p>
-          <p>Friday 15:00</p>
-          <p>Friday 15:00</p>
+          
           <p><button class="w3-btn w3-btn-block w3-theme-l4">Info</button></p>
         </div>
       </div>
@@ -58,8 +46,7 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Open Sans", sans-serif}
 <script>
 var socket;
 $(document).ready(function(){
-	$("#f_comments").hide();
-	var target = "ws://localhost/knock_member";
+	var target = "ws://localhost/f_member";
 	socket = new WebSocket(target);
 	socket.onopen = function(args) {
 		$("#login").html("<p>접속중</p>");
