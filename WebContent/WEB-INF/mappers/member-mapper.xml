@@ -44,6 +44,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select * from member
 	</select>
 	
+	<select id="checkpass" parameterType="java.util.HashMap" resultType="java.lang.String">
+		select pass from member where id=#{id} 
+	</select>
+	
 	<delete id="memberout" parameterType="java.lang.String">
 		delete from member where id= #{id}
 	</delete>

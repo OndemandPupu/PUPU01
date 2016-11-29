@@ -24,6 +24,32 @@ public class JoinMemberService {
 		} else {
 			return false;
 		}
-		
+
+	}
+
+	public int modify(HashMap map) {
+		SqlSession sql = fac.openSession();
+		int excute = sql.update("member.modify", map);
+		if (excute == 1) {
+			return 1;
+		} else {
+			return 0;
+		}
+	}
+
+	public String modifypass(String s_id) {
+
+		SqlSession sql = fac.openSession();
+		String excute = sql.selectOne("member.modifypass", s_id);
+
+		return excute;
+	}
+
+	public String checkpass(String s_id) {
+
+		SqlSession sql = fac.openSession();
+		String excute = sql.selectOne("member.checkpass", s_id);
+
+		return excute;
 	}
 }

@@ -14,14 +14,14 @@
         <input type="hidden" id="my_id" value="${userId}">
         <input type="hidden" id="your_id" value="${obj.get('ID') }">
          	<h4 class="w3-center">My Profile</h4>
-         	<p class="w3-center"><img src="/profile/${obj.get('PROFILE') }" class="w3-circle" style="height:106px;width:106px" alt="Avatar"></p>
+         	<p class="w3-center"><img src="/profilefolder/${obj.get('PROFILE') }" class="w3-circle" style="height:106px;width:106px" alt="Avatar"></p>
          	<hr>
          	<c:if test="${userId ne obj.get('ID') }">
          		<button id="friend" onclick="addFriend('${userId}','${obj.get('ID') }');">팔로워</button>
          		<p id="f_check"></p>
          	</c:if>
          	<c:if test="${userId eq obj.get('ID') }">
-         		<button id="setprofile">내정보</button>
+         		<a href="/myprofile"><button id="setprofile">내정보</button></a>
          	</c:if>
 		
          	<hr>

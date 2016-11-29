@@ -41,7 +41,12 @@ public class ManagerController {
 		return "t:delete";
 
 	}
-	
+	@RequestMapping("/recommendlist")
+	public String recommendlist() {
+
+		return "t:recommendlist";
+
+	}
 
 	@RequestMapping("/memberout")
 	public ModelAndView memberout(HttpServletRequest req) {
