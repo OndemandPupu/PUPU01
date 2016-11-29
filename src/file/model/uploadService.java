@@ -21,7 +21,7 @@ public class uploadService {
 	@Autowired
 	SqlSessionFactory fac;
 
-	public String execute(MultipartFile f, String id, String comments,String name, String cate) {
+	public String execute(MultipartFile f, String id, String comments, String name, String cate) {
 		// id: 업로더 title:파일제목 comments:파일내용
 		if (f.isEmpty())
 			return null;
@@ -45,5 +45,46 @@ public class uploadService {
 			return null;
 		}
 
+	}
+
+	public String profileupload(MultipartFile f, String id) {
+		// id: 업로더 title:파일제목 comments:파일내용
+		if (f.isEmpty())
+			return null;
+		try {
+			String uid = UUID.randomUUID().toString().substring(0, 4);
+			String dir = application.getRealPath("/profilefolder");
+			System.out.println(dir);
+			File des = new File(dir, uid);
+			f.transferTo(des);
+			HashMap map = new HashMap();
+			map.put("id", id);
+			map.put("fileuuid", uid);
+			System.out.println(map);
+			SqlSession sql = fac.openSession();
+			int r = sql.update("files.updateProfile", map);
+			sql.close();
+			if (r == 1) {
+				return uid;
+			} else {
+				return null;
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+
+	}
+
+	public String profileSet(String id) {
+		SqlSession sql = fac.openSession();
+		String uid = sql.selectOne("files.setProfile", id);
+		sql.close();
+		if (uid != null) {
+			return uid;
+		} else {
+			return null;
+		}
 	}
 }

@@ -49,6 +49,15 @@ public class LoginService {
 
 	}
 
+	public List<HashMap> profileSystemUsers(String id) {
+		SqlSession sql = fac.openSession();
+
+		List<HashMap> check = sql.selectList("member.profile", id);
+		sql.close();
+		return check;
+
+	}
+
 	public List<HashMap> profileSystem() {
 		SqlSession sql = fac.openSession();
 		List<HashMap> check = sql.selectList("member.allMember");
