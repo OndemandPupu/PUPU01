@@ -6,5 +6,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="m_getUpload" parameterType="java.util.HashMap" resultType="java.util.HashMap">
 		select * from fileupload where id=#{id} and fileuuid = #{fileuuid}
 	</select>
+	
+	<select id="m_getLike" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+		select id from likepeople where fileuuid = #{fileuuid}
+	</select>
 </mapper>
 

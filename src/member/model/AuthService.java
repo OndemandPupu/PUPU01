@@ -20,4 +20,11 @@ public class AuthService {
 		
 		return li;
 	}
+	
+	public List<HashMap> authSerLike(HashMap map) {
+		SqlSession sql = fac.openSession();
+		List<HashMap> li = sql.selectList("myauth.m_getUpload", map);
+		
+		return li;
+	}
 }
