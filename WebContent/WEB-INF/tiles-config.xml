@@ -11,6 +11,13 @@
 		<put-attribute name="body" value="/WEB-INF/view/1_Header/my_feed.jsp"></put-attribute>
 
 	</definition>
+	
+
+	<definition name="t:cateView"  extends="t:yeslogin">
+	
+		<put-attribute name="body" value="/WEB-INF/view/1_Header/cate1.jsp"></put-attribute>
+
+	</definition>
 	<definition name="t:notlogin" template="/WEB-INF/view/template3.jsp">
 		<put-attribute name="header" value="/WEB-INF/view/login/loginView.jsp"></put-attribute>
 		<put-attribute name="nav" value="/WEB-INF/view/login/memberView.jsp"></put-attribute>

@@ -19,24 +19,27 @@ public class cartController {
 
 	@RequestMapping("/cart")
 	public ModelAndView cartView(HttpSession session) {
-		
+
 		System.out.println("!!");
-		
+
 		ModelAndView mav = new ModelAndView("t:cart");
-		
-		String id = (String)session.getAttribute("userId");
+
+		String id = (String) session.getAttribute("userId");
 		System.out.println(id);
 		List<HashMap> list = cs.managercart(id);
-		
+
 		mav.addObject("productList", list);
-	
+
 		return mav;
-			
+
 	}
-	
-	
-	
-	
-	
+
+	@RequestMapping("/cartImpo")
+	public ModelAndView cartImpo(HttpSession session) {
+
+		ModelAndView mav = new ModelAndView("t:cartImpo");
+
+		return mav;
+	}
 
 }

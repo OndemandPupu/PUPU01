@@ -33,6 +33,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="getAllFile" resultType="java.util.HashMap">
 		select * from fileupload order by num desc
 	</select>
+	
+	<select id="getCateView" parameterType="java.lang.String" resultType="java.util.HashMap">
+		select * from fileupload where cate = #{select } order by num desc 
+	</select>
 		<select id="getLikers" resultType="java.util.HashMap">
 		select * from likepeople
 	</select>

@@ -19,4 +19,16 @@ public class allLoadViewService {
 		sql.close();
 		return li;
 	}
+	
+	public List<HashMap> cateview(String select) {
+		SqlSession sql = fac.openSession();
+		System.out.println("¸ðµ¨"+select);
+		List<HashMap> li = sql.selectList("files.getCateView",select);
+
+		sql.close();
+		return li;
+	}
+	
+	
+	
 }

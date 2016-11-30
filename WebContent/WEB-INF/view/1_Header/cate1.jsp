@@ -286,172 +286,46 @@ input[type="text"] {
 	vertical-align: middle;
 }
 </style>
-<c:choose>
-	<c:when test="${size eq -1 }">
-		<div class="w3-row-padding">
-			<div class="w3-col m12">
-				<div class="w3-card-2 w3-round w3-white">
-					<div class="w3-container w3-padding" id="upload">
-						<img src="/w3images/avatar2.png" alt="Avatar"
-							class="w3-left w3-circle w3-margin-right" style="width: 60px">
-						<h6 class="w3-opacity">
-							<a>${nickname}</a>(${userId})님<span id="sever_conection"></span>
-						</h6>
-						<textarea class="form-control" id="usrname"
-							placeholder="무슨 생각을 하고 있나요~?" name="comments"
-							style="border: none;"></textarea>
-						<button type="button" class="w3-btn w3-theme">
-							<i class="fa fa-pencil"></i>  사진첨부
-						</button>
-						<button type="button" class="w3-btn w3-theme">
-							<i class="fa fa-pencil"></i>  올리기
-						</button>
-					</div>
-				</div>
-			</div>
-		</div>
-		<form role="form" action="/file/upload" method="post"
-			enctype="multipart/form-data">
-			<div class="container">
-				<!-- Modal -->
-				<div class="modal fade" id="myModal" role="dialog">
-					<div class="modal-dialog">
-						<div class="modal-content">
-							<div class="modal-body" style="padding: 40px 50px;">
-								<div class="w3-container w3-padding" id="upload">
-									<img src="/w3images/avatar2.png" alt="Avatar"
-										class="w3-left w3-circle w3-margin-right" style="width: 60px">
-									<h6 class="w3-opacity">
-										<a>${nickname}</a>(${userId})님
-									</h6>
-									<textarea class="form-control" id="usrname"
-										placeholder="무슨 생각을 하고 있나요~?" name="comments"
-										style="border: none;"></textarea>
-								</div>
-								<select name="cate">
-									<option value="test1">test1</option>
-									<option value="test2">test2</option>
-									<option value="test3">test3</option>
-									<option value="test4">test4</option>
-								</select> <input type="file" id="up_files" name="file"
-									onchange="handleFileSelect()" />
-								<pre id="list1"
-									style="height: 220px; width: 220px; background-color: white; border: none;"></pre>
-								<div class="modal-footer">
-									<button type="submit" class="btn btn-success btn-block">
-										<span class="glyphicon glyphicon-off"></span> 올리기
-									</button>
-									<button type="submit"
-										class="btn btn-danger btn-default pull-left"
-										data-dismiss="modal">
-										<span class="glyphicon glyphicon-remove"></span> Cancel
-									</button>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</form>
-	</c:when>
-	<c:otherwise>
-
-		<form role="form" action="/file/upload" method="post"
-			enctype="multipart/form-data">
-			<div class="container">
-				<!-- Modal -->
-				<div class="modal fade" id="myModal" role="dialog">
-					<div class="modal-dialog">
-						<div class="modal-content">
-							<div class="modal-body" style="padding: 40px 50px;">
-								<div class="w3-container w3-padding" id="upload">
-									<img src="/w3images/avatar2.png" alt="Avatar"
-										class="w3-left w3-circle w3-margin-right" style="width: 60px">
-									<h6 class="w3-opacity">
-										<a>${nickname}</a>(${userId})님
-									</h6>
-									<textarea class="form-control" id="usrname"
-										placeholder="무슨 생각을 하고 있나요~?" name="comments"
-										style="border: none;"></textarea>
-								</div>
-								<p class="form-group">
-									<select name="cate" class="form-last-name form-control">
-										<option value="test1">test1</option>
-										<option value="test2">test2</option>
-										<option value="test3">test3</option>
-										<option value="test4">test4</option>
-									</select>
-
-								</p>
-								<input type="file" id="up_files" name="file"
-									onchange="handleFileSelect()" />
-								<pre id="list1"
-									style="height: 220px; width: 220px; background-color: white; border: none;"></pre>
-								<div class="modal-footer">
-									<button type="submit" class="btn button button5" id="F_upload">
-										<span class="glyphicon glyphicon-off"></span> 올리기
-									</button>
-									<span></span>
-									<button type="submit" class="btn button button_warning  "
-										data-dismiss="modal">
-										<span class="glyphicon glyphicon-remove"></span> Cancel
-									</button>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</form>
-		<c:forEach var="i" begin="0" end="${size }" varStatus="status">
+		<c:forEach var="i" begin="0" end="${cate.size()-1 }" varStatus="status">
 			<div class="w3-container w3-card-2 w3-white w3-round w3-margin">
 				<br> <a href="/selectview"><img src="/w3images/avatar2.png"
 					alt="Avatar" id="fileselect"
 					class="w3-left w3-circle w3-margin-right" style="width: 60px"></a>
 				<h6 class="w3-opacity">
-					<a href="/profile/${list[i].get('ID')}"> <b>${list[i].get("NAME") }</b>(${list[i].get("ID") })님
-					</a><input type="button" value="삭제" style="float: right"
-						onclick="delwrite('${list[i].FILEUUID}')" />
+					<a href="/profile/${cate[i].get('ID')}"> <b>${cate[i].get("NAME") }</b>(${cate[i].get("ID") })님
+					</a>
 				</h6>
-				<p>${list[i].get("COMMENTS") }</p>
+				<p>${cate[i].get("COMMENTS") }</p>
 				<input type="hidden" id="uploadId"
-					value="${list[i].get('FILEUUID')}"> #업로드된 이 공간의 파일 uuid 는 [<b>${list[i].get('FILEUUID')}</b>]
+					value="${cate[i].get('FILEUUID')}"> #업로드된 이 공간의 파일 uuid 는 [<b>${cate[i].get('FILEUUID')}</b>]
 				입니다
 				<div class="w3-row-padding" style="margin: 0 -16px">
 					<div class="w3-half">
 
 						<button type="button" id="filemodal_${status.index }"
 							style="border: none; background: transparent;"
-							onclick="button1_click('${list[i].get('FILEUUID') }', '${list[i].get('ID')}','${list[i].get('COMMENTS') }','${list[i].get('CATE') }' )">
-							<img src="/users/${list[i].get('FILEUUID') }" style="width: 100%"
+							onclick="button1_click('${cate[i].get('FILEUUID') }', '${cate[i].get('ID')}','${cate[i].get('COMMENTS') }','${cate[i].get('CATE') }' )">
+							<img src="/users/${cate[i].get('FILEUUID') }" style="width: 100%"
 								alt="Northern Lights" class="w3-margin-bottom" id="test">
 						</button>
 					</div>
 				</div>
 				<button type="button" class="button button5"
-					onclick="likeclick('${list[i].get('FILEUUID') }')">
+					onclick="likeclick('${cate[i].get('FILEUUID') }')">
 					<i class="fa fa-thumbs-up"></i>  좋아요♥
 				</button>
 				<button type="button" class="button button5"
-					onclick="board_click('${list[i].get('FILEUUID') }','${nickname }','${userId }')">
+					onclick="board_click('${cate[i].get('FILEUUID') }','${nickname }','${userId }')">
 					<i class="fa fa-comment"></i>  댓글달기
 				</button>
-				<div id="like_p_${list[i].get('FILEUUID') }"></div>
-				<c:forEach var="j" begin="0" end="${sleList.size() }">
-					<c:if
-						test="${list[i].get('FILEUUID') eq sleList[j].get('L_FILEUUID') }">
-						<c:if test="${j ne 0  }">,</c:if>
-					${sleList[j].get("L_SELECTLIKER") }
-				</c:if>
-				</c:forEach>
+				<div id="like_p_${cate[i].get('FILEUUID') }"></div>
+				
 				<hr />
-				<input type="text" id="f_comments_${list[i].get('FILEUUID') }"
+				<input type="text" id="f_comments_${cate[i].get('FILEUUID') }"
 					class="form-control" placeholder="댓글을 입력하세요">
-				<div id="f_comborder_${list[i].get('FILEUUID') }"></div>
+				<div id="f_comborder_${cate[i].get('FILEUUID') }"></div>
 			</div>
 		</c:forEach>
-	</c:otherwise>
-</c:choose>
 <div class="modal modal-center fade" id="my80sizeCenterModal"
 	tabindex="-1" role="dialog" aria-labelledby="my80sizeCenterModalLabel">
 	<div class="modal-dialog modal-80size modal-center" role="document">
@@ -856,24 +730,4 @@ function openNav() {
             
         reader.readAsDataURL(files);    
     }
-</script>
-
-<script>
-	function delwrite(uuid) {
-		var xhr = new XMLHttpRequest();      
-	      xhr.open("get", "/writedel?fileuuid="+uuid, true);
-	      var resq;
-	      xhr.onreadystatechange = function() {
-	         if (xhr.readyState == 4 && xhr.status == 200) {
-	            resq = xhr.responseText;
-	            if(resq == 'YYYY') {
-	               alert("삭제되었습니다.");
-	               
-	            }else {
-	            	alert("삭제실패")
-	            }
-	         }
-	      }
-	      xhr.send();
-	}
 </script>

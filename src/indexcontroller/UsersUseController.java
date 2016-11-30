@@ -15,12 +15,16 @@ import org.springframework.web.servlet.ModelAndView;
 
 import cart.model.cartService;
 import file.model.SelLikeService;
+import file.model.allLoadViewService;
 import member.model.JoinMemberService;
 import member.model.LoginService;
 import member.model.myreadService;
 
 @Controller
 public class UsersUseController {
+
+	@Autowired
+	allLoadViewService alvs;
 	@Autowired
 	LoginService ls;
 	@Autowired
@@ -168,5 +172,40 @@ public class UsersUseController {
 
 		return mav;
 
+	}
+
+	@RequestMapping("/cate")
+	public ModelAndView cate1(HttpServletRequest req) {
+
+		ModelAndView mav = new ModelAndView();
+		String select = req.getParameter("catesel");
+		System.out.println(select);
+		if (select.equals("test1")) {
+			mav.setViewName("t:cateView");
+			List<HashMap> li = alvs.cateview(select);
+			mav.addObject("cate", li);
+		}else if (select.equals("test2")) {
+			mav.setViewName("t:cateView");
+			List<HashMap> li = alvs.cateview(select);
+			mav.addObject("cate", li);
+		}else if (select.equals("test3")) {
+			mav.setViewName("t:cateView");
+			List<HashMap> li = alvs.cateview(select);
+			mav.addObject("cate", li);
+		}else if (select.equals("test4")) {
+			mav.setViewName("t:cateView");
+			List<HashMap> li = alvs.cateview(select);
+			mav.addObject("cate", li);
+		} else {
+			mav.setViewName("empty");
+			return mav;
+		}
+		return mav;
+	}
+
+	@RequestMapping("/cate2")
+	public String cate2() {
+
+		return "t:cate2";
 	}
 }

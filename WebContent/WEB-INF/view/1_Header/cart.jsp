@@ -13,14 +13,21 @@
 			<th>가격</th>
 			<th>선택</th>
 		</tr>
-		<c:forEach var="i" begin="0" end="${productList.size() }">
+		<c:forEach var="i" begin="0" end="${productList.size() -1}">
 			<tr>
 				<td>${productList[i].get("PRODUCTCATE") }</td>
 				<td>${productList[i].get("PRODUCTINFO") }</td>
 				<td>${productList[i].get("PRODUCTNAME") }</td>
 				<td>${productList[i].get("PRODUCTPRICE") }</td>
-				<td><button id="buy_cart">구매하기</button></td>
+				<td><button class="buy_cart" value="${productList[i].get('NUM') }">구매하기</button></td>
 				<td></td>
 			</tr>
 		</c:forEach>
 	</table>
+	
+	<script>
+		$(".buy_cart").click(function(){
+			var num = $(this).val();
+			location.href="/cart/confirm?num="+num;
+		});
+	</script>
