@@ -174,7 +174,8 @@ $(document).ready(function () {
 		var g = $("#birth").val();
 		var h = $("#gender").val();
 		var i = $("#interest").val();
-		if(!a || !b || !c || !d || !e || !f || !g || !h || !i) {
+		var j = $("#mail").val();
+		if(!a || !b || !c || !d || !e || !f || !g || !h || !i || !j) {
 			alert('회원가입정보를 모두 입력해주세요.');
 			$("#join").attr("disabled",true);
 			location.reload();

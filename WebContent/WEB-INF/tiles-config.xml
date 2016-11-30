@@ -37,10 +37,8 @@
 	<definition name="t:top" extends="t:login">
 		<put-attribute name="body" value="/WEB-INF/view/1_Header/recommend.jsp"></put-attribute>
 	</definition>
-	<definition name="t:profile" template="/WEB-INF/view/template4.jsp">
-		<put-attribute name="header" value="/WEB-INF/view/common/header.jsp"></put-attribute>
+	<definition name="t:profile" extends="t:yeslogin">
 		<put-attribute name="nav" value="/WEB-INF/view/2_Nav_L/1_Home/profile.jsp"></put-attribute>
-		<put-attribute name="aside" value="/WEB-INF/view/2_Nav_L/1_Home/Happy.jsp"></put-attribute>
 		<put-attribute name="body" value="/WEB-INF/view/1_Header/my_page.jsp"></put-attribute>
 	</definition>
 	

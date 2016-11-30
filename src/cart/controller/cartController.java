@@ -34,10 +34,10 @@ public class cartController {
 
 	}
 
-	@RequestMapping("/cartImpo")
+	@RequestMapping("/cart/confirm")
 	public ModelAndView cartImpo(HttpSession session) {
 
-		ModelAndView mav = new ModelAndView("t:cartImpo");
+		ModelAndView mav = new ModelAndView("t:");
 
 		return mav;
 	}

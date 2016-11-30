@@ -1,58 +1,105 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<title>W3.CSS Template</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
-<link rel="stylesheet" href="http://www.w3schools.com/lib/w3-theme-blue-grey.css">
-<link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Open+Sans'>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<style>
-html,body,h1,h2,h3,h4,h5 {font-family: "Open Sans", sans-serif}
-</style>
-<body class="w3-theme-l5">
-    <!-- Right Column -->
-    <div class="w3-col m2">
-      <div class="w3-card-2 w3-round w3-white w3-center">
-        <div class="w3-container">
-          <h5><b>접속중인 팔로워</b></h5>
-          <hr/>
-          <p><strong>Holiday</strong></p>
-         <div id="login"></div>
-          
-          <p><button class="w3-btn w3-btn-block w3-theme-l4">Info</button></p>
-        </div>
-      </div>
-      <br>
-      <div class="w3-card-2 w3-round w3-white w3-center">
-        <div class="w3-container">
-          <p>Friend Request</p>
-          <img src="/w3images/avatar6.png" alt="Avatar" style="width:50%"><br>
-          <span>Jane Doe</span>
-          <div class="w3-row w3-opacity">
-            <div class="w3-half">
-              <button class="w3-btn w3-green w3-btn-block w3-section" title="Accept"><i class="fa fa-check"></i></button>
-            </div>
-            <div class="w3-half">
-              <button class="w3-btn w3-red w3-btn-block w3-section" title="Decline"><i class="fa fa-remove"></i></button>
-            </div>
-          </div>
-        </div>
-      </div>
-      <br>
-    </div>
-<br>
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+	<!-- Right Column -->
+	<div class="w3-col m2">
+		<div class="w3-card-2 w3-round w3-white w3-center">
+			<div class="w3-container">
+				<input type="button" id="F_btn" value="팔로워목록" /> <br/>
+				<div id="F_dialog" title="팔로워목록"></div>
+				<input type="button" id="K_btn" value="알림" />
+				<div id="chat" title="알림"></div>
+				<hr />
+				<div id="login"></div>
+			</div>
+		</div>
+		<br>
+		<div class="w3-card-2 w3-round w3-white w3-center">
+			<div class="w3-container">
+				<p>Friend Request</p>
+				<img src="" alt="Avatar" style="width: 50%"><br>
+				<span>Jane Doe</span>
+				<div class="w3-row w3-opacity">
+					<div class="w3-half">
+						<button class="w3-btn w3-green w3-btn-block w3-section"
+							title="Accept">
+							<i class="fa fa-check"></i>
+						</button>
+					</div>
+					<div class="w3-half">
+						<button class="w3-btn w3-red w3-btn-block w3-section"
+							title="Decline">	
+							<i class="fa fa-remove"></i>
+						</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<br>
+	</div>
+	<br>
+
+	<script>
+
+ 
+    //창 열기 버튼을 클릭했을경우
+    $("#F_btn").on("click",function(){
+        $("#F_dialog").dialog("open"); //다이얼로그창 오픈                
+    });
+    
+    $("#K_btn").on("click",function(){
+        $("#K_dialog").dialog("open"); //다이얼로그창 오픈                
+    });
+
+</script>
 <script>
-var socket;
+
 $(document).ready(function(){
-	var target = "ws://localhost/f_member";
+	$.ajax({
+		"dataType":"json",
+		"url":"/followShow",
+		"methode":"get"
+	}).done(function(rst){
+		for(var i =0;i<rst.length;i++) {
+			$("#F_dialog").append("<b>"+rst[i].id+"</b><br/>");	
+		}
+	});
+});
+</script>
+<script>
+	var socket;
+	
+	var target = "ws://localhost/knock_member";
 	socket = new WebSocket(target);
 	socket.onopen = function(args) {
-		$("#login").html("<p>접속중</p>");
+		$("#login").html("<p>서버정상접속</p>");
 	}
 	socket.onmessage = function(args) {
-		document.getElementById("chat" ).innerHTML += "[# "+args.data+"]<br/>";
+		var i = args.data;
+		var com = i.split("#");
+		if(com[0]==1) {
+			$.ajax({
+				"url":"/authLike?fileuid="+com[2],
+				"methode":"get"	
+			}).done(function(rst){
+				if(rst!="NNNN") {
+					alert(rst);
+					$("#chat").html(com[2]+"님이'"+rst+"'게시글에 글을 남겼습니다.");
+				}
+			});
+		}
+		if(com[0]==2) {
+			$.ajax({
+				"url":"/authComment?fileuid="+com[1],
+				"methode":"get"	
+			}).done(function(rst){
+				if(rst!="NNNN") {
+					alert(rst);
+					$("#chat").html(com[2]+"님이'"+rst+"'게시글에 글을 남겼습니다.");
+				}
+			});	
+		}
+		
 		document.getElementById("chat").scrollTop = document.getElementById("chat").scrollHeight;
 	}
 	socket.onclose = function(args) {
@@ -61,9 +108,9 @@ $(document).ready(function(){
 	function destroy() {
 		socket.close();
 	}
-	
-	
-	
+
+	</script>
+	<script>
 // Accordion
 function myFunction(id) {
     var x = document.getElementById(id);
@@ -76,7 +123,8 @@ function myFunction(id) {
         x.previousElementSibling.className.replace(" w3-theme-d1", "");
     }
 }
-
+</script>
+	<script>
 // Used to toggle the menu on smaller screens when clicking on the menu button
 function openNav() {
     var x = document.getElementById("navDemo");
@@ -87,7 +135,3 @@ function openNav() {
     }
 }
 </script>
-
-</body>
-</html> 
-    

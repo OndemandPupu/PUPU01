@@ -2,61 +2,8 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles"%>
 <!-- 기본 템플릿을 작성! -->
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
-	integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
-	crossorigin="anonymous">
-<!-- Optional theme -->
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
-	integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp"
-	crossorigin="anonymous">
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-<meta http-equiv="content-type" content="text/html; charset=UTF-8">
-<meta charset="utf-8">
-<meta name="generator" content="Bootply" />
-<meta name="viewport"
-	content="width=device-width, initial-scale=1, maximum-scale=1">
-<link href="css/bootstrap.min.css" rel="stylesheet">
-<link href="css/styles.css" rel="stylesheet">
-<title>NewsFeed</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
-<link rel="stylesheet"
-	href="http://www.w3schools.com/lib/w3-theme-blue-grey.css">
-<link rel='stylesheet'
-	href='https://fonts.googleapis.com/css?family=Open+Sans'>
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
-<meta
-	content="This tutorial will explain about to open Bootstrap Modal Popup on Ajax Click Function. When user clicks on button, A ajax request comes and load the another page content."
-	name="description" />
-<meta content="demo of bootstrap modal popup, demo of bootstrap modal"
-	name="keywords" />
-<meta name="viewport" content="width=device-width, initial-scale=1">
 
-<link href="css/bootstrap.css" rel="stylesheet" type="text/css" />
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<script type="text/javascript"
-	src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-<script src="js/bootstrap.js"></script>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <style>
 html, body, h1, h2, h3, h4, h5 {
 	font-family: "Open Sans", sans-serif
@@ -285,6 +232,77 @@ input[type="text"] {
 	text-align: left;
 	vertical-align: middle;
 }
+
+.filebox input[type="file"] {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	padding: 0;
+	margin: -1px;
+	overflow: hidden;
+	clip: rect(0, 0, 0, 0);
+	border: 0;
+}
+
+.filebox label {
+	display: inline-block;
+	padding: .5em .75em;
+	color: #999;
+	font-size: inherit;
+	line-height: normal;
+	vertical-align: middle;
+	background-color: #fdfdfd;
+	cursor: pointer;
+	border: 1px solid #ebebeb;
+	border-bottom-color: #e2e2e2;
+	border-radius: .25em;
+}
+
+/* named upload */
+.filebox .upload-name {
+	display: inline-block;
+	padding: .5em .75em; /* label의 패딩값과 일치 */
+	font-size: inherit;
+	font-family: inherit;
+	line-height: normal;
+	vertical-align: middle;
+	background-color: #f5f5f5;
+	border: 1px solid #ebebeb;
+	border-bottom-color: #e2e2e2;
+	border-radius: .25em;
+	-webkit-appearance: none; /* 네이티브 외형 감추기 */
+	-moz-appearance: none;
+	appearance: none;
+}
+
+.filebox .upload-display { /* 이미지가 표시될 지역 */
+	margin-bottom: 5px;
+}
+
+@media ( min-width : 768px) {
+	.filebox .upload-display {
+		display: inline-block;
+		margin-right: 5px;
+		margin-bottom: 0;
+	}
+}
+
+.filebox .upload-thumb-wrap { /* 추가될 이미지를 감싸는 요소 */
+	display: inline-block;
+	width: 54px;
+	padding: 2px;
+	vertical-align: middle;
+	border: 1px solid #ddd;
+	border-radius: 5px;
+	background-color: #fff;
+}
+
+.filebox .upload-display img { /* 추가될 이미지 */
+	display: block;
+	max-width: 100%;
+	width: 100% \9;
+	height: auto;
+}
 </style>
 <c:choose>
 	<c:when test="${size eq -1 }">
@@ -292,10 +310,10 @@ input[type="text"] {
 			<div class="w3-col m12">
 				<div class="w3-card-2 w3-round w3-white">
 					<div class="w3-container w3-padding" id="upload">
-						<img src="/w3images/avatar2.png" alt="Avatar"
+						<img src="/profilefolder/${uid }" alt="Avatar"
 							class="w3-left w3-circle w3-margin-right" style="width: 60px">
 						<h6 class="w3-opacity">
-							<a>${nickname}</a>(${userId})님<span id="sever_conection"></span>
+							<a>${nickname}</a>(${userId})님
 						</h6>
 						<textarea class="form-control" id="usrname"
 							placeholder="무슨 생각을 하고 있나요~?" name="comments"
@@ -319,7 +337,7 @@ input[type="text"] {
 						<div class="modal-content">
 							<div class="modal-body" style="padding: 40px 50px;">
 								<div class="w3-container w3-padding" id="upload">
-									<img src="/w3images/avatar2.png" alt="Avatar"
+									<img src="/profilefolder/${uid }" alt="Avatar"
 										class="w3-left w3-circle w3-margin-right" style="width: 60px">
 									<h6 class="w3-opacity">
 										<a>${nickname}</a>(${userId})님
@@ -359,7 +377,7 @@ input[type="text"] {
 			<div class="w3-col m12">
 				<div class="w3-card-2 w3-round w3-white">
 					<div class="w3-container w3-padding" id="upload">
-						<img src="/w3images/avatar2.png" alt="Avatar"
+						<img src="/profilefolder/${uid }" alt="Avatar"
 							class="w3-left w3-circle w3-margin-right" style="width: 60px">
 						<h6 class="w3-opacity">
 							<a>${nickname}</a>(${userId})님<span id="sever_conection"></span>
@@ -386,7 +404,7 @@ input[type="text"] {
 						<div class="modal-content">
 							<div class="modal-body" style="padding: 40px 50px;">
 								<div class="w3-container w3-padding" id="upload">
-									<img src="/w3images/avatar2.png" alt="Avatar"
+									<img src="/profilefolder/${uid }" alt="Avatar"
 										class="w3-left w3-circle w3-margin-right" style="width: 60px">
 									<h6 class="w3-opacity">
 										<a>${nickname}</a>(${userId})님
@@ -404,13 +422,17 @@ input[type="text"] {
 									</select>
 
 								</p>
-								<input type="file" id="up_files" name="file"
-									onchange="handleFileSelect()" />
+								<div class="filebox bs3-primary preview-image">
+									<input class="upload-name" value="파일선택" disabled="disabled"
+										style="width: 200px;"> <label for="input_file">선택</label>
+									<input type="file" id="input_file" name="file" class="upload-hidden">
+								</div>
+
 								<pre id="list1"
 									style="height: 220px; width: 220px; background-color: white; border: none;"></pre>
 								<div class="modal-footer">
 									<button type="submit" class="btn button button5" id="F_upload">
-										<span class="glyphicon glyphicon-off"></span> 올리기
+										<span class="glyphicon glyphicon-off"></span> 업로드
 									</button>
 									<span></span>
 									<button type="submit" class="btn button button_warning  "
@@ -426,9 +448,10 @@ input[type="text"] {
 		</form>
 		<c:forEach var="i" begin="0" end="${size }" varStatus="status">
 			<div class="w3-container w3-card-2 w3-white w3-round w3-margin">
-				<br> <a href="/selectview"><img src="/w3images/avatar2.png"
-					alt="Avatar" id="fileselect"
-					class="w3-left w3-circle w3-margin-right" style="width: 60px"></a>
+				<br> <a href="/selectview"><img
+					src="/profilefolder/${list[i].get('ID')}" alt="Avatar"
+					id="fileselect" class="w3-left w3-circle w3-margin-right"
+					style="width: 60px"></a>
 				<h6 class="w3-opacity">
 					<a href="/profile/${list[i].get('ID')}"> <b>${list[i].get("NAME") }</b>(${list[i].get("ID") })님
 					</a>
@@ -456,17 +479,12 @@ input[type="text"] {
 					onclick="board_click('${list[i].get('FILEUUID') }','${nickname }','${userId }')">
 					<i class="fa fa-comment"></i>  댓글달기
 				</button>
-				<div id="like_p_${list[i].get('FILEUUID') }"></div>
-				<c:forEach var="j" begin="0" end="${sleList.size() }">
-					<c:if
-						test="${list[i].get('FILEUUID') eq sleList[j].get('L_FILEUUID') }">
-						<c:if test="${j ne 0  }">,</c:if>
-					${sleList[j].get("L_SELECTLIKER") }
-				</c:if>
-				</c:forEach>
+				<br /> <a id="good${list[i].get('FILEUUID') }"></a><span
+					id="like_p_${list[i].get('FILEUUID') }"></span>
 				<hr />
 				<input type="text" id="f_comments_${list[i].get('FILEUUID') }"
-					class="form-control" placeholder="댓글을 입력하세요">
+					class="form-control" placeholder="댓글을 입력하세요"
+					onblur="board_blur('${list[i].get('FILEUUID') }','${nickname }','${userId }')">
 				<div id="f_comborder_${list[i].get('FILEUUID') }"></div>
 			</div>
 		</c:forEach>
@@ -502,8 +520,28 @@ input[type="text"] {
 										<i class="glyphicon glyphicon-bullhorn"></i><b>글쓰기</b>
 									</button>
 									<br />
+									<div class=" list-group">
+										<div class="col-sm-4 text-left">
+											<div id="port2">
+												<a href="javascript:showProduct()" style="color: white;"><b>상품정보가
+														등록되어있습니다.</b></a>
+
+											</div>
+											<div id="port2_sun" class="list-group">
+												<a class="list-group-item active"> 카테고리 :<b id="cateP"></b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+													<b style="color: #2EFE2E; position: right">장바구니에담기</b><input
+													type="checkbox" id="h_product"></a> <a
+													class="list-group-item ">상품명 :<b id="nameP"></b>
+												</a> <a class="list-group-item ">가격 :<b id="priceP"></b></a> <a
+													class="list-group-item ">제공자 :<b id="idP"></b>
+												</a> <br />
+											</div>
+										</div>
+									</div>
+
+
 									<div id=asd class="button button5" data-toggle="tooltip"
-										data-placement="right" title="사진을 상품을 아시나요?">
+										data-placement="right" title="사진의상품을 아시나요?">
 										<b>정보제공</b>
 									</div>
 									<div id="port1" class=" panel-info">
@@ -520,44 +558,28 @@ input[type="text"] {
 										<input type="text" class=" form-control"
 											placeholder="Comments.." id="write" />
 									</div>
-				</div>
+								</div>
 							</div>
 						</li>
 					</ul>
-				</nav><div id="content_wrap">
+				</nav>
+				<div id="content_wrap">
 					<div id="content">
 
 						<div id="ccc"></div>
-						<div class="row">
-							<div class="col-sm-4 text-center">
-								<div id="port2">
-									<a href="javascript:showProduct()">상품정보가 등록되어있습니다.</a>장바구니에담기<input
-										type="checkbox" id="h_product">
-								</div>
-									<div id="port2_sun">
-										<label>카테고리 :</label>
-										<p id="cateP"></p>
-										<label>상품명 : </label>
-										<p id="nameP"></p>
-										<br /> <label>가격 : </label>
-										<p id="priceP"></p>
-										<br /> <label>제공자 : </label>
-										<p id="idP"></p>
-										<br />
-									</div>
-								</div>
-							</div>
+
+					</div>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="button button_warning"
+					data-dismiss="modal">
+					<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>닫기
+				</button>
 			</div>
 		</div>
 	</div>
-	<div class="modal-footer">
-				<button type="button" class="button button_warning" data-dismiss="modal"> <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>닫기</button>
-			</div>
 </div>
-</div>
-</div>
-
-
 <script>
 
 	$("#h_product").change(function() {
@@ -579,6 +601,7 @@ input[type="text"] {
 			}).done(function(rst) {
 				if(rst=="true") {
 					alert("장바구니에 등록되었습니다.");
+					$("#h_product").hide();
 				}else {
 					alert("실패");
 				}
@@ -587,6 +610,31 @@ input[type="text"] {
 	});
 </script>
 <script>
+function board_blur(uuid, nick, id) {
+	var r = $("#f_comments_"+uuid).val();
+	printTime3();
+	var time;
+	function printTime3() {
+        var now = new Date();                                               
+        var nowTime = now.getFullYear() + "-" + (now.getMonth()+1) + "-" + now.getDate() + " " + now.getHours() + ":" + now.getMinutes() + ":" + now.getSeconds();
+        time = nowTime;          
+        setTimeout("printTime()",1000);       
+	}
+	if(r!="") {
+		$("#f_comborder_"+uuid).append(nick+"("+id+"):"+r+"("+time+")<br/>");
+		$.ajax({
+			"dataType":"json",
+			"url":"/saveWirter?id="+id+"&nick="+nick+"&uuid="+uuid+"&memo="+r,
+			"methode":"get"
+		}).done(function(rst) {
+			if(rst=="true") {
+				console.log("등록");
+			}else {
+				console.log("실패");
+			}
+		});
+	}
+}
 function board_click(uuid,nick,id) {
 	$("#f_comments_"+uuid).focus();
 	printTime2();
@@ -615,9 +663,9 @@ function board_click(uuid,nick,id) {
 		}
 	});
 }
+
 </script>
 <script>
-var socket;
 $(document).ready(function(){
 	$.ajax({
 		"dataType":"json",
@@ -637,26 +685,13 @@ $(document).ready(function(){
 	}).done(function(rst) {
 		if(rst!="null") {
 			for(var i=0;i<rst.length;i++) {
-				$("#like_p_"+rst[i].id).html("<i class='fa fa-thumbs-up'></i>");
+				
+				$("#good"+rst[i].id).html("<i class='fa fa-thumbs-up'></i>");
 				$("#like_p_"+rst[i].id).append("<b>"+rst[i].like+"</b>님");	
 			}
 		}
 	})
-	var target = "ws://localhost/j_member";
-	socket = new WebSocket(target);
-	socket.onopen = function(args) { 
-		$("#sever_conection").html("서버와연결됨..");
-	}
-	socket.onmessage = function(args) {
-		document.getElementById("chat " ).innerHTML += "[# "+args.data+"]<br/>";
-		document.getElementById("chat").scrollTop = document.getElementById("chat").scrollHeight;
-	}
-	socket.onclose = function(args) {
-	}
-	
-	function destroy() {
-		socket.close();
-	}
+
 	$("#list1").hide();
     $("#upload").click(function(){
         $("#myModal").modal();
@@ -678,6 +713,7 @@ function likeclick(uuid) {
 			for(var i=0;i<rst.length;i++) {
 				$("#like_p_"+uuid).html("<i class='fa fa-thumbs-up'></i>");
 				$("#like_p_"+uuid).append("<b>"+rst[i].like+"</b>님");
+				
 			}
 		}else {
 			$("#like_p_"+uuid).html("");
@@ -776,7 +812,7 @@ function showProduct() {
 		if(rst[0].name!="null") {
 			$("#nameP").html(rst[0].name);
 			$("#priceP").html(rst[0].price);
-			$("#idP").html(rst[0].id);	
+			$("#idP").html("<img src='http://api.randomuser.me/portraits/thumb/women/17.jpg' class='img-round'/><b>"+rst[0].id);	
 			$("#cateP").html(rst[0].cate);
 		}else {
 			$("#port2").hide();
@@ -852,24 +888,39 @@ function openNav() {
 </script>
 
 <script type="text/javascript">
-    function handleFileSelect() 
-    {
-        var files = document.getElementById('up_files').files[0]; //파일 객체
- 
+var imgTarget = $('.preview-image .upload-hidden');
+
+imgTarget.on('change', function(){
+    var parent = $(this).parent();
+    parent.children('.upload-display').remove();
+
+    if(window.FileReader){
+        //image 파일만
+        if (!$(this)[0].files[0].type.match(/image\//)) return;
+        
         var reader = new FileReader();
- 
-        //파일정보 수집        
-        reader.onload = (function(theFile) 
-        {
-            return function(e) 
-            {
-                //이미지 뷰
-                var img_view = ['<img src="', e.target.result, '" title="', escape(theFile.name), '"  style= "width:200px;height:200px;  " />'].join('');                
-                document.getElementById('list1').innerHTML = img_view;
-            };
- 
-        })(files);
-            
-        reader.readAsDataURL(files);    
+        reader.onload = function(e){
+            var src = e.target.result;
+            parent.prepend('<div class="upload-display"><div class="upload-thumb-wrap"><img src="'+src+'" class="upload-thumb"></div></div>');
+        }
+        reader.readAsDataURL($(this)[0].files[0]);
     }
+
+    else {
+        $(this)[0].select();
+        $(this)[0].blur();
+        var imgSrc = document.selection.createRange().text;
+        parent.prepend('<div class="upload-display"><div class="upload-thumb-wrap"><img class="upload-thumb"></div></div>');
+
+        var img = $(this).siblings('.upload-display').find('img');
+        img[0].style.filter = "progid:DXImageTransform.Microsoft.AlphaImageLoader(enable='true',sizingMethod='scale',src=\""+imgSrc+"\")";        
+    }
+});
+</script>
+
+
+<script>
+$(document).ready(function(){
+    $('[data-toggle="popover"]').popover();   
+});
 </script>

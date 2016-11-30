@@ -21,12 +21,16 @@ public class followController {
 	
 	@RequestMapping("/follow")
 	@ResponseBody
-	public String follow(HttpServletRequest req) {
+	public String follow(HttpServletRequest req, HttpSession session) {
+		String myname = (String)session.getAttribute("nickname");		
 		String myid = req.getParameter("myid");
 		String youid = req.getParameter("youid");
-		int r = jfs.followServiceJoin(myid, youid);
-		if(r==1) {
-			handler.sendToAllSession(youid+"등록되었습니다.");
+		String youname = req.getParameter("youname");
+		
+		String myidname = myname+"("+myid+")";
+		String youidname = youname+"("+youid+")";
+		int r = jfs.followServiceJoin(myidname, youidname);
+		if(r==1) {	
 			return "TRUE";
 		}else {
 			return "FALSE";
@@ -35,16 +39,15 @@ public class followController {
 	
 	@RequestMapping("/followcheck")
 	@ResponseBody
-	public String follow2(HttpServletRequest req) {
+	public String follow2(HttpServletRequest req, HttpSession session) {
 		String my_id = req.getParameter("my_id");
+		String my_name = (String)session.getAttribute("nickname");
 		String your_id = req.getParameter("you_id");
-		String ask = jfs.follwCheckService(my_id, your_id);
+		String your_name = req.getParameter("your_name");
+		
+		String myidname = my_name+"("+my_id+")";
+		String youridname = your_name+"("+your_id+")";
+		String ask = jfs.follwCheckService(myidname, youridname);
 		return ask;
-	}
-	
-	@RequestMapping("/followShow")
-	public String follow3(HttpSession session) {
-		session.getAttribute("userId");
-		return "";
 	}
 }

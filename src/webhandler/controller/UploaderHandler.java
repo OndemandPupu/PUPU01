@@ -22,7 +22,7 @@ import org.springframework.web.socket.handler.TextWebSocketHandler;
 public class UploaderHandler extends TextWebSocketHandler {
 
 	List<WebSocketSession> sList;
-	HashMap<Object ,WebSocketSession> map;
+	
 	@PostConstruct
 	public void init() {
 		sList = new ArrayList<>();
@@ -33,9 +33,8 @@ public class UploaderHandler extends TextWebSocketHandler {
 	public void afterConnectionEstablished(WebSocketSession session) throws Exception {
 		System.out.println(session+"pupu연결");
 		 Object userId = session.getAttributes().get("userId");
-		 System.out.println(userId);
-		 map.put(""+userId, session);
-		sList.add((WebSocketSession) userId);
+		
+		sList.add(session);
 		System.out.println(sList);
 	}
 	@Override
@@ -45,10 +44,8 @@ public class UploaderHandler extends TextWebSocketHandler {
 
 	}
 	public void sendToAllSession(String msg) {
-		HashMap map = new HashMap();
 		for (int i = 0; i < sList.size(); i++) {
-			map = (HashMap) sList.get(i);
-			System.out.println("요청들어온 메세지"+map);
+			System.out.println(msg);
 			WebSocketSession wss = sList.get(i);
 			try {
 				wss.sendMessage(new TextMessage(msg));

@@ -3,7 +3,6 @@ package file.controller;
 import java.util.HashMap;
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,11 +12,14 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import file.model.mentService;
+import webhandler.controller.UploaderHandler;
 
 @Controller
 public class mentUpcontroller {
 	@Autowired
 	mentService ms;
+	@Autowired
+	UploaderHandler upload1;
 
 	@RequestMapping("/memo/upMemo")
 	@ResponseBody
@@ -26,9 +28,14 @@ public class mentUpcontroller {
 		String id2 = (String)session.getAttribute("nickname");
 		String tid = id2+"("+id+")";
 		boolean r = ms.addMent(tid, memo, fileuuid);
-		if(r)
+		if(r){
+			upload1.sendToAllSession("2#"+fileuuid+"#"+tid+"#파일에 새로운댓글이 등록되었습니다.#"+memo);
 			return "YYYYY";
-		else 
+		}
+		
+		else {
+			
+		}
 			return "NNNNN";
 	}
 	@RequestMapping("/memo/show")

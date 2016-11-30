@@ -13,11 +13,12 @@
         <div class="w3-container">
         <input type="hidden" id="my_id" value="${userId}">
         <input type="hidden" id="your_id" value="${obj.get('ID') }">
+        <input type="hidden" id="your_name" value="${obj.get('NAME') }">
          	<h4 class="w3-center">My Profile</h4>
          	<p class="w3-center"><img src="/profilefolder/${obj.get('PROFILE') }" class="w3-circle" style="height:106px;width:106px" alt="Avatar"></p>
          	<hr>
          	<c:if test="${userId ne obj.get('ID') }">
-         		<button id="friend" onclick="addFriend('${userId}','${obj.get('ID') }');">팔로워</button>
+         		<button id="friend" onclick="addFriend('${userId}','${obj.get('ID') }','${obj.get('NAME') }');">팔로워</button>
          		<p id="f_check"></p>
          	</c:if>
          	<c:if test="${userId eq obj.get('ID') }">
@@ -35,8 +36,9 @@
 $(document).ready(function() {
 	var my_id = $("#my_id").val();
 	var your_id = $("#your_id").val();
+	var your_name = $("#your_name").val();
 	$.ajax({
-		"url":"/followcheck?my_id="+my_id+"&you_id="+your_id,
+		"url":"/followcheck?my_id="+my_id+"&you_id="+your_id+"&your_name="+your_name,
     	"methode":"get"
 	}).done(function(rst){
 		if(rst=="FALSE") {
@@ -44,21 +46,20 @@ $(document).ready(function() {
 			$("#f_check").html("<button>팔로워~</button>");
 		}else {
 			$("#friend").show();
-			function addFriend(youid, myid) {
-				 $.ajax({
-				    	"url":"/follow?myid="+myid+"&youid="+youid,
-				    	"methode":"get"
-				 }).done(function(rst) {
-					 if(rst=="TRUE") {
-						 alert("친구됨!");
-						 $("#friend").hide();
-						 $("#f_check").html("<button>친구입니다.</button>");
-						 
-					 }
-				 })
-			}
 		}
 	})
 });
-
+function addFriend(myid, youid,name) {
+	 $.ajax({
+	    	"url":"/follow?myid="+myid+"&youid="+youid+"&youname="+name,
+	    	"methode":"get"
+	 }).done(function(rst) {
+		 if(rst=="TRUE") {
+			 alert("팔로워 정상등록되었습니다.");
+			 $("#friend").hide();
+			 $("#f_check").html("<button>팔로워상태입니다.</button>");
+			 
+		 }
+	 })
+}
 </script>

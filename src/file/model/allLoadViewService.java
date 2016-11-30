@@ -12,23 +12,35 @@ import org.springframework.stereotype.Component;
 public class allLoadViewService {
 	@Autowired
 	SqlSessionFactory fac;
-	
+
 	public List<HashMap> allview() {
 		SqlSession sql = fac.openSession();
 		List<HashMap> li = sql.selectList("files.getAllFile");
 		sql.close();
 		return li;
 	}
-	
+
 	public List<HashMap> cateview(String select) {
 		SqlSession sql = fac.openSession();
-		System.out.println("¸ðµ¨"+select);
-		List<HashMap> li = sql.selectList("files.getCateView",select);
+		System.out.println("¸ðµ¨" + select);
+		List<HashMap> li = sql.selectList("files.getCateView", select);
 
 		sql.close();
 		return li;
 	}
-	
-	
-	
+
+	public HashMap allChart() {
+		SqlSession sql = fac.openSession();
+		HashMap map = new HashMap();
+		int sum1 = sql.selectOne("files.getAllChart", "test1");
+		int sum2 = sql.selectOne("files.getAllChart", "test2");
+		int sum3 = sql.selectOne("files.getAllChart", "test2");
+		int sum4 = sql.selectOne("files.getAllChart", "test2");
+		map.put("test1", sum1);
+		map.put("test2", sum2);
+		map.put("test3", sum3);
+		map.put("test4", sum4);
+		sql.close();
+		return map;
+	}
 }

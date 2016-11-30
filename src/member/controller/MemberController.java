@@ -40,10 +40,11 @@ public class MemberController {
 		jmember.put("interest", req.getParameter("interest"));
 		jmember.put("profile", "null");
 		String id = req.getParameter("id");
+		String name = req.getParameter("name");
 		boolean check = joinmemberservice.joinmember(jmember);
 		if(check) {
 			
-			int r = jfs.followService(id);
+			int r = jfs.followService(id, name);
 		}
 		mav.addObject("joincheck", check);
 		return mav;

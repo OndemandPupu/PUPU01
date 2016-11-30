@@ -28,6 +28,6 @@
 	<script>
 		$(".buy_cart").click(function(){
 			var num = $(this).val();
-			location.href="/cart/confirm?num="+num;
+							location.href="/cart/confirm?num="+num;
 		});
 	</script>

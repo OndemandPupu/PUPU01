@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.UUID;
 
 import javax.servlet.ServletContext;
+import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -55,17 +56,17 @@ public class uploadService {
 			String uid = UUID.randomUUID().toString().substring(0, 4);
 			String dir = application.getRealPath("/profilefolder");
 			System.out.println(dir);
-			File des = new File(dir, uid);
+			File des = new File(dir, id);
 			f.transferTo(des);
 			HashMap map = new HashMap();
 			map.put("id", id);
-			map.put("fileuuid", uid);
+			map.put("fileuuid", id);
 			System.out.println(map);
 			SqlSession sql = fac.openSession();
 			int r = sql.update("files.updateProfile", map);
 			sql.close();
 			if (r == 1) {
-				return uid;
+				return id;
 			} else {
 				return null;
 			}
