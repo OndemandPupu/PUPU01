@@ -12,10 +12,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		insert into memberfollower values(#{id}, null)
 	</insert>
 	<update id="setFollw" parameterType="java.util.HashMap">
-		update memberfollower set followerid = #{myid} where id =#{youid}
+		insert into memberfollower values (#{id}, #{followerid})
 	</update>
   	<select id="checkFollow" parameterType="java.util.HashMap" resultType="java.lang.String">
   		select id from memberfollower where id=#{id} and followerid = #{followerid}
+  	</select>
+  	<select id="getNickname" parameterType="java.lang.String" resultType="java.lang.String">
+  		select id from member where name=#{a}
+  	</select>
+  	<select id="showFollow" parameterType="java.lang.String" resultType="java.util.HashMap">
+  		select * from memberfollower where id=#{id}
   	</select>
 	<select id="checkmember" resultType="java.lang.String"
 		parameterType="java.util.HashMap">

@@ -116,7 +116,7 @@ a {
 			<img src="/users/${vb.FILEUUID} " alt="Avatar"
 				class="w3-center  w3-margin-right" style="width: 200px">
 			<h6 class="w3-opacity">
-				<a>${nickname}</a>(${userId})님 <span>${vb.LOADDATE } </span>
+				<a>${vb.NAME}</a>(${vb.ID})님 <span>${vb.LOADDATE } </span>
 			</h6>
 		    <div class="form-control" id="usrname"
 				style="border: none;">

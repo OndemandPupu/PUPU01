@@ -26,10 +26,19 @@ public class JoinMemberService {
 		}
 
 	}
+	
+	public String getNick(String a) {
+		SqlSession sql = fac.openSession();
+		String name = sql.selectOne("member.getNickname", a);
+		sql.close();
+		return name;
 
+	}
+	
 	public int modify(HashMap map) {
 		SqlSession sql = fac.openSession();
 		int excute = sql.update("member.modify", map);
+		sql.close();
 		if (excute == 1) {
 			return 1;
 		} else {
@@ -41,7 +50,7 @@ public class JoinMemberService {
 
 		SqlSession sql = fac.openSession();
 		String excute = sql.selectOne("member.modifypass", s_id);
-
+		sql.close();
 		return excute;
 	}
 
@@ -49,7 +58,7 @@ public class JoinMemberService {
 
 		SqlSession sql = fac.openSession();
 		String excute = sql.selectOne("member.checkpass", s_id);
-
+		sql.close();
 		return excute;
 	}
 }

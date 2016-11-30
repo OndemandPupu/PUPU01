@@ -34,7 +34,7 @@
 
 <body>
 
-	<header style="margin: 0px; padding: 0px; ">
+	<header style="margin: 0px; padding: 10px; ">
 		<tiles:insertAttribute name="header" />
 	</header>
 <div style="min-height: 1200px;" id="bg">
@@ -51,22 +51,26 @@
 				</div>
 			</aside>
 		</div>
-	</div>
-  <div></div>
-  <br/>
-  <br/>
-  <br/>
-	<footer class="container-fluid text-center"
-		style="background-color: #fffff "  >
+	
+
+
+ </div>
+ <br/>
+ <br/>
+ <br/>
+	<footer class="text-center"
+		style="color: #fffff "  >
 		CopyRight <b style="color: white"> &copy; PUPU corp.</b> All rights reserved.
 	</footer>
+	</div>
 	
-	<div class="featurette pb-0 pt-6 shade-gray border-top">
+
   <div class="container-responsive">
     <h2 class="alt-h2 mt-3 mb-2 text-center">Welcome home, followers</h2>
       <p class="alt-h2 mt-3 mb-2 text-center">Who uses PUPU?</p>
   </div>
-</div>
+
+
 <div id="tabs">
   <ul>
     <li><a href="#tabs-1">사용법</a></li>

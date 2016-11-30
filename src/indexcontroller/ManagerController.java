@@ -71,7 +71,6 @@ public class ManagerController {
 	@RequestMapping("/writedel")
 	@ResponseBody
 	public String writedel(String fileuuid) {
-		System.out.println("¿äÃ»µé¿È?"+fileuuid);
 		int r = ls.writeout(fileuuid);
 		System.out.println(r);
 		if (r == 1) {

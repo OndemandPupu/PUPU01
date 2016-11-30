@@ -15,6 +15,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import cart.model.cartService;
 import file.model.SelLikeService;
+import file.model.allLoadViewService;
+import member.model.JoinFollowService;
 import member.model.JoinMemberService;
 import member.model.LoginService;
 import member.model.myreadService;
@@ -31,6 +33,10 @@ public class UsersUseController {
 	myreadService ms;
 	@Autowired
 	JoinMemberService joinmemberservice;
+	@Autowired
+	allLoadViewService alvs;
+	@Autowired
+	JoinFollowService jfs;
 
 	@RequestMapping("/saveWirter")
 	@ResponseBody
@@ -137,12 +143,29 @@ public class UsersUseController {
 		ModelAndView mav = new ModelAndView();
 		if (a != null) {
 			mav.setViewName("t:profile");
-			List<HashMap> li = ls.profileCheck(a);
-			List<HashMap> lis = ms.readAlldata(a);
-			mav.addObject("data", lis);
-			mav.addObject("mssize", lis);
-			mav.addObject("profile", li);
-			mav.addObject("size", li.size() - 1);
+			System.out.println("요청들어온것"+a);
+			String name = joinmemberservice.getNick(a);
+			System.out.println("1차처리"+name);
+			if(name == a) {
+				List<HashMap> li = ls.profileCheck(name);
+				List<HashMap> lis = ms.readAlldata(name);
+				System.out.println(li+"/"+lis);
+				mav.addObject("data", lis);
+				mav.addObject("mssize", lis);
+				mav.addObject("profile", li);
+				mav.addObject("size", li.size() - 1);
+				return mav;
+			}else {
+				List<HashMap> li = ls.profileCheck(a);
+				List<HashMap> lis = ms.readAlldata(a);
+				System.out.println(li+"/"+lis);
+				mav.addObject("nick",name);
+				mav.addObject("data", lis);
+				mav.addObject("mssize", lis);
+				mav.addObject("profile", li);
+				mav.addObject("size", li.size() - 1);
+				return mav;
+			}
 		}
 		return mav;
 	}
@@ -153,7 +176,6 @@ public class UsersUseController {
 
 		return mav;
 	}
-
 	@RequestMapping("/cart")
 	public ModelAndView cartView(HttpSession session) {
 
@@ -168,5 +190,16 @@ public class UsersUseController {
 
 		return mav;
 
+	}
+	
+	@RequestMapping("/followShow")
+	public ModelAndView showfollow(HttpSession session) {
+		ModelAndView mav = new ModelAndView("followView");
+		String nick = (String) session.getAttribute("nickname");
+		String id = (String) session.getAttribute("userId");
+		String nickid = nick+"("+id+")";
+		List<HashMap> li = jfs.followList(nickid);
+		mav.addObject("list",li);
+		return mav;
 	}
 }

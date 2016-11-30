@@ -12,12 +12,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import file.model.SelLikeService;
+import webhandler.controller.UploaderHandler;
 
 @Controller
 public class fileSelectController {
 	
 	@Autowired
 	SelLikeService sls;
+	@Autowired
+	UploaderHandler upload1;
 	
 	@RequestMapping("/selectview")
 	public String move() {
@@ -44,6 +47,7 @@ public class fileSelectController {
 					List<HashMap> sleList = sls.sellikeList(uuid);
 					mav.setViewName("like");
 					mav.addObject("sleList", sleList);
+					upload1.sendToAllSession("1#"+selectliker+"#"+uuid+"#를 좋아요눌럿어요");
 					return mav;
 				}
 			}

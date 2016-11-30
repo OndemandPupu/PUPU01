@@ -1,6 +1,7 @@
 package member.model;
 
 import java.util.HashMap;
+import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -14,9 +15,10 @@ public class JoinFollowService {
 	@Autowired
 	SqlSessionFactory fac;
 	
-	public int followService(String id) {
+	public int followService(String id, String name) {
 		SqlSession sql = fac.openSession();
-		int r = sql.insert("member.addfollw",id);
+		String nickid = name+"("+id+")";
+		int r = sql.insert("member.addfollw",nickid);
 		sql.close();
 		if(r==1) {
 			return r;
@@ -25,30 +27,39 @@ public class JoinFollowService {
 		}
 	}
 	
-	public int followServiceJoin(String myid, String youid) {
+	public int followServiceJoin(String myidname, String youidname) {
 		SqlSession sql = fac.openSession();
 		HashMap map = new HashMap();
-		map.put("myid", myid);
-		map.put("youid", youid);
+		map.put("id", myidname);
+		map.put("followerid", youidname);
 		int r = sql.update("member.setFollw", map);
 		sql.close();
 		return r;
 	}
 	
-	public String follwCheckService(String my_id, String your_id) {
+	public String follwCheckService(String myidname, String youridname) {
 		SqlSession sql= fac.openSession();
 		HashMap map = new HashMap();
-		map.put("id", my_id);
-		map.put("followerid", your_id);
+		map.put("id", myidname);
+		map.put("followerid", youridname);
 		String ask = sql.selectOne("member.checkFollow", map);
 		sql.close();
 		if(ask!=null) {
 			return "FALSE";
 		}else {
 			return "TRUE";
-		}
-	
-		
-		
+		}	
 	}
+	
+	public List<HashMap> followList(String nickid) {
+		SqlSession sql = fac.openSession();
+		List<HashMap> li = sql.selectList("member.showFollow", nickid);
+		sql.close();
+		if(li!=null) {
+			return li;
+		}else {
+			return null;
+		}
+	}
+	
 }

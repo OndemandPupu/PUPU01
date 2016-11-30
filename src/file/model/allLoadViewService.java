@@ -19,4 +19,19 @@ public class allLoadViewService {
 		sql.close();
 		return li;
 	}
+	
+	public HashMap allChart() {
+		SqlSession sql = fac.openSession();
+		HashMap map = new HashMap();
+		int sum1 = sql.selectOne("files.getAllChart", "test1");
+		int sum2 = sql.selectOne("files.getAllChart", "test2");
+		int sum3 = sql.selectOne("files.getAllChart", "test2");
+		int sum4 = sql.selectOne("files.getAllChart", "test2");
+		map.put("test1", sum1);
+		map.put("test2", sum2);
+		map.put("test3", sum3);
+		map.put("test4", sum4);
+		sql.close();
+		return map;
+	}
 }
